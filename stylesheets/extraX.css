@@ -1,0 +1,276 @@
+.er.attributeBoxEven {
+    background-color: white;
+    color: black;
+}
+.er.attributeBoxOdd {
+    background-color: white;
+    color: black;
+}
+
+.md-grid {
+    max-width: 100%;
+}
+
+.md-footer__link {
+    flex-grow: 1;
+    flex-shrink: 0;
+    padding: 8px;
+}
+
+.md-footer-meta {
+    background-color: unset;
+}
+
+.md-copyright {
+    flex: 0 0 1;
+}
+
+.md-typeset h1 {
+    margin-bottom: 0.5em;
+}
+
+.md-typeset h2 {
+    margin-top: 0.5em;
+}
+
+.sas1-binary summary::after {
+    content: none;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    overflow: hidden;
+}
+
+.md-clipboard {
+    color: var(--md-default-fg-color--lighter)
+}
+
+.md-header, .md-footer {
+    flex: 0 0 auto;
+}
+
+.md-container {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.md-main {
+    flex: 1 1 0;
+    overflow: hidden;
+}
+
+.md-main__inner {
+    margin: 0px;
+}
+.md-content {
+    flex: 1 1 0;
+}
+.md-content__inner {
+    margin: 0px;
+    margin-left: 0px;
+}
+
+[dir=ltr] .md-sidebar--primary:not([hidden])~.md-content>.md-content__inner {
+    margin-left: 0px;
+    padding-top: 0px;
+}
+
+.md-content, .md-content__inner {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+}
+
+.md-main {
+    padding: 8px;
+}
+
+.md-content__inner {
+    display: flex;
+    flex-direction: row;
+}
+
+.md-sidebar {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.md-sidebar--primary {
+    flex: 0 0 auto;
+    height: 100%;
+    overflow: auto;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.sas1-code-block {
+    display: flex;
+    flex-direction: row;
+}
+.sas1-code-block-lines {
+    display: block;
+    flex: 0 0 auto;
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right-style: solid;
+    border-color: var(--md-primary-fg-color);
+    border-width: 1px;
+}
+.sas1-code-block-code {
+    display: block;
+    flex: 1 1 auto;
+}
+
+.sas1-single-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.sas1-single-row-column {
+    padding: 10px;
+    flex: 1 1 0;
+}
+
+.sas1-caption {
+    font-style: italic;
+    font-size: smaller;
+}
+
+.sas1-content-column {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sas1-text-column {
+    display: block;
+    flex: 3 1 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    overflow: auto;
+}
+.sas1-code-column {
+    display: block;
+    flex: 4 1 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.sas1-code-file {
+    font-feature-settings: "kern";
+    font-family: var(--md-code-font-family);
+    overflow: auto;
+}
+
+del {
+    background-color: var(--md-typeset-del-color);
+    display: block;
+}
+
+ins {
+    background-color: var(--md-typeset-ins-color);
+    text-decoration: none;
+    display: block;
+    white-space: pre-wrap;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: lightGray;
+}
+
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: var(--md-primary-fg-color);
+}
+
+a.find-button {
+  color: black;
+}
+
+.find-button {
+  background-color: #bbdefb;
+  color: black;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  padding-left: 6px;
+  padding-right: 6px;
+  margin: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 16px;
+}
+
+.find {
+    position:relative;
+    display:inline-block;
+    vertical-align: middle;
+}
+
+.find-button::after {
+    font-family: 'Material Symbols Outlined';
+    content: "pageview";
+    padding-left: 4px;
+    vertical-align: middle;
+    -webkit-font-feature-settings: 'liga';
+}
+
+.sas1-code-block *:target {
+    background-color: #ffd;
+    border: 1px #777 solid;
+    border-radius: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 16px;
+    margin-top: 10px;
+    display: block;
+    transition: border-width 0.3s linear;
+    transition: margin 0.3s linear;
+    transition: padding 0.3s linear;
+}
+
+.sas1-code-block *:target::after {
+    content: 'File: ' var(--sas1-file-name) '\A';
+    background-color: var(--md-primary-bg-color);
+    position: relative;
+    z-index: 100;
+    float: right;
+    font-weight: bold;
+    font-style: italic;
+    font-size: 80%;
+    padding: 4px;
+    margin-right: 10px;
+    border: 1px solid #777;
+    border-radius: 4px;
+    white-space: pre-wrap;
+}
+
+pre {
+    width: 100%;
+}

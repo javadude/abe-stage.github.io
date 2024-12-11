@@ -1,0 +1,4576 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://androidbyexample.com/modules/movie-db/STEP_050_REPO.html">
+      
+      
+        <link rel="prev" href="STEP_040_REPO.html">
+      
+      
+        <link rel="next" href="STEP_060_REPO.html">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>Entities, DAO and Database - Android By Example</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');}</style>
+
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#naming" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Android By Example" class="md-header__button md-logo" aria-label="Android By Example" data-md-component="logo">
+      
+  <img src="../../android.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Android By Example
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Entities, DAO and Database
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Android By Example" class="md-nav__button md-logo" aria-label="Android By Example" data-md-component="logo">
+      
+  <img src="../../android.png" alt="logo">
+
+    </a>
+    Android By Example
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_010_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About This Site
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Your Instructor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Source Code License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Course Hardware and Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_080_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assignments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_090_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Grading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_100_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Third-Party and Course Sample Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 1 (1/23-1/29)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Week 1 (1/23-1/29)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Kotlin Primer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Kotlin Primer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kotlin-primer/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kotlin-primer/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Domain Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User-Interface Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Events
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_080_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unidirectional Data Flow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Android Studio
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Android Studio
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../android-studio/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 2 (1/30-2/5)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Week 2 (1/30-2/5)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Jetpack Compose Concepts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Jetpack Compose Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compose Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Composable Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    String literals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    State
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compose Optimizations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Where do you store state?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Density
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Initial Movies UI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Initial Movies UI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Initial Movie UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Update versions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create initial screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Refactor Scaffold Use
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flesh out the screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 3 (2/6-2/12)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Week 3 (2/6-2/12)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Room
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Room
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_10_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Relationships
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_20_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Room Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_25_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Room Relations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_30_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Suspending Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_40_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies Database
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies Database
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add new modules
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Room dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_035_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Android SDK and JDK to version catalog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module Dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Entities, DAO and Database
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="STEP_050_REPO.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Entities, DAO and Database
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#naming" class="md-nav__link">
+    <span class="md-ellipsis">
+      Naming
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ratingentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      RatingEntity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actorentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      ActorEntity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#movieentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      MovieEntity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#roleentity" class="md-nav__link">
+    <span class="md-ellipsis">
+      RoleEntity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moviedao" class="md-nav__link">
+    <span class="md-ellipsis">
+      MovieDao
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#moviedatabase" class="md-nav__link">
+    <span class="md-ellipsis">
+      MovieDatabase
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#databasebuilderkt" class="md-nav__link">
+    <span class="md-ellipsis">
+      DatabaseBuilder.kt
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repository Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modifying the view model to use real data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fix movie list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_090_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fetch data for movie display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_100_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Viewing the Database
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 4 (2/13-2/19)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Week 4 (2/13-2/19)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Compose Lists
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Compose Lists
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fixed UIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dynamic UIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies UI - Lists
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies UI - Lists
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convert to LazyColumn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selection Tracking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selections in the UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contextual Top Bar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Refactor time!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Actors and Ratings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Better Movie Icon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_090_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wrapup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 5 (2/20-2/26)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Week 5 (2/20-2/26)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Compose Text Fields
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            Compose Text Fields
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    State Races
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fixing State Races
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heads up!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies UI - Updates
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies UI - Updates
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Display-screen list cleanup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deleting from the display screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Editing a movie
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 6 (2/27-3/5)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Week 6 (2/27-3/5)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies Widget
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Movies Widget
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Widget Declaration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Widget UI and Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Speech
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Speech
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../speech/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../speech/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 7 (3/6-3/12)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Week 7 (3/6-3/12)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_1" id="__nav_8_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Google Map
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            Google Map
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Find Your Fingerprint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Console Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Set up a map
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add a Marker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Initial Position
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Loading Spinner
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Map Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_090_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Current Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_100_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jump to Current Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_110_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Top Bar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_120_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Copy Icons
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_130_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manage Car Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_140_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dragging a Marker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_150_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Navigating
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_160_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lat/Lon Bounds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    REST services
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            REST services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest server module
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Server code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Server address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST client repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+<h4>Movies Database</h4>
+
+<h1>Entities, DAO and Database</h1>
+
+<p>Let's define the Entities, DAO and Database using Room.</p>
+<p>Here's our schema</p>
+<pre class="mermaid"><code>erDiagram
+    RATING ||--o{ MOVIE: movies
+    MOVIE ||--o{ ROLE : cast
+    ROLE }o--|| ACTOR : appearance</code></pre>
+<p>What does this mean?</p>
+<ul>
+<li>
+<p>RATING &lt;-&gt; MOVIE is a one-to-many relationship</p>
+<ul>
+<li>A RATING can be associated with zero or more MOVIEs</li>
+<li>A MOVIE has exactly one RATING</li>
+</ul>
+</li>
+<li>
+<p>MOVIE &lt;-&gt; ACTOR is a many-to-many relationship</p>
+<ul>
+<li>An ACTOR can appear in zero or more MOVIEs</li>
+<li>A MOVIE can cast zero or more ACTORs</li>
+<li>To implement this, we introduce an associative entity ROLE with a one-to-many relationship on each side<ul>
+<li>A MOVIE can cast zero or more ROLEs</li>
+<li>An ACTOR can appear in zero or more ROLEs</li>
+<li>A ROLE can appear in exactly one MOVIE</li>
+<li>A ROLE is played by exactly one ACTOR</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Let's look at the attributes of each entity. All entities are represented as Kotlin data classes.</p>
+<h2 id="naming">Naming</h2>
+<p>There will be a different types of classes used in this application:</p>
+<ul>
+<li><strong>Database entities</strong>: the objects that represent rows in a database. We'll use the suffix
+    "Entity" for these.</li>
+<li><strong>Data-layer Plain-Old-Kotlin-Objects (POKOs)</strong>: helper objects for retrieving data (or partial
+    data) from entities. For example, a POKO may retrieve a Rating with a list of all Movies taggged
+    with that Rating. We won't use a suffix for these.  </li>
+<li><strong>Data transfer objects</strong>: representations of the data from the <code>data</code> module exposed by the
+    <code>repository</code> module. This hides the fact that the data is coming from a database, as the
+    repository could be returning it from anywhere.  We're creating a abstraction that doesn't 
+    leak the underlying implementation details to the user-interface layer. We'll use the suffix
+    "Dto" for these.</li>
+</ul>
+<h2 id="ratingentity">RatingEntity</h2>
+<p>Represents an MPAA rating (G, PG, PG-13, R, NR)</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>We define <code>RatingEntity</code> and a POKO to gather a rating and all of its movies at the same time.
+Note that this POKO represents a ONE-TO-MANY relation. </p>
+<details class="success" open>
+<summary><a class="find-button" href="#050-rating-entity">show in full file</a>  data/src/main/java/com/androidbyexample/compose/movies/data/RatingEntity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">import</span> <span class="nn">java.util.UUID</span>
+
+<ins><span class="n">@Entity</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">RatingEntity</span><span class="p">(</span></ins>
+<ins>    <span class="n">@PrimaryKey</span> <span class="k">var</span> <span class="py">id</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="n">UUID</span><span class="p">.</span><span class="n">randomUUID</span><span class="p">().</span><span class="n">toString</span><span class="p">(),</span></ins>
+<ins>    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins>    <span class="k">var</span> <span class="py">description</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="c1">// ONE-TO-MANY relationship (Rating -&gt; Movies)</span></ins>
+<ins><span class="c1">// NOTE: THIS IS NOT AN ENTITY!</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">RatingWithMovies</span><span class="p">(</span></ins>
+<ins>    <span class="n">@Embedded</span></ins>
+<ins>    <span class="k">val</span> <span class="py">rating</span><span class="p">:</span> <span class="n">RatingEntity</span><span class="p">,</span></ins>
+<ins>    <span class="n">@Relation</span><span class="p">(</span></ins>
+<ins>        <span class="n">parentColumn</span> <span class="p">=</span> <span class="s">&quot;id&quot;</span><span class="p">,</span></ins>
+<ins>        <span class="n">entityColumn</span> <span class="p">=</span> <span class="s">&quot;ratingId&quot;</span><span class="p">,</span></ins>
+<ins>    <span class="p">)</span></ins>
+<ins>    <span class="k">val</span> <span class="py">movies</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">MovieEntity</span><span class="p">&gt;</span></ins>
+<ins><span class="p">)</span></ins></pre>
+</div>
+</div>
+</details>
+
+<h2 id="actorentity">ActorEntity</h2>
+<p>An actor that can appear in movies</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Key</th>
+<th>Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>PK</td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>We define an <code>ActorEntity</code> and two POKOs to gather an actor and all associated movies at the same
+time. Note that these POKOs represent a MANY-TO-MANY relation, gathering the association data in
+the <code>RoleEntity</code> by treating it as a ONE-TO-MANY relation <strong>and</strong> a MANY-TO-ONE relation. The
+<code>RoleEntity</code> is the MANY part in the middle.</p>
+<details class="success" open>
+<summary><a class="find-button" href="#050-actor-entity">show in full file</a>  data/src/main/java/com/androidbyexample/compose/movies/data/ActorEntity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">import</span> <span class="nn">java.util.UUID</span>
+
+<ins><span class="n">@Entity</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">ActorEntity</span><span class="p">(</span></ins>
+<ins>    <span class="n">@PrimaryKey</span> <span class="k">var</span> <span class="py">id</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="n">UUID</span><span class="p">.</span><span class="n">randomUUID</span><span class="p">().</span><span class="n">toString</span><span class="p">(),</span></ins>
+<ins>    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="c1">// POKO that groups an Actor with the movies they appear in, and the</span></ins>
+<ins><span class="c1">//   role played in each movie. This is a ONE-TO-MANY relation from the</span></ins>
+<ins><span class="c1">//   ActorEntity to the RoleEntity, where we resolve the RoleEntity&#39;s movieId</span></ins>
+<ins><span class="c1">//   to fetch the actual movie (a MANY-TO-ONE relation). The end result is turning</span></ins>
+<ins><span class="c1">//   a MANY-TO-MANY relation into two ONE-TO-MANY relationships, where the MANY part</span></ins>
+<ins><span class="c1">//   is the RoleEntity.</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">ActorWithFilmography</span><span class="p">(</span></ins>
+<ins>    <span class="n">@Embedded</span></ins>
+<ins>    <span class="k">val</span> <span class="py">actor</span><span class="p">:</span> <span class="n">ActorEntity</span><span class="p">,</span></ins>
+<ins>    <span class="n">@Relation</span><span class="p">(</span></ins>
+<ins>        <span class="n">entity</span> <span class="p">=</span> <span class="n">RoleEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>        <span class="n">parentColumn</span> <span class="p">=</span> <span class="s">&quot;id&quot;</span><span class="p">,</span></ins>
+<ins>        <span class="n">entityColumn</span> <span class="p">=</span> <span class="s">&quot;actorId&quot;</span><span class="p">,</span></ins>
+<ins>    <span class="p">)</span></ins>
+<ins>    <span class="k">val</span> <span class="py">rolesWithMovies</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">RoleWithMovie</span><span class="p">&gt;,</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">RoleWithMovie</span><span class="p">(</span></ins>
+<ins>    <span class="n">@Embedded</span></ins>
+<ins>    <span class="k">val</span> <span class="py">role</span><span class="p">:</span> <span class="n">RoleEntity</span><span class="p">,</span></ins>
+<ins>    <span class="n">@Relation</span><span class="p">(</span></ins>
+<ins>        <span class="n">parentColumn</span> <span class="p">=</span> <span class="s">&quot;movieId&quot;</span><span class="p">,</span></ins>
+<ins>        <span class="n">entityColumn</span> <span class="p">=</span> <span class="s">&quot;id&quot;</span></ins>
+<ins>    <span class="p">)</span></ins>
+<ins>    <span class="k">val</span> <span class="py">movie</span><span class="p">:</span> <span class="n">MovieEntity</span><span class="p">,</span></ins>
+<ins><span class="p">)</span></ins></pre>
+</div>
+</div>
+</details>
+
+<h2 id="movieentity">MovieEntity</h2>
+<p>A movie</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td>String</td>
+<td>PK</td>
+</tr>
+<tr>
+<td>title</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>description</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>ratingId</td>
+<td>String</td>
+<td>FK</td>
+</tr>
+</tbody>
+</table>
+<p>We define <code>MovieEntity</code> and two POKOs to gather a movie and all associated actors at the same time.
+Note that these POKOs represent a MANY-TO-MANY relation, gathering the association data in the
+<code>RoleEntity</code> by treating it as a ONE-TO-MANY relation <strong>and</strong> a MANY-TO-ONE relation. The
+<code>RoleEntity</code> is the MANY part in the middle.</p>
+<details class="success" open>
+<summary><a class="find-button" href="#050-movie-entity">show in full file</a>  data/src/main/java/com/androidbyexample/compose/movies/data/MovieEntity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="c1">//   Rating key, we update that key in all associated movies.</span>
+
+<ins><span class="n">@Entity</span><span class="p">(</span></ins>
+<ins>    <span class="n">indices</span> <span class="p">=</span> <span class="p">[</span></ins>
+<ins>        <span class="n">Index</span><span class="p">(</span><span class="n">value</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;ratingId&quot;</span><span class="p">])</span></ins>
+<ins>    <span class="p">],</span></ins>
+<ins>    <span class="n">foreignKeys</span> <span class="p">=</span> <span class="p">[</span></ins>
+<ins>        <span class="n">ForeignKey</span><span class="p">(</span></ins>
+<ins>            <span class="n">entity</span> <span class="p">=</span> <span class="n">RatingEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>            <span class="n">parentColumns</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">],</span></ins>
+<ins>            <span class="n">childColumns</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;ratingId&quot;</span><span class="p">],</span></ins>
+<ins>            <span class="n">onUpdate</span> <span class="p">=</span> <span class="n">ForeignKey</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span></ins>
+<ins>            <span class="n">onDelete</span> <span class="p">=</span> <span class="n">ForeignKey</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span></ins>
+<ins>        <span class="p">)</span></ins>
+<ins>    <span class="p">]</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">MovieEntity</span><span class="p">(</span></ins>
+<ins>    <span class="n">@PrimaryKey</span> <span class="k">var</span> <span class="py">id</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="n">UUID</span><span class="p">.</span><span class="n">randomUUID</span><span class="p">().</span><span class="n">toString</span><span class="p">(),</span></ins>
+<ins>    <span class="k">var</span> <span class="py">title</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins>    <span class="k">var</span> <span class="py">description</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins>    <span class="k">var</span> <span class="py">ratingId</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="c1">// POKO that groups a Movie with the actors that appear in it, and the</span></ins>
+<ins><span class="c1">//   role played in the movie. This is a ONE-TO-MANY relation from the</span></ins>
+<ins><span class="c1">//   MovieEntity to the RoleEntity, where we resolve the RoleEntity&#39;s actorId</span></ins>
+<ins><span class="c1">//   to fetch the actual actor (a MANY-TO-ONE relation). The end result is turning</span></ins>
+<ins><span class="c1">//   a MANY-TO-MANY relation into two ONE-TO-MANY relationships, where the MANY part</span></ins>
+<ins><span class="c1">//   is the RoleEntity.</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">MovieWithCast</span><span class="p">(</span></ins>
+<ins>    <span class="n">@Embedded</span></ins>
+<ins>    <span class="k">val</span> <span class="py">movie</span><span class="p">:</span> <span class="n">MovieEntity</span><span class="p">,</span></ins>
+<ins>    <span class="n">@Relation</span><span class="p">(</span></ins>
+<ins>        <span class="n">entity</span> <span class="p">=</span> <span class="n">RoleEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>        <span class="n">parentColumn</span> <span class="p">=</span> <span class="s">&quot;id&quot;</span><span class="p">,</span></ins>
+<ins>        <span class="n">entityColumn</span> <span class="p">=</span> <span class="s">&quot;movieId&quot;</span><span class="p">,</span></ins>
+<ins>    <span class="p">)</span></ins>
+<ins>    <span class="k">val</span> <span class="py">rolesWithActors</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">RoleWithActor</span><span class="p">&gt;,</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">RoleWithActor</span><span class="p">(</span></ins>
+<ins>    <span class="n">@Embedded</span></ins>
+<ins>    <span class="k">val</span> <span class="py">role</span><span class="p">:</span> <span class="n">RoleEntity</span><span class="p">,</span></ins>
+<ins>    <span class="n">@Relation</span><span class="p">(</span></ins>
+<ins>        <span class="n">parentColumn</span> <span class="p">=</span> <span class="s">&quot;actorId&quot;</span><span class="p">,</span></ins>
+<ins>        <span class="n">entityColumn</span> <span class="p">=</span> <span class="s">&quot;id&quot;</span></ins>
+<ins>    <span class="p">)</span></ins>
+<ins>    <span class="k">val</span> <span class="py">actor</span><span class="p">:</span> <span class="n">ActorEntity</span><span class="p">,</span></ins>
+<ins><span class="p">)</span></ins></pre>
+</div>
+</div>
+</details>
+
+<h2 id="roleentity">RoleEntity</h2>
+<p>Association entity that casts actors into movies</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Type</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>movieId</td>
+<td>String</td>
+<td>FK</td>
+</tr>
+<tr>
+<td>actorId</td>
+<td>String</td>
+<td>FK</td>
+</tr>
+<tr>
+<td>character</td>
+<td>String</td>
+<td></td>
+</tr>
+<tr>
+<td>orderInCredits</td>
+<td>int</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>We define <code>RoleEntity</code> to hold the MANY-TO-MANY relation data between <code>MovieEntity</code> and
+<code>ActorEntity</code>. It holds additional <strong>association data</strong> describing how the movies and actors are
+related. Gathering the many-to-many data would be simpler if we weren't interested in the
+association data. However, to access the association data we'll have to use it at the center to
+two MANY-TO-ONE relations. See <code>MovieEntity</code> and <code>ActorEntity</code> above for how this works.</p>
+<details class="success" open>
+<summary><a class="find-button" href="#050-role-entity">show in full file</a>  data/src/main/java/com/androidbyexample/compose/movies/data/RoleEntity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="c1">//    either parent&#39;s key is updated, we update this entity.</span>
+
+<ins><span class="n">@Entity</span><span class="p">(</span></ins>
+<ins>    <span class="n">primaryKeys</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;actorId&quot;</span><span class="p">,</span> <span class="s">&quot;movieId&quot;</span><span class="p">],</span></ins>
+<ins>    <span class="n">indices</span> <span class="p">=</span> <span class="p">[</span></ins>
+<ins>        <span class="n">Index</span><span class="p">(</span><span class="s">&quot;movieId&quot;</span><span class="p">),</span></ins>
+<ins>        <span class="n">Index</span><span class="p">(</span><span class="s">&quot;actorId&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="p">],</span></ins>
+<ins>    <span class="n">foreignKeys</span> <span class="p">=</span> <span class="p">[</span></ins>
+<ins>        <span class="n">ForeignKey</span><span class="p">(</span></ins>
+<ins>            <span class="n">entity</span> <span class="p">=</span> <span class="n">MovieEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>            <span class="n">parentColumns</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">],</span></ins>
+<ins>            <span class="n">childColumns</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;movieId&quot;</span><span class="p">],</span></ins>
+<ins>            <span class="n">onUpdate</span> <span class="p">=</span> <span class="n">ForeignKey</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span></ins>
+<ins>            <span class="n">onDelete</span> <span class="p">=</span> <span class="n">ForeignKey</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span></ins>
+<ins>        <span class="p">),</span></ins>
+<ins>        <span class="n">ForeignKey</span><span class="p">(</span></ins>
+<ins>            <span class="n">entity</span> <span class="p">=</span> <span class="n">ActorEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>            <span class="n">parentColumns</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">],</span></ins>
+<ins>            <span class="n">childColumns</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;actorId&quot;</span><span class="p">],</span></ins>
+<ins>            <span class="n">onUpdate</span> <span class="p">=</span> <span class="n">ForeignKey</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span></ins>
+<ins>            <span class="n">onDelete</span> <span class="p">=</span> <span class="n">ForeignKey</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span></ins>
+<ins>        <span class="p">)</span></ins>
+<ins>    <span class="p">]</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">RoleEntity</span><span class="p">(</span></ins>
+<ins>    <span class="k">var</span> <span class="py">movieId</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins>    <span class="k">var</span> <span class="py">actorId</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins>    <span class="k">var</span> <span class="py">character</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins>    <span class="k">var</span> <span class="py">orderInCredits</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span></ins>
+<ins><span class="p">)</span></ins></pre>
+</div>
+</div>
+</details>
+
+<h2 id="moviedao">MovieDao</h2>
+<p>We start with a DAO that has basic create and read operations. We'll make it an abstract class so
+we can define a concrete implementation for <code>resetDatabase()</code>.</p>
+<p>All basic query functions immediately return a <code>Flow</code> that we'll collect inside a coroutine.
+When the data is fetched, it will emit the result to the <code>Flow</code>. If the data changes, the queries
+will re-execute and emit the new data to the previously-returned <code>Flow</code>.</p>
+<details class="success" open>
+<summary><a class="find-button" href="#050-movie-dao">show in full file</a>  data/src/main/java/com/androidbyexample/compose/movies/data/MovieDao.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.flow.Flow</span>
+
+<ins><span class="n">@Dao</span></ins>
+<ins><span class="k">abstract</span> <span class="k">class</span> <span class="nc">MovieDao</span> <span class="p">{</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM RatingEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">getRatingsFlow</span><span class="p">():</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">RatingEntity</span><span class="p">&gt;&gt;</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM MovieEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">getMoviesFlow</span><span class="p">():</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieEntity</span><span class="p">&gt;&gt;</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM ActorEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">getActorsFlow</span><span class="p">():</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">ActorEntity</span><span class="p">&gt;&gt;</span></ins>
+<ins></ins>
+<ins>    <span class="n">@Transaction</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM RatingEntity WHERE id = :id&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">getRatingWithMovies</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">RatingWithMovies</span></ins>
+<ins>    <span class="n">@Transaction</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM ActorEntity WHERE id = :id&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">getActorWithFilmography</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">ActorWithFilmography</span></ins>
+<ins>    <span class="n">@Transaction</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM MovieEntity WHERE id = :id&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">getMovieWithCast</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">MovieWithCast</span></ins>
+<ins></ins>
+<ins>    <span class="n">@Insert</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">insert</span><span class="p">(</span><span class="k">vararg</span> <span class="n">ratings</span><span class="p">:</span> <span class="n">RatingEntity</span><span class="p">)</span></ins>
+<ins>    <span class="n">@Insert</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">insert</span><span class="p">(</span><span class="k">vararg</span> <span class="n">movies</span><span class="p">:</span> <span class="n">MovieEntity</span><span class="p">)</span></ins>
+<ins>    <span class="n">@Insert</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">insert</span><span class="p">(</span><span class="k">vararg</span> <span class="n">actors</span><span class="p">:</span> <span class="n">ActorEntity</span><span class="p">)</span></ins>
+<ins>    <span class="n">@Insert</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">insert</span><span class="p">(</span><span class="k">vararg</span> <span class="n">roles</span><span class="p">:</span> <span class="n">RoleEntity</span><span class="p">)</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;DELETE FROM MovieEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">clearMovies</span><span class="p">()</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;DELETE FROM ActorEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">clearActors</span><span class="p">()</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;DELETE FROM RatingEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">clearRatings</span><span class="p">()</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;DELETE FROM RoleEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">clearRoles</span><span class="p">()</span></ins>
+<ins>    <span class="n">@Transaction</span></ins>
+<ins>    <span class="k">open</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">resetDatabase</span><span class="p">()</span> <span class="p">{</span></ins>
+<ins>        <span class="n">clearMovies</span><span class="p">()</span></ins>
+<ins>        <span class="n">clearActors</span><span class="p">()</span></ins>
+<ins>        <span class="n">clearRoles</span><span class="p">()</span></ins>
+<ins>        <span class="n">clearRatings</span><span class="p">()</span></ins>
+<ins>        <span class="n">insert</span><span class="p">(</span></ins>
+<ins>            <span class="n">RatingEntity</span><span class="p">(</span><span class="n">id</span> <span class="p">=</span> <span class="s">&quot;r0&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="p">=</span> <span class="s">&quot;Not Rated&quot;</span><span class="p">,</span> <span class="n">description</span> <span class="p">=</span> <span class="s">&quot;Not yet rated&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">RatingEntity</span><span class="p">(</span><span class="n">id</span> <span class="p">=</span> <span class="s">&quot;r1&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="p">=</span> <span class="s">&quot;G&quot;</span><span class="p">,</span> <span class="n">description</span> <span class="p">=</span> <span class="s">&quot;General Audiences&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">RatingEntity</span><span class="p">(</span><span class="n">id</span> <span class="p">=</span> <span class="s">&quot;r2&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="p">=</span> <span class="s">&quot;PG&quot;</span><span class="p">,</span> <span class="n">description</span> <span class="p">=</span> <span class="s">&quot;Parental Guidance Suggested&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">RatingEntity</span><span class="p">(</span><span class="n">id</span> <span class="p">=</span> <span class="s">&quot;r3&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="p">=</span> <span class="s">&quot;PG-13&quot;</span><span class="p">,</span> <span class="n">description</span> <span class="p">=</span> <span class="s">&quot;Unsuitable for those under 13&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">RatingEntity</span><span class="p">(</span><span class="n">id</span> <span class="p">=</span> <span class="s">&quot;r4&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="p">=</span> <span class="s">&quot;R&quot;</span><span class="p">,</span> <span class="n">description</span> <span class="p">=</span> <span class="s">&quot;Restricted - 17 and older&quot;</span><span class="p">),</span></ins>
+<ins>        <span class="p">)</span></ins>
+<ins>        <span class="n">insert</span><span class="p">(</span></ins>
+<ins>            <span class="n">MovieEntity</span><span class="p">(</span><span class="s">&quot;m1&quot;</span><span class="p">,</span> <span class="s">&quot;The Transporter&quot;</span><span class="p">,</span> <span class="s">&quot;Jason Statham kicks a guy in the face&quot;</span><span class="p">,</span> <span class="s">&quot;r3&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">MovieEntity</span><span class="p">(</span><span class="s">&quot;m2&quot;</span><span class="p">,</span> <span class="s">&quot;Transporter 2&quot;</span><span class="p">,</span> <span class="s">&quot;Jason Statham kicks a bunch of guys in the face&quot;</span><span class="p">,</span> <span class="s">&quot;r4&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">MovieEntity</span><span class="p">(</span><span class="s">&quot;m3&quot;</span><span class="p">,</span> <span class="s">&quot;Hobbs and Shaw&quot;</span><span class="p">,</span> <span class="s">&quot;Cars, Explosions and Stuff&quot;</span><span class="p">,</span> <span class="s">&quot;r3&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">MovieEntity</span><span class="p">(</span><span class="s">&quot;m4&quot;</span><span class="p">,</span> <span class="s">&quot;Jumanji - Welcome to the Jungle&quot;</span><span class="p">,</span> <span class="s">&quot;The Rock smolders&quot;</span><span class="p">,</span> <span class="s">&quot;r3&quot;</span><span class="p">),</span></ins>
+<ins>        <span class="p">)</span></ins>
+<ins>        <span class="n">insert</span><span class="p">(</span></ins>
+<ins>            <span class="n">ActorEntity</span><span class="p">(</span><span class="s">&quot;a1&quot;</span><span class="p">,</span> <span class="s">&quot;Jason Statham&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">ActorEntity</span><span class="p">(</span><span class="s">&quot;a2&quot;</span><span class="p">,</span> <span class="s">&quot;The Rock&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">ActorEntity</span><span class="p">(</span><span class="s">&quot;a3&quot;</span><span class="p">,</span> <span class="s">&quot;Shu Qi&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">ActorEntity</span><span class="p">(</span><span class="s">&quot;a4&quot;</span><span class="p">,</span> <span class="s">&quot;Amber Valletta&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">ActorEntity</span><span class="p">(</span><span class="s">&quot;a5&quot;</span><span class="p">,</span> <span class="s">&quot;Kevin Hart&quot;</span><span class="p">),</span></ins>
+<ins>        <span class="p">)</span></ins>
+<ins>        <span class="n">insert</span><span class="p">(</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m1&quot;</span><span class="p">,</span> <span class="s">&quot;a1&quot;</span><span class="p">,</span> <span class="s">&quot;Frank Martin&quot;</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m1&quot;</span><span class="p">,</span> <span class="s">&quot;a3&quot;</span><span class="p">,</span> <span class="s">&quot;Lai&quot;</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m2&quot;</span><span class="p">,</span> <span class="s">&quot;a1&quot;</span><span class="p">,</span> <span class="s">&quot;Frank Martin&quot;</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m2&quot;</span><span class="p">,</span> <span class="s">&quot;a4&quot;</span><span class="p">,</span> <span class="s">&quot;Audrey Billings&quot;</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m3&quot;</span><span class="p">,</span> <span class="s">&quot;a2&quot;</span><span class="p">,</span> <span class="s">&quot;Hobbs&quot;</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m3&quot;</span><span class="p">,</span> <span class="s">&quot;a1&quot;</span><span class="p">,</span> <span class="s">&quot;Shaw&quot;</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m4&quot;</span><span class="p">,</span> <span class="s">&quot;a2&quot;</span><span class="p">,</span> <span class="s">&quot;Spencer&quot;</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m4&quot;</span><span class="p">,</span> <span class="s">&quot;a5&quot;</span><span class="p">,</span> <span class="s">&quot;Fridge&quot;</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span></ins>
+<ins>        <span class="p">)</span></ins>
+<ins>    <span class="p">}</span></ins>
+<ins><span class="p">}</span></ins>
+</pre>
+</div>
+</div>
+</details>
+
+<p>Note that functions <code>getRatingWithMovies()</code>, <code>getActorWithFilmography()</code>, and<code>getMovieWithCast()</code>
+are declared as one-shot functions. For now, this is fine, but it will become an issue later when
+we allow data updates from the UI.</p>
+<details class="success" open>
+<summary><a class="find-button" href="#050-one-shot">show in full file</a>  data/src/main/java/com/androidbyexample/compose/movies/data/MovieDao.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="n">@Dao</span>
+<span class="k">abstract</span> <span class="k">class</span> <span class="nc">MovieDao</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">getActorsFlow</span><span class="p">():</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">ActorEntity</span><span class="p">&gt;&gt;</span>
+
+<ins>    <span class="n">@Transaction</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM RatingEntity WHERE id = :id&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">getRatingWithMovies</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">RatingWithMovies</span></ins>
+<ins>    <span class="n">@Transaction</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM ActorEntity WHERE id = :id&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">getActorWithFilmography</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">ActorWithFilmography</span></ins>
+<ins>    <span class="n">@Transaction</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM MovieEntity WHERE id = :id&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">getMovieWithCast</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">MovieWithCast</span></ins>
+
+    <span class="n">@Insert</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+<span class="c1">// ...</span></pre>
+</div>
+</div>
+</details>
+
+<p>The problem is that because we're not fetching these data using a <code>Flow</code>, there's no way for
+the database to send us updated data when the data behind the scenes changes. This will lead
+to stale data on the screen. For example, if we display a movie with its cast, and delete a
+cast entry, the entry will be removed from the database, but still be visible on the screen
+unless we do something manual (ewwwww) to update it. Later we'll switch to using <code>Flow</code>s for
+these queries, but for now, I want to demonstrate how you can use a controlled-side effect
+inside a composable function to fetch data (and demonstrate why this can lead to stale data).</p>
+<p>Functions like these that return POKOs that use <code>@Relation</code> will run multiple queries and must
+be annotated with <code>@Transaction</code>.</p>
+<p>Later we'll add update and delete functionality. For now, the only updating we'll do is insert
+initial data.</p>
+<h2 id="moviedatabase">MovieDatabase</h2>
+<p>A very typical Room database declaration.</p>
+<details class="success" open>
+<summary><a class="find-button" href="#050-database">show in full file</a>  data/src/main/java/com/androidbyexample/compose/movies/data/MovieDatabase.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">import</span> <span class="nn">androidx.room.RoomDatabase</span>
+
+<ins><span class="n">@Database</span><span class="p">(</span></ins>
+<ins>    <span class="n">version</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span></ins>
+<ins>    <span class="n">entities</span> <span class="p">=</span> <span class="p">[</span></ins>
+<ins>        <span class="n">MovieEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>        <span class="n">ActorEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>        <span class="n">RoleEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>        <span class="n">RatingEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>    <span class="p">],</span></ins>
+<ins>    <span class="n">exportSchema</span> <span class="p">=</span> <span class="k">false</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="k">abstract</span> <span class="k">class</span> <span class="nc">MovieDatabase</span><span class="p">:</span> <span class="n">RoomDatabase</span><span class="p">()</span> <span class="p">{</span></ins>
+<ins>    <span class="k">abstract</span> <span class="k">val</span> <span class="py">dao</span><span class="p">:</span> <span class="n">MovieDao</span></ins>
+<ins><span class="p">}</span></ins></pre>
+</div>
+</div>
+</details>
+
+<p>The database will contain Movie, Actor, Role and Rating entities and expose a MovieDao.</p>
+<h2 id="databasebuilderkt">DatabaseBuilder.kt</h2>
+<p>This Kotlin file hosts a single function that we'll use to create an instance of the database.</p>
+<details class="success" open>
+<summary><a class="find-button" href="#050-db-builder">show in full file</a>  data/src/main/java/com/androidbyexample/compose/movies/data/DatabaseBuilder.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">import</span> <span class="nn">androidx.room.Room</span>
+
+<ins><span class="k">fun</span> <span class="nf">createDao</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">=</span></ins>
+<ins>    <span class="n">Room</span><span class="p">.</span><span class="n">databaseBuilder</span><span class="p">(</span></ins>
+<ins>        <span class="n">context</span><span class="p">,</span></ins>
+<ins>        <span class="n">MovieDatabase</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">,</span></ins>
+<ins>        <span class="s">&quot;MOVIES&quot;</span></ins>
+<ins>    <span class="p">)</span></ins>
+<ins><span class="c1">// uncomment the following to see the SQL queries that are run</span></ins>
+<ins><span class="c1">//        .setQueryCallback(</span></ins>
+<ins><span class="c1">//            { sqlQuery, bindArgs -&gt;</span></ins>
+<ins><span class="c1">//                Log.d(&quot;!!!SQL&quot;, &quot;SQL Query: $sqlQuery SQL Args: $bindArgs&quot;)</span></ins>
+<ins><span class="c1">//            }, Executors.newSingleThreadExecutor()</span></ins>
+<ins><span class="c1">//        )</span></ins>
+<ins>        <span class="p">.</span><span class="n">build</span><span class="p">()</span></ins>
+<ins>        <span class="p">.</span><span class="n">dao</span></ins></pre>
+</div>
+</div>
+</details>
+
+<p>Defining this function here, in the <code>data</code> module, avoids the need to make the <code>repository</code>
+module depend on Room just to create the database instance.</p>
+<p>Note that if you want to see the SQL queries that are being run, you can uncomment
+the <code>setQueryCallback</code> call and look at the <strong>Logcat</strong> view at the bottom of Android Studio.</p>
+<hr/>
+<h2>All code changes</h2>
+<details class="success" open>
+<summary>ADDED: data/src/main/java/com/androidbyexample/compose/movies/data/ActorEntity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><ins><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.data</span></ins>
+<ins></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Embedded</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Entity</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.PrimaryKey</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Relation</span></ins>
+<ins><span class="k">import</span> <span class="nn">java.util.UUID</span></ins>
+<ins></ins>
+<div id="050-actor-entity"><ins><span class="n">@Entity</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">ActorEntity</span><span class="p">(</span></ins>
+<ins>    <span class="n">@PrimaryKey</span> <span class="k">var</span> <span class="py">id</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="n">UUID</span><span class="p">.</span><span class="n">randomUUID</span><span class="p">().</span><span class="n">toString</span><span class="p">(),</span></ins>
+<ins>    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="c1">// POKO that groups an Actor with the movies they appear in, and the</span></ins>
+<ins><span class="c1">//   role played in each movie. This is a ONE-TO-MANY relation from the</span></ins>
+<ins><span class="c1">//   ActorEntity to the RoleEntity, where we resolve the RoleEntity&#39;s movieId</span></ins>
+<ins><span class="c1">//   to fetch the actual movie (a MANY-TO-ONE relation). The end result is turning</span></ins>
+<ins><span class="c1">//   a MANY-TO-MANY relation into two ONE-TO-MANY relationships, where the MANY part</span></ins>
+<ins><span class="c1">//   is the RoleEntity.</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">ActorWithFilmography</span><span class="p">(</span></ins>
+<ins>    <span class="n">@Embedded</span></ins>
+<ins>    <span class="k">val</span> <span class="py">actor</span><span class="p">:</span> <span class="n">ActorEntity</span><span class="p">,</span></ins>
+<ins>    <span class="n">@Relation</span><span class="p">(</span></ins>
+<ins>        <span class="n">entity</span> <span class="p">=</span> <span class="n">RoleEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>        <span class="n">parentColumn</span> <span class="p">=</span> <span class="s">&quot;id&quot;</span><span class="p">,</span></ins>
+<ins>        <span class="n">entityColumn</span> <span class="p">=</span> <span class="s">&quot;actorId&quot;</span><span class="p">,</span></ins>
+<ins>    <span class="p">)</span></ins>
+<ins>    <span class="k">val</span> <span class="py">rolesWithMovies</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">RoleWithMovie</span><span class="p">&gt;,</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">RoleWithMovie</span><span class="p">(</span></ins>
+<ins>    <span class="n">@Embedded</span></ins>
+<ins>    <span class="k">val</span> <span class="py">role</span><span class="p">:</span> <span class="n">RoleEntity</span><span class="p">,</span></ins>
+<ins>    <span class="n">@Relation</span><span class="p">(</span></ins>
+<ins>        <span class="n">parentColumn</span> <span class="p">=</span> <span class="s">&quot;movieId&quot;</span><span class="p">,</span></ins>
+<ins>        <span class="n">entityColumn</span> <span class="p">=</span> <span class="s">&quot;id&quot;</span></ins>
+<ins>    <span class="p">)</span></ins>
+<ins>    <span class="k">val</span> <span class="py">movie</span><span class="p">:</span> <span class="n">MovieEntity</span><span class="p">,</span></ins>
+<ins><span class="p">)</span></ins>
+</div></pre>
+</div>
+</div>
+</details>
+<details class="success" open>
+<summary>ADDED: data/src/main/java/com/androidbyexample/compose/movies/data/DatabaseBuilder.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><ins><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.data</span></ins>
+<ins></ins>
+<ins><span class="k">import</span> <span class="nn">android.content.Context</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Room</span></ins>
+<ins></ins>
+<div id="050-db-builder"><ins><span class="k">fun</span> <span class="nf">createDao</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">)</span> <span class="p">=</span></ins>
+<ins>    <span class="n">Room</span><span class="p">.</span><span class="n">databaseBuilder</span><span class="p">(</span></ins>
+<ins>        <span class="n">context</span><span class="p">,</span></ins>
+<ins>        <span class="n">MovieDatabase</span><span class="o">::</span><span class="k">class</span><span class="p">.</span><span class="n">java</span><span class="p">,</span></ins>
+<ins>        <span class="s">&quot;MOVIES&quot;</span></ins>
+<ins>    <span class="p">)</span></ins>
+<ins><span class="c1">// uncomment the following to see the SQL queries that are run</span></ins>
+<ins><span class="c1">//        .setQueryCallback(</span></ins>
+<ins><span class="c1">//            { sqlQuery, bindArgs -&gt;</span></ins>
+<ins><span class="c1">//                Log.d(&quot;!!!SQL&quot;, &quot;SQL Query: $sqlQuery SQL Args: $bindArgs&quot;)</span></ins>
+<ins><span class="c1">//            }, Executors.newSingleThreadExecutor()</span></ins>
+<ins><span class="c1">//        )</span></ins>
+<ins>        <span class="p">.</span><span class="n">build</span><span class="p">()</span></ins>
+<ins>        <span class="p">.</span><span class="n">dao</span></ins>
+</div></pre>
+</div>
+</div>
+</details>
+<details class="success" open>
+<summary>ADDED: data/src/main/java/com/androidbyexample/compose/movies/data/MovieDao.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><ins><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.data</span></ins>
+<ins></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Dao</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Insert</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Query</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Transaction</span></ins>
+<ins><span class="k">import</span> <span class="nn">kotlinx.coroutines.flow.Flow</span></ins>
+<ins></ins>
+<div id="050-movie-dao"><ins><span class="n">@Dao</span></ins>
+<ins><span class="k">abstract</span> <span class="k">class</span> <span class="nc">MovieDao</span> <span class="p">{</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM RatingEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">getRatingsFlow</span><span class="p">():</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">RatingEntity</span><span class="p">&gt;&gt;</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM MovieEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">getMoviesFlow</span><span class="p">():</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieEntity</span><span class="p">&gt;&gt;</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM ActorEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="k">fun</span> <span class="nf">getActorsFlow</span><span class="p">():</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">ActorEntity</span><span class="p">&gt;&gt;</span></ins>
+<ins></ins>
+<div id="050-one-shot"><ins>    <span class="n">@Transaction</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM RatingEntity WHERE id = :id&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">getRatingWithMovies</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">RatingWithMovies</span></ins>
+<ins>    <span class="n">@Transaction</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM ActorEntity WHERE id = :id&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">getActorWithFilmography</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">ActorWithFilmography</span></ins>
+<ins>    <span class="n">@Transaction</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;SELECT * FROM MovieEntity WHERE id = :id&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">getMovieWithCast</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">MovieWithCast</span></ins>
+</div><ins></ins>
+<ins>    <span class="n">@Insert</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">insert</span><span class="p">(</span><span class="k">vararg</span> <span class="n">ratings</span><span class="p">:</span> <span class="n">RatingEntity</span><span class="p">)</span></ins>
+<ins>    <span class="n">@Insert</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">insert</span><span class="p">(</span><span class="k">vararg</span> <span class="n">movies</span><span class="p">:</span> <span class="n">MovieEntity</span><span class="p">)</span></ins>
+<ins>    <span class="n">@Insert</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">insert</span><span class="p">(</span><span class="k">vararg</span> <span class="n">actors</span><span class="p">:</span> <span class="n">ActorEntity</span><span class="p">)</span></ins>
+<ins>    <span class="n">@Insert</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">insert</span><span class="p">(</span><span class="k">vararg</span> <span class="n">roles</span><span class="p">:</span> <span class="n">RoleEntity</span><span class="p">)</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;DELETE FROM MovieEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">clearMovies</span><span class="p">()</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;DELETE FROM ActorEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">clearActors</span><span class="p">()</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;DELETE FROM RatingEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">clearRatings</span><span class="p">()</span></ins>
+<ins>    <span class="n">@Query</span><span class="p">(</span><span class="s">&quot;DELETE FROM RoleEntity&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">abstract</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">clearRoles</span><span class="p">()</span></ins>
+<ins>    <span class="n">@Transaction</span></ins>
+<ins>    <span class="k">open</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">resetDatabase</span><span class="p">()</span> <span class="p">{</span></ins>
+<ins>        <span class="n">clearMovies</span><span class="p">()</span></ins>
+<ins>        <span class="n">clearActors</span><span class="p">()</span></ins>
+<ins>        <span class="n">clearRoles</span><span class="p">()</span></ins>
+<ins>        <span class="n">clearRatings</span><span class="p">()</span></ins>
+<ins>        <span class="n">insert</span><span class="p">(</span></ins>
+<ins>            <span class="n">RatingEntity</span><span class="p">(</span><span class="n">id</span> <span class="p">=</span> <span class="s">&quot;r0&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="p">=</span> <span class="s">&quot;Not Rated&quot;</span><span class="p">,</span> <span class="n">description</span> <span class="p">=</span> <span class="s">&quot;Not yet rated&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">RatingEntity</span><span class="p">(</span><span class="n">id</span> <span class="p">=</span> <span class="s">&quot;r1&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="p">=</span> <span class="s">&quot;G&quot;</span><span class="p">,</span> <span class="n">description</span> <span class="p">=</span> <span class="s">&quot;General Audiences&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">RatingEntity</span><span class="p">(</span><span class="n">id</span> <span class="p">=</span> <span class="s">&quot;r2&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="p">=</span> <span class="s">&quot;PG&quot;</span><span class="p">,</span> <span class="n">description</span> <span class="p">=</span> <span class="s">&quot;Parental Guidance Suggested&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">RatingEntity</span><span class="p">(</span><span class="n">id</span> <span class="p">=</span> <span class="s">&quot;r3&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="p">=</span> <span class="s">&quot;PG-13&quot;</span><span class="p">,</span> <span class="n">description</span> <span class="p">=</span> <span class="s">&quot;Unsuitable for those under 13&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">RatingEntity</span><span class="p">(</span><span class="n">id</span> <span class="p">=</span> <span class="s">&quot;r4&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="p">=</span> <span class="s">&quot;R&quot;</span><span class="p">,</span> <span class="n">description</span> <span class="p">=</span> <span class="s">&quot;Restricted - 17 and older&quot;</span><span class="p">),</span></ins>
+<ins>        <span class="p">)</span></ins>
+<ins>        <span class="n">insert</span><span class="p">(</span></ins>
+<ins>            <span class="n">MovieEntity</span><span class="p">(</span><span class="s">&quot;m1&quot;</span><span class="p">,</span> <span class="s">&quot;The Transporter&quot;</span><span class="p">,</span> <span class="s">&quot;Jason Statham kicks a guy in the face&quot;</span><span class="p">,</span> <span class="s">&quot;r3&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">MovieEntity</span><span class="p">(</span><span class="s">&quot;m2&quot;</span><span class="p">,</span> <span class="s">&quot;Transporter 2&quot;</span><span class="p">,</span> <span class="s">&quot;Jason Statham kicks a bunch of guys in the face&quot;</span><span class="p">,</span> <span class="s">&quot;r4&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">MovieEntity</span><span class="p">(</span><span class="s">&quot;m3&quot;</span><span class="p">,</span> <span class="s">&quot;Hobbs and Shaw&quot;</span><span class="p">,</span> <span class="s">&quot;Cars, Explosions and Stuff&quot;</span><span class="p">,</span> <span class="s">&quot;r3&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">MovieEntity</span><span class="p">(</span><span class="s">&quot;m4&quot;</span><span class="p">,</span> <span class="s">&quot;Jumanji - Welcome to the Jungle&quot;</span><span class="p">,</span> <span class="s">&quot;The Rock smolders&quot;</span><span class="p">,</span> <span class="s">&quot;r3&quot;</span><span class="p">),</span></ins>
+<ins>        <span class="p">)</span></ins>
+<ins>        <span class="n">insert</span><span class="p">(</span></ins>
+<ins>            <span class="n">ActorEntity</span><span class="p">(</span><span class="s">&quot;a1&quot;</span><span class="p">,</span> <span class="s">&quot;Jason Statham&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">ActorEntity</span><span class="p">(</span><span class="s">&quot;a2&quot;</span><span class="p">,</span> <span class="s">&quot;The Rock&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">ActorEntity</span><span class="p">(</span><span class="s">&quot;a3&quot;</span><span class="p">,</span> <span class="s">&quot;Shu Qi&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">ActorEntity</span><span class="p">(</span><span class="s">&quot;a4&quot;</span><span class="p">,</span> <span class="s">&quot;Amber Valletta&quot;</span><span class="p">),</span></ins>
+<ins>            <span class="n">ActorEntity</span><span class="p">(</span><span class="s">&quot;a5&quot;</span><span class="p">,</span> <span class="s">&quot;Kevin Hart&quot;</span><span class="p">),</span></ins>
+<ins>        <span class="p">)</span></ins>
+<ins>        <span class="n">insert</span><span class="p">(</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m1&quot;</span><span class="p">,</span> <span class="s">&quot;a1&quot;</span><span class="p">,</span> <span class="s">&quot;Frank Martin&quot;</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m1&quot;</span><span class="p">,</span> <span class="s">&quot;a3&quot;</span><span class="p">,</span> <span class="s">&quot;Lai&quot;</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m2&quot;</span><span class="p">,</span> <span class="s">&quot;a1&quot;</span><span class="p">,</span> <span class="s">&quot;Frank Martin&quot;</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m2&quot;</span><span class="p">,</span> <span class="s">&quot;a4&quot;</span><span class="p">,</span> <span class="s">&quot;Audrey Billings&quot;</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m3&quot;</span><span class="p">,</span> <span class="s">&quot;a2&quot;</span><span class="p">,</span> <span class="s">&quot;Hobbs&quot;</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m3&quot;</span><span class="p">,</span> <span class="s">&quot;a1&quot;</span><span class="p">,</span> <span class="s">&quot;Shaw&quot;</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m4&quot;</span><span class="p">,</span> <span class="s">&quot;a2&quot;</span><span class="p">,</span> <span class="s">&quot;Spencer&quot;</span><span class="p">,</span> <span class="m">1</span><span class="p">),</span></ins>
+<ins>            <span class="n">RoleEntity</span><span class="p">(</span><span class="s">&quot;m4&quot;</span><span class="p">,</span> <span class="s">&quot;a5&quot;</span><span class="p">,</span> <span class="s">&quot;Fridge&quot;</span><span class="p">,</span> <span class="m">2</span><span class="p">),</span></ins>
+<ins>        <span class="p">)</span></ins>
+<ins>    <span class="p">}</span></ins>
+<ins><span class="p">}</span></ins>
+<ins></ins>
+</div></pre>
+</div>
+</div>
+</details>
+<details class="success" open>
+<summary>ADDED: data/src/main/java/com/androidbyexample/compose/movies/data/MovieDatabase.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><ins><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.data</span></ins>
+<ins></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Database</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.RoomDatabase</span></ins>
+<ins></ins>
+<div id="050-database"><ins><span class="n">@Database</span><span class="p">(</span></ins>
+<ins>    <span class="n">version</span> <span class="p">=</span> <span class="m">1</span><span class="p">,</span></ins>
+<ins>    <span class="n">entities</span> <span class="p">=</span> <span class="p">[</span></ins>
+<ins>        <span class="n">MovieEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>        <span class="n">ActorEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>        <span class="n">RoleEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>        <span class="n">RatingEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>    <span class="p">],</span></ins>
+<ins>    <span class="n">exportSchema</span> <span class="p">=</span> <span class="k">false</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="k">abstract</span> <span class="k">class</span> <span class="nc">MovieDatabase</span><span class="p">:</span> <span class="n">RoomDatabase</span><span class="p">()</span> <span class="p">{</span></ins>
+<ins>    <span class="k">abstract</span> <span class="k">val</span> <span class="py">dao</span><span class="p">:</span> <span class="n">MovieDao</span></ins>
+<ins><span class="p">}</span></ins>
+</div></pre>
+</div>
+</div>
+</details>
+<details class="success" open>
+<summary>ADDED: data/src/main/java/com/androidbyexample/compose/movies/data/MovieEntity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><ins><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.data</span></ins>
+<ins></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Embedded</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Entity</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.ForeignKey</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Index</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.PrimaryKey</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Relation</span></ins>
+<ins><span class="k">import</span> <span class="nn">java.util.UUID</span></ins>
+<ins></ins>
+<ins><span class="c1">// Movie Entity - note that we set up a foreign key relationship with RatingEntity,</span></ins>
+<ins><span class="c1">//   which is considered the owner of movies with that rating. (Probably not the best</span></ins>
+<ins><span class="c1">//   way to represent this relationship, but I wanted to demonstrate a one-to-many</span></ins>
+<ins><span class="c1">//   relationship with cascading deletion.</span></ins>
+<ins><span class="c1">//   If we delete a Rating, we delete all associated movies. If we update the</span></ins>
+<ins><span class="c1">//   Rating key, we update that key in all associated movies.</span></ins>
+<ins></ins>
+<div id="050-movie-entity"><ins><span class="n">@Entity</span><span class="p">(</span></ins>
+<ins>    <span class="n">indices</span> <span class="p">=</span> <span class="p">[</span></ins>
+<ins>        <span class="n">Index</span><span class="p">(</span><span class="n">value</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;ratingId&quot;</span><span class="p">])</span></ins>
+<ins>    <span class="p">],</span></ins>
+<ins>    <span class="n">foreignKeys</span> <span class="p">=</span> <span class="p">[</span></ins>
+<ins>        <span class="n">ForeignKey</span><span class="p">(</span></ins>
+<ins>            <span class="n">entity</span> <span class="p">=</span> <span class="n">RatingEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>            <span class="n">parentColumns</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">],</span></ins>
+<ins>            <span class="n">childColumns</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;ratingId&quot;</span><span class="p">],</span></ins>
+<ins>            <span class="n">onUpdate</span> <span class="p">=</span> <span class="n">ForeignKey</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span></ins>
+<ins>            <span class="n">onDelete</span> <span class="p">=</span> <span class="n">ForeignKey</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span></ins>
+<ins>        <span class="p">)</span></ins>
+<ins>    <span class="p">]</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">MovieEntity</span><span class="p">(</span></ins>
+<ins>    <span class="n">@PrimaryKey</span> <span class="k">var</span> <span class="py">id</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="n">UUID</span><span class="p">.</span><span class="n">randomUUID</span><span class="p">().</span><span class="n">toString</span><span class="p">(),</span></ins>
+<ins>    <span class="k">var</span> <span class="py">title</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins>    <span class="k">var</span> <span class="py">description</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins>    <span class="k">var</span> <span class="py">ratingId</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="c1">// POKO that groups a Movie with the actors that appear in it, and the</span></ins>
+<ins><span class="c1">//   role played in the movie. This is a ONE-TO-MANY relation from the</span></ins>
+<ins><span class="c1">//   MovieEntity to the RoleEntity, where we resolve the RoleEntity&#39;s actorId</span></ins>
+<ins><span class="c1">//   to fetch the actual actor (a MANY-TO-ONE relation). The end result is turning</span></ins>
+<ins><span class="c1">//   a MANY-TO-MANY relation into two ONE-TO-MANY relationships, where the MANY part</span></ins>
+<ins><span class="c1">//   is the RoleEntity.</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">MovieWithCast</span><span class="p">(</span></ins>
+<ins>    <span class="n">@Embedded</span></ins>
+<ins>    <span class="k">val</span> <span class="py">movie</span><span class="p">:</span> <span class="n">MovieEntity</span><span class="p">,</span></ins>
+<ins>    <span class="n">@Relation</span><span class="p">(</span></ins>
+<ins>        <span class="n">entity</span> <span class="p">=</span> <span class="n">RoleEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>        <span class="n">parentColumn</span> <span class="p">=</span> <span class="s">&quot;id&quot;</span><span class="p">,</span></ins>
+<ins>        <span class="n">entityColumn</span> <span class="p">=</span> <span class="s">&quot;movieId&quot;</span><span class="p">,</span></ins>
+<ins>    <span class="p">)</span></ins>
+<ins>    <span class="k">val</span> <span class="py">rolesWithActors</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">RoleWithActor</span><span class="p">&gt;,</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">RoleWithActor</span><span class="p">(</span></ins>
+<ins>    <span class="n">@Embedded</span></ins>
+<ins>    <span class="k">val</span> <span class="py">role</span><span class="p">:</span> <span class="n">RoleEntity</span><span class="p">,</span></ins>
+<ins>    <span class="n">@Relation</span><span class="p">(</span></ins>
+<ins>        <span class="n">parentColumn</span> <span class="p">=</span> <span class="s">&quot;actorId&quot;</span><span class="p">,</span></ins>
+<ins>        <span class="n">entityColumn</span> <span class="p">=</span> <span class="s">&quot;id&quot;</span></ins>
+<ins>    <span class="p">)</span></ins>
+<ins>    <span class="k">val</span> <span class="py">actor</span><span class="p">:</span> <span class="n">ActorEntity</span><span class="p">,</span></ins>
+<ins><span class="p">)</span></ins>
+</div></pre>
+</div>
+</div>
+</details>
+<details class="success" open>
+<summary>ADDED: data/src/main/java/com/androidbyexample/compose/movies/data/RatingEntity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><ins><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.data</span></ins>
+<ins></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Embedded</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Entity</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.PrimaryKey</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Relation</span></ins>
+<ins><span class="k">import</span> <span class="nn">java.util.UUID</span></ins>
+<ins></ins>
+<div id="050-rating-entity"><ins><span class="n">@Entity</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">RatingEntity</span><span class="p">(</span></ins>
+<ins>    <span class="n">@PrimaryKey</span> <span class="k">var</span> <span class="py">id</span><span class="p">:</span> <span class="n">String</span> <span class="p">=</span> <span class="n">UUID</span><span class="p">.</span><span class="n">randomUUID</span><span class="p">().</span><span class="n">toString</span><span class="p">(),</span></ins>
+<ins>    <span class="k">var</span> <span class="py">name</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins>    <span class="k">var</span> <span class="py">description</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="c1">// ONE-TO-MANY relationship (Rating -&gt; Movies)</span></ins>
+<ins><span class="c1">// NOTE: THIS IS NOT AN ENTITY!</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">RatingWithMovies</span><span class="p">(</span></ins>
+<ins>    <span class="n">@Embedded</span></ins>
+<ins>    <span class="k">val</span> <span class="py">rating</span><span class="p">:</span> <span class="n">RatingEntity</span><span class="p">,</span></ins>
+<ins>    <span class="n">@Relation</span><span class="p">(</span></ins>
+<ins>        <span class="n">parentColumn</span> <span class="p">=</span> <span class="s">&quot;id&quot;</span><span class="p">,</span></ins>
+<ins>        <span class="n">entityColumn</span> <span class="p">=</span> <span class="s">&quot;ratingId&quot;</span><span class="p">,</span></ins>
+<ins>    <span class="p">)</span></ins>
+<ins>    <span class="k">val</span> <span class="py">movies</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">MovieEntity</span><span class="p">&gt;</span></ins>
+<ins><span class="p">)</span></ins>
+</div></pre>
+</div>
+</div>
+</details>
+<details class="success" open>
+<summary>ADDED: data/src/main/java/com/androidbyexample/compose/movies/data/RoleEntity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><ins><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.data</span></ins>
+<ins></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Entity</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.ForeignKey</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.room.Index</span></ins>
+<ins></ins>
+<ins><span class="c1">// RoleEntity - note that it&#39;s considered a child of both MovieEntity and</span></ins>
+<ins><span class="c1">//    ActorEntity. When either parent is deleted, we delete this entity. If</span></ins>
+<ins><span class="c1">//    either parent&#39;s key is updated, we update this entity.</span></ins>
+<ins></ins>
+<div id="050-role-entity"><ins><span class="n">@Entity</span><span class="p">(</span></ins>
+<ins>    <span class="n">primaryKeys</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;actorId&quot;</span><span class="p">,</span> <span class="s">&quot;movieId&quot;</span><span class="p">],</span></ins>
+<ins>    <span class="n">indices</span> <span class="p">=</span> <span class="p">[</span></ins>
+<ins>        <span class="n">Index</span><span class="p">(</span><span class="s">&quot;movieId&quot;</span><span class="p">),</span></ins>
+<ins>        <span class="n">Index</span><span class="p">(</span><span class="s">&quot;actorId&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="p">],</span></ins>
+<ins>    <span class="n">foreignKeys</span> <span class="p">=</span> <span class="p">[</span></ins>
+<ins>        <span class="n">ForeignKey</span><span class="p">(</span></ins>
+<ins>            <span class="n">entity</span> <span class="p">=</span> <span class="n">MovieEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>            <span class="n">parentColumns</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">],</span></ins>
+<ins>            <span class="n">childColumns</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;movieId&quot;</span><span class="p">],</span></ins>
+<ins>            <span class="n">onUpdate</span> <span class="p">=</span> <span class="n">ForeignKey</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span></ins>
+<ins>            <span class="n">onDelete</span> <span class="p">=</span> <span class="n">ForeignKey</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span></ins>
+<ins>        <span class="p">),</span></ins>
+<ins>        <span class="n">ForeignKey</span><span class="p">(</span></ins>
+<ins>            <span class="n">entity</span> <span class="p">=</span> <span class="n">ActorEntity</span><span class="o">::</span><span class="k">class</span><span class="p">,</span></ins>
+<ins>            <span class="n">parentColumns</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;id&quot;</span><span class="p">],</span></ins>
+<ins>            <span class="n">childColumns</span> <span class="p">=</span> <span class="p">[</span><span class="s">&quot;actorId&quot;</span><span class="p">],</span></ins>
+<ins>            <span class="n">onUpdate</span> <span class="p">=</span> <span class="n">ForeignKey</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span></ins>
+<ins>            <span class="n">onDelete</span> <span class="p">=</span> <span class="n">ForeignKey</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">,</span></ins>
+<ins>        <span class="p">)</span></ins>
+<ins>    <span class="p">]</span></ins>
+<ins><span class="p">)</span></ins>
+<ins><span class="k">data</span> <span class="k">class</span> <span class="nc">RoleEntity</span><span class="p">(</span></ins>
+<ins>    <span class="k">var</span> <span class="py">movieId</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins>    <span class="k">var</span> <span class="py">actorId</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins>    <span class="k">var</span> <span class="py">character</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></ins>
+<ins>    <span class="k">var</span> <span class="py">orderInCredits</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span></ins>
+<ins><span class="p">)</span></ins>
+</div></pre>
+</div>
+</div>
+</details>
+
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025. Scott Stanchfield
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.sections", "search.suggest", "search.highlight", "navigation.instant", "content.tabs.link", "toc.follow", "toc.integrate", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4601 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://androidbyexample.com/modules/movie-ui-3/STEP_020_REPO.html">
+      
+      
+        <link rel="prev" href="index.html">
+      
+      
+        <link rel="next" href="STEP_030_REPO.html">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>Display-screen list cleanup - Android By Example</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');}</style>
+
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Android By Example" class="md-header__button md-logo" aria-label="Android By Example" data-md-component="logo">
+      
+  <img src="../../android.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Android By Example
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Display-screen list cleanup
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Android By Example" class="md-nav__button md-logo" aria-label="Android By Example" data-md-component="logo">
+      
+  <img src="../../android.png" alt="logo">
+
+    </a>
+    Android By Example
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_010_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About This Site
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Your Instructor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Source Code License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Course Hardware and Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_080_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assignments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_090_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Grading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_100_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Third-Party and Course Sample Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 1 (1/23-1/29)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Week 1 (1/23-1/29)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Kotlin Primer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Kotlin Primer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kotlin-primer/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kotlin-primer/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Domain Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User-Interface Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Events
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_080_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unidirectional Data Flow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Android Studio
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Android Studio
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../android-studio/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 2 (1/30-2/5)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Week 2 (1/30-2/5)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Jetpack Compose Concepts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Jetpack Compose Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compose Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Composable Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    String literals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    State
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compose Optimizations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Where do you store state?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Density
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Initial Movies UI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Initial Movies UI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Initial Movie UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Update versions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create initial screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Refactor Scaffold Use
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flesh out the screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 3 (2/6-2/12)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Week 3 (2/6-2/12)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Room
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Room
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_10_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Relationships
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_20_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Room Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_25_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Room Relations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_30_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Suspending Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_40_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies Database
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies Database
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add new modules
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Room dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_035_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Android SDK and JDK to version catalog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module Dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entities, DAO and Database
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repository Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modifying the view model to use real data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fix movie list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_090_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fetch data for movie display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_100_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Viewing the Database
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 4 (2/13-2/19)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Week 4 (2/13-2/19)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Compose Lists
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Compose Lists
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fixed UIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dynamic UIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies UI - Lists
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies UI - Lists
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convert to LazyColumn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selection Tracking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selections in the UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contextual Top Bar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Refactor time!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Actors and Ratings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Better Movie Icon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_090_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wrapup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 5 (2/20-2/26)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Week 5 (2/20-2/26)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Compose Text Fields
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            Compose Text Fields
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    State Races
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fixing State Races
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heads up!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies UI - Updates
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies UI - Updates
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="STEP_020_REPO.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Display-screen list cleanup
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deleting from the display screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Editing a movie
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 6 (2/27-3/5)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Week 6 (2/27-3/5)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies Widget
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Movies Widget
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Widget Declaration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Widget UI and Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Speech
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Speech
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../speech/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../speech/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 7 (3/6-3/12)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Week 7 (3/6-3/12)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_1" id="__nav_8_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Google Map
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            Google Map
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Find Your Fingerprint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Console Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Set up a map
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add a Marker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Initial Position
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Loading Spinner
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Map Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_090_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Current Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_100_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jump to Current Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_110_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Top Bar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_120_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Copy Icons
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_130_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manage Car Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_140_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dragging a Marker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_150_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Navigating
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_160_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lat/Lon Bounds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    REST services
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            REST services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest server module
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Server code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Server address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST client repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+<h4>Movies UI - Updates</h4>
+
+<h1>Display-screen list cleanup</h1>
+
+<p>In our previous example, you could not delete items from display screens. For example, the
+Rating display screen shows a list of movies with that rating, but you cannot delete the
+movies from that screen.</p>
+<p>We'd like to reuse as much as possible, but our <code>ListScaffold</code> isn't as flexible as we need.
+It manages the entire body content as a <code>List</code>. For our display screens, we have other content
+above the list of children.</p>
+<p>But let's not ignore a big issue: When we rotate the screen, there's very
+little room for the list. If there were more fields at the top, or the user increases
+the font size, we may lose some field and the list completely!</p>
+<p><img alt="Not enough room for the list!" src="screenshots/too-small.gif" width="200" /></p>
+<p>So we need to take advantage of adding individual items to the <code>LazyColumn</code>, as follows:</p>
+<div class="highlight"><pre><span></span><code><span class="n">LazyColumn</span><span class="p">(...)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">item</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// fixed part of UI - could be multiple separate item {...} blocks </span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">items</span><span class="p">(</span><span class="n">list</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// dynamic part</span>
+<span class="w">        </span><span class="c1">// card for each item in the list</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>We do this as follows. Add a <code>topContent</code> parameter in <code>List</code>.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#020-top-content-param-in-list">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/screens/List.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="n">@OptIn</span><span class="p">(</span><span class="n">ExperimentalFoundationApi</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="n">HasId</span><span class="p">&gt;</span> <span class="nf">List</span><span class="p">(</span>
+    <span class="c1">// ...</span>
+    <span class="n">onClearSelections</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">,</span>
+<ins>    <span class="n">topContent</span><span class="p">:</span> <span class="p">(</span><span class="n">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">)?</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span></ins>
+    <span class="n">itemContent</span><span class="p">:</span> <span class="n">@Composable</span> <span class="n">ColumnScope</span><span class="p">.(</span><span class="n">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>Add a <code>topContent</code> parameter in <code>ListScaffold</code> and pass it from <code>ListScaffold</code> to <code>List</code></p>
+<details class="example" open>
+<summary><a class="find-button" href="#020-top-content-param-in-list-scaffold">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/screens/ListScaffold.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="n">@OptIn</span><span class="p">(</span><span class="n">ExperimentalMaterial3Api</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="n">HasId</span><span class="p">&gt;</span> <span class="nf">ListScaffold</span><span class="p">(</span>
+    <span class="c1">// ...</span>
+    <span class="n">onResetDatabase</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">,</span>
+<ins>    <span class="n">topContent</span><span class="p">:</span> <span class="p">(</span><span class="n">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">)?</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span></ins>
+    <span class="n">itemContent</span><span class="p">:</span> <span class="n">@Composable</span> <span class="n">ColumnScope</span><span class="p">.(</span><span class="n">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="n">Scaffold</span><span class="p">(</span>
+        <span class="c1">// ...</span>
+    <span class="p">)</span> <span class="p">{</span> <span class="n">paddingValues</span> <span class="p">-&gt;</span>
+        <span class="n">List</span><span class="p">(</span>
+            <span class="c1">// ...</span>
+            <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">onSelectionToggle</span><span class="p">,</span>
+            <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">onClearSelections</span><span class="p">,</span>
+<ins>            <span class="n">topContent</span> <span class="p">=</span> <span class="n">topContent</span><span class="p">,</span></ins>
+            <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span>
+                <span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="n">paddingValues</span><span class="p">)</span>
+                <span class="c1">// ...</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>Add <code>topContent</code> (if it exists) as a fixed <code>item</code> to the <code>LazyColumn</code> when setting up the <code>List</code>.
+We'll only pass <code>topContent</code> in the display screens. (The list screens only display
+the dynamic lists.)</p>
+<details class="example" open>
+<summary><a class="find-button" href="#020-add-top-content-if-exists">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/screens/List.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="n">@OptIn</span><span class="p">(</span><span class="n">ExperimentalFoundationApi</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="n">HasId</span><span class="p">&gt;</span> <span class="nf">List</span><span class="p">(</span>
+    <span class="c1">// ...</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="n">LazyColumn</span><span class="p">(</span>
+        <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span>
+    <span class="p">)</span> <span class="p">{</span>
+<ins>        <span class="n">topContent</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span></ins>
+<ins>            <span class="n">item</span> <span class="p">{</span></ins>
+<ins>                <span class="n">topContent</span><span class="p">()</span></ins>
+<ins>            <span class="p">}</span></ins>
+<ins>        <span class="p">}</span></ins>
+        <span class="n">items</span><span class="p">(</span>
+            <span class="n">items</span> <span class="p">=</span> <span class="n">items</span><span class="p">,</span>
+            <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>Because the display screens now have selectable lists, we need to add selection parameters to them,
+as well as the other parameters needed for the <code>ListScaffold</code>. (Here we show <code>RatingDisplay</code>, but
+we need to do the same to <code>MovieDisplay</code> and <code>ActorDisplay</code>)</p>
+<details class="example" open>
+<summary><a class="find-button" href="#020-add-selection-to-rating-display">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/screens/RatingDisplay.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="sas1-strike"><span class="c1">//<span class="n">@OptIn</span><span class="p">(</span><span class="n">ExperimentalMaterial3Api</span><span class="o">::</span><span class="k">class</span><span class="p">)</span></span></span>
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="nf">RatingDisplayUi</span><span class="p">(</span>
+    <span class="c1">// ...</span>
+    <span class="n">fetchRating</span><span class="p">:</span> <span class="n">suspend</span> <span class="p">(</span><span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">RatingWithMoviesDto</span><span class="p">,</span>
+    <span class="n">onMovieClicked</span><span class="p">:</span> <span class="p">(</span><span class="n">MovieDto</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+<ins>    <span class="n">selectedIds</span><span class="p">:</span> <span class="n">Set</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;,</span></ins>
+<ins>    <span class="n">onSelectionToggle</span><span class="p">:</span> <span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">onClearSelections</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">onDeleteSelectedMovies</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">currentScreen</span><span class="p">:</span> <span class="n">Screen</span><span class="p">,</span></ins>
+<ins>    <span class="n">onSelectListScreen</span><span class="p">:</span> <span class="p">(</span><span class="n">Screen</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">onResetDatabase</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">,</span></ins>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">ratingWithMovies</span> <span class="k">by</span> <span class="n">remember</span> <span class="p">{</span> <span class="n">mutableStateOf</span><span class="p">&lt;</span><span class="n">RatingWithMoviesDto</span><span class="p">?&gt;(</span><span class="k">null</span><span class="p">)</span> <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>Collect the <code>selection</code> state from the view model (in <code>Ui()</code>) and pass the selection and other top-bar
+parameters to the display screen</p>
+<details class="example" open>
+<summary><a class="find-button" href="#020-collect-selection">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/screens/Ui.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="nf">Ui</span><span class="p">(</span>
+    <span class="c1">// ...</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">when</span> <span class="p">(</span><span class="k">val</span> <span class="py">screen</span> <span class="p">=</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">currentScreen</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="p">}</span>
+        <span class="k">is</span> <span class="n">RatingDisplay</span> <span class="p">-&gt;</span> <span class="p">{</span>
+<ins>            <span class="k">val</span> <span class="py">selectedIds</span> <span class="k">by</span> <span class="n">viewModel</span></ins>
+<ins>                <span class="p">.</span><span class="n">selectedIdsFlow</span></ins>
+<ins>                <span class="p">.</span><span class="n">collectAsStateWithLifecycle</span><span class="p">(</span><span class="n">initialValue</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">())</span></ins>
+
+            <span class="n">RatingDisplayUi</span><span class="p">(</span>
+                <span class="c1">// ...</span>
+<span class="sas1-strike"><span class="c1">//              <span class="n">onMovieClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">pushScreen</span><span class="p">(</span><span class="n">MovieDisplay</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">id</span><span class="p">))</span> <span class="p">}</span></span></span>
+                <span class="n">onMovieClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">pushScreen</span><span class="p">(</span><span class="n">MovieDisplay</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">id</span><span class="p">))</span> <span class="p">},</span>
+<ins>                <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span></ins>
+<ins>                <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">clearSelectedIds</span><span class="p">,</span></ins>
+<ins>                <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">toggleSelection</span><span class="p">,</span></ins>
+<ins>                <span class="n">onDeleteSelectedMovies</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">deleteSelectedMovies</span><span class="p">,</span></ins>
+<ins>                <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">screen</span><span class="p">,</span></ins>
+<ins>                <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">setScreen</span><span class="p">,</span></ins>
+<ins>                <span class="n">onResetDatabase</span> <span class="p">=</span> <span class="p">{</span></ins>
+<ins>                    <span class="n">scope</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>                        <span class="n">viewModel</span><span class="p">.</span><span class="n">resetDatabase</span><span class="p">()</span></ins>
+<ins>                    <span class="p">}</span></ins>
+<ins>                <span class="p">}</span></ins>
+            <span class="p">)</span>
+        <span class="p">}</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>And finally convert the <code>Scaffold</code> to <code>ListScaffold</code></p>
+<details class="example" open>
+<summary><a class="find-button" href="#020-convert-to-list-scaffold">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/screens/RatingDisplay.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="sas1-strike"><span class="c1">//<span class="n">@OptIn</span><span class="p">(</span><span class="n">ExperimentalMaterial3Api</span><span class="o">::</span><span class="k">class</span><span class="p">)</span></span></span>
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="nf">RatingDisplayUi</span><span class="p">(</span>
+    <span class="c1">// ...</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<del><span class="c1">//  <span class="n">Scaffold</span><span class="p">(</span></span></del>
+<del><span class="c1">//      <span class="n">topBar</span> <span class="p">=</span> <span class="p">{</span></span></del>
+<del><span class="c1">//          <span class="n">TopAppBar</span><span class="p">(</span></span></del>
+<del><span class="c1">//              <span class="n">title</span> <span class="p">=</span> <span class="p">{</span></span></del>
+<del><span class="c1">//                  <span class="n">Text</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">ratingWithMovies</span><span class="o">?.</span><span class="n">rating</span><span class="o">?.</span><span class="n">name</span> <span class="o">?:</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">loading</span><span class="p">))</span></span></del>
+<del><span class="c1">//              <span class="p">}</span></span></del>
+<ins>    <span class="n">ListScaffold</span><span class="p">(</span></ins>
+<ins>        <span class="n">titleId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">rating</span><span class="p">,</span></ins>
+<ins>        <span class="n">items</span> <span class="p">=</span> <span class="n">ratingWithMovies</span><span class="o">?.</span><span class="n">movies</span><span class="o">?.</span><span class="n">sortedBy</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">title</span> <span class="p">}</span> <span class="o">?:</span> <span class="n">emptyList</span><span class="p">(),</span></ins>
+<ins>        <span class="n">onItemClicked</span> <span class="p">=</span> <span class="n">onMovieClicked</span><span class="p">,</span></ins>
+<ins>        <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span></ins>
+<ins>        <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">onSelectionToggle</span><span class="p">,</span></ins>
+<ins>        <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">onClearSelections</span><span class="p">,</span></ins>
+<ins>        <span class="n">onDeleteSelectedItems</span> <span class="p">=</span> <span class="n">onDeleteSelectedMovies</span><span class="p">,</span></ins>
+<ins>        <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">currentScreen</span><span class="p">,</span></ins>
+<ins>        <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">onSelectListScreen</span><span class="p">,</span></ins>
+<ins>        <span class="n">onResetDatabase</span> <span class="p">=</span> <span class="n">onResetDatabase</span><span class="p">,</span></ins>
+<ins>        <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span><span class="p">,</span></ins>
+<ins>        <span class="n">itemContent</span> <span class="p">=</span> <span class="p">{</span> <span class="n">movie</span> <span class="p">-&gt;</span></ins>
+<ins>            <span class="n">Display</span><span class="p">(</span></ins>
+<ins>                <span class="n">text</span> <span class="p">=</span> <span class="n">movie</span><span class="p">.</span><span class="n">title</span></ins>
+            <span class="p">)</span>
+<del><span class="c1">//      <span class="p">}</span></span></del>
+<del><span class="c1">//  <span class="p">)</span> <span class="p">{</span> <span class="n">paddingValues</span> <span class="p">-&gt;</span></span></del>
+<ins>        <span class="p">},</span></ins>
+<ins>        <span class="n">topContent</span> <span class="p">=</span> <span class="p">{</span></ins>
+            <span class="n">ratingWithMovies</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span> <span class="n">ratingWithMovies</span> <span class="p">-&gt;</span>
+<del><span class="c1">//          <span class="n">Column</span><span class="p">(</span></span></del>
+<del><span class="c1">//              <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span></span></del>
+<del><span class="c1">//                  <span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="n">paddingValues</span><span class="p">)</span></span></del>
+<del><span class="c1">//          <span class="p">)</span> <span class="p">{</span></span></del>
+                <span class="n">Label</span><span class="p">(</span><span class="n">textId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">ratingWithMovies</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">Label</span><span class="p">(</span><span class="n">textId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">description</span><span class="p">)</span>
+                <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">ratingWithMovies</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">description</span><span class="p">)</span>
+                <span class="n">Label</span><span class="p">(</span>
+                    <span class="n">text</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span>
+                        <span class="n">id</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">movies_rated</span><span class="p">,</span>
+                        <span class="n">ratingWithMovies</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">name</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+<del><span class="c1">//              <span class="n">List</span><span class="p">(</span></span></del>
+<del><span class="c1">//                  <span class="n">items</span> <span class="p">=</span> <span class="n">ratingWithMovies</span><span class="p">.</span><span class="n">movies</span><span class="p">.</span><span class="n">sortedBy</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">title</span> <span class="p">},</span></span></del>
+<del><span class="c1">//                  <span class="n">onItemClicked</span> <span class="p">=</span> <span class="n">onMovieClicked</span><span class="p">,</span></span></del>
+<del><span class="c1">//                  <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">(),</span></span></del>
+<del><span class="c1">//                  <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="p">{},</span></span></del>
+<del><span class="c1">//                  <span class="n">onClearSelections</span> <span class="p">=</span> <span class="p">{},</span></span></del>
+<del><span class="c1">//                  <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">weight</span><span class="p">(</span><span class="m">1f</span><span class="p">)</span></span></del>
+<del><span class="c1">//              <span class="p">)</span> <span class="p">{</span> <span class="n">movie</span> <span class="p">-&gt;</span></span></del>
+<del><span class="c1">//                  <span class="n">Display</span><span class="p">(</span></span></del>
+<del><span class="c1">//                      <span class="n">text</span> <span class="p">=</span> <span class="n">movie</span><span class="p">.</span><span class="n">title</span></span></del>
+<ins>            <span class="p">}</span></ins>
+<ins>        <span class="p">}</span></ins>
+    <span class="p">)</span>
+<del><span class="c1">//              <span class="p">}</span></span></del>
+<del><span class="c1">//          <span class="p">}</span></span></del>
+<del><span class="c1">//      <span class="p">}</span></span></del>
+<del><span class="c1">//  <span class="p">}</span></span></del>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>After making these changes, the entire display screen scrolls. We have reasonable space
+to look at the list items and fixed items!</p>
+<p><img alt="Space is a little better" src="screenshots/better-space.gif" width="200" /></p>
+<hr/>
+<h2>All code changes</h2>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/movies/screens/ActorDisplay.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.screens</span>
+
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.Column</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.padding</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.material3.ExperimentalMaterial3Api</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.material3.Scaffold</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.material3.Text</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.material3.TopAppBar</span></span></del>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.Composable</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.LaunchedEffect</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.getValue</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.mutableStateOf</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.remember</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.setValue</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.Modifier</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.res.stringResource</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.R</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.components.Display</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.components.Label</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.ActorWithFilmographyDto</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.MovieDto</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.Dispatchers</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.withContext</span>
+
+<del><span class="c1">//<span class="n">@OptIn</span><span class="p">(</span><span class="n">ExperimentalMaterial3Api</span><span class="o">::</span><span class="k">class</span><span class="p">)</span></span></del>
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="nf">ActorDisplayUi</span><span class="p">(</span>
+    <span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="n">fetchActor</span><span class="p">:</span> <span class="n">suspend</span> <span class="p">(</span><span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">ActorWithFilmographyDto</span><span class="p">,</span>
+    <span class="n">onMovieClicked</span><span class="p">:</span> <span class="p">(</span><span class="n">MovieDto</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+<ins>    <span class="n">selectedIds</span><span class="p">:</span> <span class="n">Set</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;,</span></ins>
+<ins>    <span class="n">onSelectionToggle</span><span class="p">:</span> <span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">onClearSelections</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">onDeleteSelectedMovies</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">currentScreen</span><span class="p">:</span> <span class="n">Screen</span><span class="p">,</span></ins>
+<ins>    <span class="n">onSelectListScreen</span><span class="p">:</span> <span class="p">(</span><span class="n">Screen</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">onResetDatabase</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">,</span></ins>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">actorWithFilmography</span> <span class="k">by</span> <span class="n">remember</span> <span class="p">{</span> <span class="n">mutableStateOf</span><span class="p">&lt;</span><span class="n">ActorWithFilmographyDto</span><span class="p">?&gt;(</span><span class="k">null</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">LaunchedEffect</span><span class="p">(</span><span class="n">key1</span> <span class="p">=</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">actorWithFilmography</span> <span class="p">=</span> <span class="n">fetchActor</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<del><span class="c1">//  <span class="n">Scaffold</span><span class="p">(</span></span></del>
+<del><span class="c1">//      <span class="n">topBar</span> <span class="p">=</span> <span class="p">{</span></span></del>
+<del><span class="c1">//          <span class="n">TopAppBar</span><span class="p">(</span></span></del>
+<del><span class="c1">//              <span class="n">title</span> <span class="p">=</span> <span class="p">{</span></span></del>
+<del><span class="c1">//                  <span class="n">Text</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">actorWithFilmography</span><span class="o">?.</span><span class="n">actor</span><span class="o">?.</span><span class="n">name</span> <span class="o">?:</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">loading</span><span class="p">))</span></span></del>
+<del><span class="c1">//              <span class="p">}</span></span></del>
+<del><span class="c1">//          <span class="p">)</span></span></del>
+<del><span class="c1">//      <span class="p">}</span></span></del>
+<del><span class="c1">//  <span class="p">)</span> <span class="p">{</span> <span class="n">paddingValues</span> <span class="p">-&gt;</span></span></del>
+<del><span class="c1">//      <span class="n">actorWithFilmography</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span> <span class="n">actorWithFilmography</span> <span class="p">-&gt;</span></span></del>
+<del><span class="c1">//          <span class="n">Column</span><span class="p">(</span></span></del>
+<del><span class="c1">//              <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span></span></del>
+<del><span class="c1">//                  <span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="n">paddingValues</span><span class="p">)</span></span></del>
+<del><span class="c1">//          <span class="p">)</span> <span class="p">{</span></span></del>
+<ins>    <span class="n">ListScaffold</span><span class="p">(</span></ins>
+<ins>        <span class="n">titleId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">actor</span><span class="p">,</span></ins>
+<ins>        <span class="n">items</span> <span class="p">=</span> <span class="n">actorWithFilmography</span><span class="o">?.</span><span class="n">filmography</span><span class="o">?.</span><span class="n">sortedBy</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">movie</span><span class="p">.</span><span class="n">title</span> <span class="p">}</span> <span class="o">?:</span> <span class="n">emptyList</span><span class="p">(),</span></ins>
+<ins>        <span class="n">onItemClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">onMovieClicked</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">movie</span><span class="p">)</span> <span class="p">},</span></ins>
+<ins>        <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span></ins>
+<ins>        <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">onSelectionToggle</span><span class="p">,</span></ins>
+<ins>        <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">onClearSelections</span><span class="p">,</span></ins>
+<ins>        <span class="n">onDeleteSelectedItems</span> <span class="p">=</span> <span class="n">onDeleteSelectedMovies</span><span class="p">,</span></ins>
+<ins>        <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">currentScreen</span><span class="p">,</span></ins>
+<ins>        <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">onSelectListScreen</span><span class="p">,</span></ins>
+<ins>        <span class="n">onResetDatabase</span> <span class="p">=</span> <span class="n">onResetDatabase</span><span class="p">,</span></ins>
+<ins>        <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span><span class="p">,</span></ins>
+<ins>        <span class="n">itemContent</span> <span class="p">=</span> <span class="p">{</span> <span class="n">role</span> <span class="p">-&gt;</span></ins>
+<ins>            <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">role</span><span class="p">.</span><span class="n">movie</span><span class="p">.</span><span class="n">title</span><span class="p">)</span></ins>
+<ins>        <span class="p">},</span></ins>
+<ins>        <span class="n">topContent</span> <span class="p">=</span> <span class="p">{</span></ins>
+            <span class="n">Label</span><span class="p">(</span><span class="n">textId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+<del><span class="c1">//              <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">actorWithFilmography</span><span class="p">.</span><span class="n">actor</span><span class="p">.</span><span class="n">name</span><span class="p">)</span></span></del>
+<ins>            <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">actorWithFilmography</span><span class="o">?.</span><span class="n">actor</span><span class="o">?.</span><span class="n">name</span> <span class="o">?:</span> <span class="s">&quot;&quot;</span><span class="p">)</span></ins>
+            <span class="n">Label</span><span class="p">(</span>
+                <span class="n">text</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span>
+                    <span class="n">id</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">movies_starring</span><span class="p">,</span>
+<del><span class="c1">//                      <span class="n">actorWithFilmography</span><span class="p">.</span><span class="n">actor</span><span class="p">.</span><span class="n">name</span></span></del>
+<ins>                    <span class="n">actorWithFilmography</span><span class="o">?.</span><span class="n">actor</span><span class="o">?.</span><span class="n">name</span> <span class="o">?:</span> <span class="s">&quot;&quot;</span></ins>
+                <span class="p">)</span>
+            <span class="p">)</span>
+<del><span class="c1">//              <span class="n">List</span><span class="p">(</span></span></del>
+<del><span class="c1">//                  <span class="n">items</span> <span class="p">=</span> <span class="n">actorWithFilmography</span><span class="p">.</span><span class="n">filmography</span><span class="p">.</span><span class="n">sortedBy</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">movie</span><span class="p">.</span><span class="n">title</span> <span class="p">},</span></span></del>
+<del><span class="c1">//                  <span class="n">onItemClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">onMovieClicked</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">movie</span><span class="p">)</span> <span class="p">},</span></span></del>
+<del><span class="c1">//                  <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">(),</span></span></del>
+<del><span class="c1">//                  <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="p">{},</span></span></del>
+<del><span class="c1">//                  <span class="n">onClearSelections</span> <span class="p">=</span> <span class="p">{},</span></span></del>
+<del><span class="c1">//                  <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">weight</span><span class="p">(</span><span class="m">1f</span><span class="p">)</span></span></del>
+<del><span class="c1">//              <span class="p">)</span> <span class="p">{</span> <span class="n">role</span> <span class="p">-&gt;</span></span></del>
+<del><span class="c1">//                  <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">role</span><span class="p">.</span><span class="n">movie</span><span class="p">.</span><span class="n">title</span><span class="p">)</span></span></del>
+<del><span class="c1">//              <span class="p">}</span></span></del>
+<del><span class="c1">//          <span class="p">}</span></span></del>
+<del><span class="c1">//      <span class="p">}</span></span></del>
+        <span class="p">}</span>
+<ins>    <span class="p">)</span></ins>
+<span class="p">}</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/movies/screens/List.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.screens</span>
+
+<span class="k">import</span> <span class="nn">androidx.activity.compose.BackHandler</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.ExperimentalFoundationApi</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.combinedClickable</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.ColumnScope</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.padding</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.lazy.LazyColumn</span>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.foundation.lazy.LazyListState</span></ins>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.lazy.items</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.Card</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.CardDefaults</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.MaterialTheme</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.contentColorFor</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.Composable</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.Modifier</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.unit.dp</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.HasId</span>
+
+<span class="n">@OptIn</span><span class="p">(</span><span class="n">ExperimentalFoundationApi</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="n">HasId</span><span class="p">&gt;</span> <span class="nf">List</span><span class="p">(</span>
+    <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span>
+    <span class="n">onItemClicked</span><span class="p">:</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">selectedIds</span><span class="p">:</span> <span class="n">Set</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;,</span>
+    <span class="n">onSelectionToggle</span><span class="p">:</span> <span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">onClearSelections</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">,</span>
+<div id="020-top-content-param-in-list"><ins>    <span class="n">topContent</span><span class="p">:</span> <span class="p">(</span><span class="n">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">)?</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span></ins>
+</div>    <span class="n">itemContent</span><span class="p">:</span> <span class="n">@Composable</span> <span class="n">ColumnScope</span><span class="p">.(</span><span class="n">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="n">LazyColumn</span><span class="p">(</span>
+        <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span>
+    <span class="p">)</span> <span class="p">{</span>
+<div id="020-add-top-content-if-exists"><ins>        <span class="n">topContent</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span></ins>
+<ins>            <span class="n">item</span> <span class="p">{</span></ins>
+<ins>                <span class="n">topContent</span><span class="p">()</span></ins>
+<ins>            <span class="p">}</span></ins>
+<ins>        <span class="p">}</span></ins>
+</div>        <span class="n">items</span><span class="p">(</span>
+            <span class="n">items</span> <span class="p">=</span> <span class="n">items</span><span class="p">,</span>
+            <span class="n">key</span> <span class="p">=</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">id</span> <span class="p">},</span>
+        <span class="p">)</span> <span class="p">{</span> <span class="n">item</span> <span class="p">-&gt;</span>
+            <span class="k">val</span> <span class="py">containerColor</span> <span class="p">=</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">id</span> <span class="k">in</span> <span class="n">selectedIds</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">MaterialTheme</span><span class="p">.</span><span class="n">colorScheme</span><span class="p">.</span><span class="n">secondary</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="n">MaterialTheme</span><span class="p">.</span><span class="n">colorScheme</span><span class="p">.</span><span class="n">surface</span>
+                <span class="p">}</span>
+            <span class="k">val</span> <span class="py">contentColor</span> <span class="p">=</span> <span class="n">MaterialTheme</span><span class="p">.</span><span class="n">colorScheme</span><span class="p">.</span><span class="n">contentColorFor</span><span class="p">(</span><span class="n">containerColor</span><span class="p">)</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">selectedIds</span><span class="p">.</span><span class="n">isNotEmpty</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">BackHandler</span> <span class="p">{</span>
+                    <span class="n">onClearSelections</span><span class="p">()</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="n">Card</span><span class="p">(</span>
+                <span class="n">elevation</span> <span class="p">=</span> <span class="n">CardDefaults</span><span class="p">.</span><span class="n">cardElevation</span><span class="p">(</span>
+                    <span class="n">defaultElevation</span> <span class="p">=</span> <span class="m">8.</span><span class="n">dp</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">colors</span> <span class="p">=</span> <span class="n">CardDefaults</span><span class="p">.</span><span class="n">cardColors</span><span class="p">(</span>
+                    <span class="n">containerColor</span> <span class="p">=</span> <span class="n">containerColor</span><span class="p">,</span>
+                    <span class="n">contentColor</span> <span class="p">=</span> <span class="n">contentColor</span><span class="p">,</span>
+                <span class="p">),</span>
+                <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span>
+                    <span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="m">8.</span><span class="n">dp</span><span class="p">)</span>
+                    <span class="p">.</span><span class="n">combinedClickable</span><span class="p">(</span>
+                        <span class="n">onClick</span> <span class="p">=</span> <span class="p">{</span>
+                            <span class="k">if</span> <span class="p">(</span><span class="n">selectedIds</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+                                <span class="n">onItemClicked</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                                <span class="n">onSelectionToggle</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+                            <span class="p">}</span>
+                        <span class="p">},</span>
+                        <span class="n">onLongClick</span> <span class="p">=</span> <span class="p">{</span>
+                            <span class="n">onSelectionToggle</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+                        <span class="p">},</span>
+                    <span class="p">)</span>
+            <span class="p">)</span> <span class="p">{</span>
+                <span class="n">itemContent</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/movies/screens/ListScaffold.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.screens</span>
+
+<span class="k">import</span> <span class="nn">androidx.annotation.StringRes</span>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.animation.AnimatedVisibility</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.animation.expandVertically</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.animation.fadeIn</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.animation.fadeOut</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.animation.shrinkVertically</span></ins>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.clickable</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.ColumnScope</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.fillMaxSize</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.padding</span>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.foundation.lazy.LazyListState</span></ins>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.Icons</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.automirrored.filled.ArrowBack</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.filled.Delete</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.filled.Movie</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.filled.Person</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.filled.Refresh</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.filled.Star</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.ExperimentalMaterial3Api</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.Icon</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.IconButton</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.NavigationBar</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.Scaffold</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.Text</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.TopAppBar</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.Composable</span>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.runtime.derivedStateOf</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.runtime.getValue</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.runtime.remember</span></ins>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.Modifier</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.res.stringResource</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.unit.dp</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.R</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.components.ScreenSelectButton</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.HasId</span>
+
+<span class="n">@OptIn</span><span class="p">(</span><span class="n">ExperimentalMaterial3Api</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="n">HasId</span><span class="p">&gt;</span> <span class="nf">ListScaffold</span><span class="p">(</span>
+    <span class="n">@StringRes</span> <span class="n">titleId</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
+    <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span>
+    <span class="n">onItemClicked</span><span class="p">:</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">selectedIds</span><span class="p">:</span> <span class="n">Set</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;,</span>
+    <span class="n">onSelectionToggle</span><span class="p">:</span> <span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">onClearSelections</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">onDeleteSelectedItems</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">currentScreen</span><span class="p">:</span> <span class="n">Screen</span><span class="p">,</span>
+    <span class="n">onSelectListScreen</span><span class="p">:</span> <span class="p">(</span><span class="n">Screen</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">onResetDatabase</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">,</span>
+<div id="020-top-content-param-in-list-scaffold"><ins>    <span class="n">topContent</span><span class="p">:</span> <span class="p">(</span><span class="n">@Composable</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">)?</span> <span class="p">=</span> <span class="k">null</span><span class="p">,</span></ins>
+</div>    <span class="n">itemContent</span><span class="p">:</span> <span class="n">@Composable</span> <span class="n">ColumnScope</span><span class="p">.(</span><span class="n">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="n">Scaffold</span><span class="p">(</span>
+        <span class="n">topBar</span> <span class="p">=</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">selectedIds</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">TopAppBar</span><span class="p">(</span>
+                    <span class="n">title</span> <span class="p">=</span> <span class="p">{</span> <span class="n">Text</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">titleId</span><span class="p">))</span> <span class="p">},</span>
+                    <span class="n">actions</span> <span class="p">=</span> <span class="p">{</span>
+                        <span class="n">IconButton</span><span class="p">(</span><span class="n">onClick</span> <span class="p">=</span> <span class="n">onResetDatabase</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="n">Icon</span><span class="p">(</span>
+                                <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Refresh</span><span class="p">,</span>
+                                <span class="n">contentDescription</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">reset_database</span><span class="p">)</span>
+                            <span class="p">)</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">TopAppBar</span><span class="p">(</span>
+                    <span class="n">navigationIcon</span> <span class="p">=</span> <span class="p">{</span>
+                        <span class="n">Icon</span><span class="p">(</span>
+                            <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">AutoMirrored</span><span class="p">.</span><span class="n">Filled</span><span class="p">.</span><span class="n">ArrowBack</span><span class="p">,</span>
+                            <span class="n">contentDescription</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">clear_selections</span><span class="p">),</span>
+                            <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">clickable</span><span class="p">(</span><span class="n">onClick</span> <span class="p">=</span> <span class="n">onClearSelections</span><span class="p">),</span>
+                        <span class="p">)</span>
+                    <span class="p">},</span>
+                    <span class="n">title</span> <span class="p">=</span> <span class="p">{</span> <span class="n">Text</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span> <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="m">8.</span><span class="n">dp</span><span class="p">))</span> <span class="p">},</span>
+                    <span class="n">actions</span> <span class="p">=</span> <span class="p">{</span>
+                        <span class="n">IconButton</span><span class="p">(</span><span class="n">onClick</span> <span class="p">=</span> <span class="n">onDeleteSelectedItems</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="n">Icon</span><span class="p">(</span>
+                                <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Delete</span><span class="p">,</span>
+                                <span class="n">contentDescription</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">delete_selected_items</span><span class="p">)</span>
+                            <span class="p">)</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="n">bottomBar</span> <span class="p">=</span> <span class="p">{</span>
+            <span class="n">NavigationBar</span> <span class="p">{</span>
+                <span class="n">ScreenSelectButton</span><span class="p">(</span>
+                    <span class="n">targetScreen</span> <span class="p">=</span> <span class="n">RatingList</span><span class="p">,</span>
+                    <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Star</span><span class="p">,</span>
+                    <span class="n">labelId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">ratings</span><span class="p">,</span>
+                    <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">currentScreen</span><span class="p">,</span>
+                    <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">onSelectListScreen</span>
+                <span class="p">)</span>
+                <span class="n">ScreenSelectButton</span><span class="p">(</span>
+                    <span class="n">targetScreen</span> <span class="p">=</span> <span class="n">MovieList</span><span class="p">,</span>
+                    <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Movie</span><span class="p">,</span>
+                    <span class="n">labelId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">movies</span><span class="p">,</span>
+                    <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">currentScreen</span><span class="p">,</span>
+                    <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">onSelectListScreen</span>
+                <span class="p">)</span>
+                <span class="n">ScreenSelectButton</span><span class="p">(</span>
+                    <span class="n">targetScreen</span> <span class="p">=</span> <span class="n">ActorList</span><span class="p">,</span>
+                    <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Person</span><span class="p">,</span>
+                    <span class="n">labelId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">actors</span><span class="p">,</span>
+                    <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">currentScreen</span><span class="p">,</span>
+                    <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">onSelectListScreen</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span>
+    <span class="p">)</span> <span class="p">{</span> <span class="n">paddingValues</span> <span class="p">-&gt;</span>
+        <span class="n">List</span><span class="p">(</span>
+            <span class="n">items</span> <span class="p">=</span> <span class="n">items</span><span class="p">,</span>
+            <span class="n">onItemClicked</span> <span class="p">=</span> <span class="n">onItemClicked</span><span class="p">,</span>
+            <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span>
+            <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">onSelectionToggle</span><span class="p">,</span>
+            <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">onClearSelections</span><span class="p">,</span>
+<div id="020-top-content-pass-to-list"><ins>            <span class="n">topContent</span> <span class="p">=</span> <span class="n">topContent</span><span class="p">,</span></ins>
+</div>            <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span>
+                <span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="n">paddingValues</span><span class="p">)</span>
+                <span class="p">.</span><span class="n">fillMaxSize</span><span class="p">(),</span>
+            <span class="n">itemContent</span> <span class="p">=</span> <span class="n">itemContent</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/movies/screens/MovieDisplay.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.screens</span>
+
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.Column</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.padding</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.foundation.rememberScrollState</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.foundation.verticalScroll</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.material3.ExperimentalMaterial3Api</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.material3.Scaffold</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.material3.Text</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.material3.TopAppBar</span></span></del>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.Composable</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.LaunchedEffect</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.getValue</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.mutableStateOf</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.remember</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.setValue</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.Modifier</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.res.stringResource</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.R</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.components.Display</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.components.Label</span>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.MovieDto</span></span></del>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.MovieWithCastDto</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.RoleWithActorDto</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.Dispatchers</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.withContext</span>
+
+<del><span class="c1">//<span class="n">@OptIn</span><span class="p">(</span><span class="n">ExperimentalMaterial3Api</span><span class="o">::</span><span class="k">class</span><span class="p">)</span> <span class="c1">// for TopAppBar</span></span></del>
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="nf">MovieDisplayUi</span><span class="p">(</span>
+    <span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="n">fetchMovie</span><span class="p">:</span> <span class="n">suspend</span> <span class="p">(</span><span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">MovieWithCastDto</span><span class="p">,</span>
+    <span class="n">onActorClicked</span><span class="p">:</span> <span class="p">(</span><span class="n">RoleWithActorDto</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+<ins>    <span class="n">selectedIds</span><span class="p">:</span> <span class="n">Set</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;,</span></ins>
+<ins>    <span class="n">onSelectionToggle</span><span class="p">:</span> <span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">onClearSelections</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">onDeleteSelectedMovies</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">currentScreen</span><span class="p">:</span> <span class="n">Screen</span><span class="p">,</span></ins>
+<ins>    <span class="n">onSelectListScreen</span><span class="p">:</span> <span class="p">(</span><span class="n">Screen</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">onResetDatabase</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">,</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">movieWithCast</span> <span class="k">by</span> <span class="n">remember</span> <span class="p">{</span> <span class="n">mutableStateOf</span><span class="p">&lt;</span><span class="n">MovieWithCastDto</span><span class="p">?&gt;(</span><span class="k">null</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">LaunchedEffect</span><span class="p">(</span><span class="n">key1</span> <span class="p">=</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">movieWithCast</span> <span class="p">=</span> <span class="n">fetchMovie</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<del><span class="c1">//  <span class="n">Scaffold</span><span class="p">(</span></span></del>
+<del><span class="c1">//      <span class="n">topBar</span> <span class="p">=</span> <span class="p">{</span></span></del>
+<del><span class="c1">//          <span class="n">TopAppBar</span><span class="p">(</span></span></del>
+<del><span class="c1">//              <span class="n">title</span> <span class="p">=</span> <span class="p">{</span></span></del>
+<del><span class="c1">//                  <span class="n">Text</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">movieWithCast</span><span class="o">?.</span><span class="n">movie</span><span class="o">?.</span><span class="n">title</span> <span class="o">?:</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">loading</span><span class="p">))</span></span></del>
+<del><span class="c1">//              <span class="p">}</span></span></del>
+<del><span class="c1">//          <span class="p">)</span></span></del>
+<del><span class="c1">//      <span class="p">},</span></span></del>
+<del><span class="c1">//      <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span><span class="p">,</span></span></del>
+<del><span class="c1">//  <span class="p">)</span> <span class="p">{</span> <span class="n">innerPadding</span> <span class="p">-&gt;</span></span></del>
+<del><span class="c1">//      <span class="n">movieWithCast</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span> <span class="n">movieWithCast</span> <span class="p">-&gt;</span></span></del>
+<del><span class="c1">//          <span class="n">Column</span> <span class="p">(</span></span></del>
+<del><span class="c1">//              <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span></span></del>
+<del><span class="c1">//                  <span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="n">innerPadding</span><span class="p">)</span></span></del>
+<del><span class="c1">//          <span class="p">)</span> <span class="p">{</span></span></del>
+<del><span class="c1">//              <span class="n">Label</span> <span class="p">(</span><span class="n">textId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">title</span><span class="p">)</span></span></del>
+<del><span class="c1">//              <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">movieWithCast</span><span class="p">.</span><span class="n">movie</span><span class="p">.</span><span class="n">title</span><span class="p">)</span></span></del>
+<del><span class="c1">//              <span class="n">Label</span><span class="p">(</span><span class="n">textId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">description</span><span class="p">)</span></span></del>
+<del><span class="c1">//              <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">movieWithCast</span><span class="p">.</span><span class="n">movie</span><span class="p">.</span><span class="n">description</span><span class="p">)</span></span></del>
+<del><span class="c1">//              <span class="n">Label</span><span class="p">(</span><span class="n">textId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">cast</span><span class="p">)</span></span></del>
+<del><span class="c1">//</span></del>
+<del><span class="c1">//              <span class="n">List</span><span class="p">(</span></span></del>
+<del><span class="c1">//                  <span class="n">items</span> <span class="p">=</span> <span class="n">movieWithCast</span><span class="p">.</span><span class="n">cast</span><span class="p">.</span><span class="n">sortedBy</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">orderInCredits</span> <span class="p">},</span></span></del>
+<ins>    <span class="n">ListScaffold</span><span class="p">(</span></ins>
+<ins>        <span class="n">titleId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">movie</span><span class="p">,</span></ins>
+<ins>        <span class="n">items</span> <span class="p">=</span> <span class="n">movieWithCast</span><span class="o">?.</span><span class="n">cast</span><span class="o">?.</span><span class="n">sortedBy</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">orderInCredits</span> <span class="p">}</span> <span class="o">?:</span> <span class="n">emptyList</span><span class="p">(),</span></ins>
+        <span class="n">onItemClicked</span> <span class="p">=</span> <span class="n">onActorClicked</span><span class="p">,</span>
+<del><span class="c1">//                  <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">(),</span></span></del>
+<del><span class="c1">//                  <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="p">{},</span></span></del>
+<del><span class="c1">//                  <span class="n">onClearSelections</span> <span class="p">=</span> <span class="p">{},</span></span></del>
+<del><span class="c1">//                  <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">weight</span><span class="p">(</span><span class="m">1f</span><span class="p">)</span></span></del>
+<del><span class="c1">//              <span class="p">)</span> <span class="p">{</span> <span class="n">role</span> <span class="p">-&gt;</span></span></del>
+<ins>        <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span></ins>
+<ins>        <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">onSelectionToggle</span><span class="p">,</span></ins>
+<ins>        <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">onClearSelections</span><span class="p">,</span></ins>
+<ins>        <span class="n">onDeleteSelectedItems</span> <span class="p">=</span> <span class="n">onDeleteSelectedMovies</span><span class="p">,</span></ins>
+<ins>        <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">currentScreen</span><span class="p">,</span></ins>
+<ins>        <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">onSelectListScreen</span><span class="p">,</span></ins>
+<ins>        <span class="n">onResetDatabase</span> <span class="p">=</span> <span class="n">onResetDatabase</span><span class="p">,</span></ins>
+<ins>        <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span><span class="p">,</span></ins>
+<ins>        <span class="n">itemContent</span> <span class="p">=</span> <span class="p">{</span> <span class="n">role</span> <span class="p">-&gt;</span></ins>
+            <span class="n">Display</span><span class="p">(</span>
+                <span class="n">text</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span>
+                    <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">cast_entry</span><span class="p">,</span>
+                    <span class="n">role</span><span class="p">.</span><span class="n">character</span><span class="p">,</span>
+                    <span class="n">role</span><span class="p">.</span><span class="n">actor</span><span class="p">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+<ins>        <span class="p">},</span></ins>
+<ins>        <span class="n">topContent</span> <span class="p">=</span> <span class="p">{</span></ins>
+<ins>            <span class="n">Label</span><span class="p">(</span><span class="n">textId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">title</span><span class="p">)</span></ins>
+<ins>            <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">movieWithCast</span><span class="o">?.</span><span class="n">movie</span><span class="o">?.</span><span class="n">title</span> <span class="o">?:</span> <span class="s">&quot;&quot;</span><span class="p">)</span></ins>
+<ins>            <span class="n">Label</span><span class="p">(</span><span class="n">textId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">description</span><span class="p">)</span></ins>
+<ins>            <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">movieWithCast</span><span class="o">?.</span><span class="n">movie</span><span class="o">?.</span><span class="n">description</span> <span class="o">?:</span> <span class="s">&quot;&quot;</span><span class="p">)</span></ins>
+<ins>            <span class="n">Label</span><span class="p">(</span><span class="n">textId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">cast</span><span class="p">)</span></ins>
+        <span class="p">}</span>
+<del><span class="c1">//          <span class="p">}</span></span></del>
+<del><span class="c1">//      <span class="p">}</span></span></del>
+<del><span class="c1">//  <span class="p">}</span></span></del>
+<del><span class="c1">//<span class="p">}</span></span></del>
+<ins>    <span class="p">)}</span></ins>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/movies/screens/RatingDisplay.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.screens</span>
+
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.Column</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.padding</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.material3.ExperimentalMaterial3Api</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.material3.Scaffold</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.material3.Text</span></span></del>
+<del><span class="c1">//<span class="k">import</span> <span class="nn">androidx.compose.material3.TopAppBar</span></span></del>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.Composable</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.LaunchedEffect</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.getValue</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.mutableStateOf</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.remember</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.setValue</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.Modifier</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.res.stringResource</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.R</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.components.Display</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.components.Label</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.MovieDto</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.RatingWithMoviesDto</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.Dispatchers</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.withContext</span>
+
+<del><span class="c1">//<span class="n">@OptIn</span><span class="p">(</span><span class="n">ExperimentalMaterial3Api</span><span class="o">::</span><span class="k">class</span><span class="p">)</span></span></del>
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="nf">RatingDisplayUi</span><span class="p">(</span>
+    <span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span>
+    <span class="n">fetchRating</span><span class="p">:</span> <span class="n">suspend</span> <span class="p">(</span><span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">RatingWithMoviesDto</span><span class="p">,</span>
+    <span class="n">onMovieClicked</span><span class="p">:</span> <span class="p">(</span><span class="n">MovieDto</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+<div id="020-add-selection-to-rating-display"><ins>    <span class="n">selectedIds</span><span class="p">:</span> <span class="n">Set</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;,</span></ins>
+<ins>    <span class="n">onSelectionToggle</span><span class="p">:</span> <span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">onClearSelections</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">onDeleteSelectedMovies</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">currentScreen</span><span class="p">:</span> <span class="n">Screen</span><span class="p">,</span></ins>
+<ins>    <span class="n">onSelectListScreen</span><span class="p">:</span> <span class="p">(</span><span class="n">Screen</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">onResetDatabase</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span></ins>
+<ins>    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">,</span></ins>
+</div><span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">ratingWithMovies</span> <span class="k">by</span> <span class="n">remember</span> <span class="p">{</span> <span class="n">mutableStateOf</span><span class="p">&lt;</span><span class="n">RatingWithMoviesDto</span><span class="p">?&gt;(</span><span class="k">null</span><span class="p">)</span> <span class="p">}</span>
+    <span class="n">LaunchedEffect</span><span class="p">(</span><span class="n">key1</span> <span class="p">=</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">withContext</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">ratingWithMovies</span> <span class="p">=</span> <span class="n">fetchRating</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<div id="020-convert-to-list-scaffold"><del><span class="c1">//  <span class="n">Scaffold</span><span class="p">(</span></span></del>
+<del><span class="c1">//      <span class="n">topBar</span> <span class="p">=</span> <span class="p">{</span></span></del>
+<del><span class="c1">//          <span class="n">TopAppBar</span><span class="p">(</span></span></del>
+<del><span class="c1">//              <span class="n">title</span> <span class="p">=</span> <span class="p">{</span></span></del>
+<del><span class="c1">//                  <span class="n">Text</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">ratingWithMovies</span><span class="o">?.</span><span class="n">rating</span><span class="o">?.</span><span class="n">name</span> <span class="o">?:</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">loading</span><span class="p">))</span></span></del>
+<del><span class="c1">//              <span class="p">}</span></span></del>
+<ins>    <span class="n">ListScaffold</span><span class="p">(</span></ins>
+<ins>        <span class="n">titleId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">rating</span><span class="p">,</span></ins>
+<ins>        <span class="n">items</span> <span class="p">=</span> <span class="n">ratingWithMovies</span><span class="o">?.</span><span class="n">movies</span><span class="o">?.</span><span class="n">sortedBy</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">title</span> <span class="p">}</span> <span class="o">?:</span> <span class="n">emptyList</span><span class="p">(),</span></ins>
+<ins>        <span class="n">onItemClicked</span> <span class="p">=</span> <span class="n">onMovieClicked</span><span class="p">,</span></ins>
+<ins>        <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span></ins>
+<ins>        <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">onSelectionToggle</span><span class="p">,</span></ins>
+<ins>        <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">onClearSelections</span><span class="p">,</span></ins>
+<ins>        <span class="n">onDeleteSelectedItems</span> <span class="p">=</span> <span class="n">onDeleteSelectedMovies</span><span class="p">,</span></ins>
+<ins>        <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">currentScreen</span><span class="p">,</span></ins>
+<ins>        <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">onSelectListScreen</span><span class="p">,</span></ins>
+<ins>        <span class="n">onResetDatabase</span> <span class="p">=</span> <span class="n">onResetDatabase</span><span class="p">,</span></ins>
+<ins>        <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span><span class="p">,</span></ins>
+<ins>        <span class="n">itemContent</span> <span class="p">=</span> <span class="p">{</span> <span class="n">movie</span> <span class="p">-&gt;</span></ins>
+<ins>            <span class="n">Display</span><span class="p">(</span></ins>
+<ins>                <span class="n">text</span> <span class="p">=</span> <span class="n">movie</span><span class="p">.</span><span class="n">title</span></ins>
+            <span class="p">)</span>
+<del><span class="c1">//      <span class="p">}</span></span></del>
+<del><span class="c1">//  <span class="p">)</span> <span class="p">{</span> <span class="n">paddingValues</span> <span class="p">-&gt;</span></span></del>
+<ins>        <span class="p">},</span></ins>
+<ins>        <span class="n">topContent</span> <span class="p">=</span> <span class="p">{</span></ins>
+            <span class="n">ratingWithMovies</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span> <span class="n">ratingWithMovies</span> <span class="p">-&gt;</span>
+<del><span class="c1">//          <span class="n">Column</span><span class="p">(</span></span></del>
+<del><span class="c1">//              <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span></span></del>
+<del><span class="c1">//                  <span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="n">paddingValues</span><span class="p">)</span></span></del>
+<del><span class="c1">//          <span class="p">)</span> <span class="p">{</span></span></del>
+                <span class="n">Label</span><span class="p">(</span><span class="n">textId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">ratingWithMovies</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="n">Label</span><span class="p">(</span><span class="n">textId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">description</span><span class="p">)</span>
+                <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">ratingWithMovies</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">description</span><span class="p">)</span>
+                <span class="n">Label</span><span class="p">(</span>
+                    <span class="n">text</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span>
+                        <span class="n">id</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">movies_rated</span><span class="p">,</span>
+                        <span class="n">ratingWithMovies</span><span class="p">.</span><span class="n">rating</span><span class="p">.</span><span class="n">name</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+<del><span class="c1">//              <span class="n">List</span><span class="p">(</span></span></del>
+<del><span class="c1">//                  <span class="n">items</span> <span class="p">=</span> <span class="n">ratingWithMovies</span><span class="p">.</span><span class="n">movies</span><span class="p">.</span><span class="n">sortedBy</span> <span class="p">{</span> <span class="n">it</span><span class="p">.</span><span class="n">title</span> <span class="p">},</span></span></del>
+<del><span class="c1">//                  <span class="n">onItemClicked</span> <span class="p">=</span> <span class="n">onMovieClicked</span><span class="p">,</span></span></del>
+<del><span class="c1">//                  <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">(),</span></span></del>
+<del><span class="c1">//                  <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="p">{},</span></span></del>
+<del><span class="c1">//                  <span class="n">onClearSelections</span> <span class="p">=</span> <span class="p">{},</span></span></del>
+<del><span class="c1">//                  <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">weight</span><span class="p">(</span><span class="m">1f</span><span class="p">)</span></span></del>
+<del><span class="c1">//              <span class="p">)</span> <span class="p">{</span> <span class="n">movie</span> <span class="p">-&gt;</span></span></del>
+<del><span class="c1">//                  <span class="n">Display</span><span class="p">(</span></span></del>
+<del><span class="c1">//                      <span class="n">text</span> <span class="p">=</span> <span class="n">movie</span><span class="p">.</span><span class="n">title</span></span></del>
+<ins>            <span class="p">}</span></ins>
+<ins>        <span class="p">}</span></ins>
+    <span class="p">)</span>
+<del><span class="c1">//              <span class="p">}</span></span></del>
+<del><span class="c1">//          <span class="p">}</span></span></del>
+<del><span class="c1">//      <span class="p">}</span></span></del>
+<del><span class="c1">//  <span class="p">}</span></span></del>
+</div><span class="p">}</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/movies/screens/Ui.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.screens</span>
+
+<span class="k">import</span> <span class="nn">androidx.activity.compose.BackHandler</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.Composable</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.getValue</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.rememberCoroutineScope</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.Modifier</span>
+<span class="k">import</span> <span class="nn">androidx.lifecycle.compose.collectAsStateWithLifecycle</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.MovieViewModel</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.Dispatchers</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.launch</span>
+
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="nf">Ui</span><span class="p">(</span>
+    <span class="n">viewModel</span><span class="p">:</span> <span class="n">MovieViewModel</span><span class="p">,</span>
+    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">,</span>
+    <span class="n">onExit</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="n">BackHandler</span> <span class="p">{</span>
+        <span class="n">viewModel</span><span class="p">.</span><span class="n">popScreen</span><span class="p">()</span>
+    <span class="p">}</span>
+
+    <span class="k">val</span> <span class="py">scope</span> <span class="p">=</span> <span class="n">rememberCoroutineScope</span><span class="p">()</span>
+
+    <span class="k">when</span> <span class="p">(</span><span class="k">val</span> <span class="py">screen</span> <span class="p">=</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">currentScreen</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">null</span> <span class="p">-&gt;</span> <span class="n">onExit</span><span class="p">()</span>
+        <span class="k">is</span> <span class="n">MovieDisplay</span> <span class="p">-&gt;</span> <span class="p">{</span>
+<ins>            <span class="k">val</span> <span class="py">selectedIds</span> <span class="k">by</span> <span class="n">viewModel</span></ins>
+<ins>                <span class="p">.</span><span class="n">selectedIdsFlow</span></ins>
+<ins>                <span class="p">.</span><span class="n">collectAsStateWithLifecycle</span><span class="p">(</span><span class="n">initialValue</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">())</span></ins>
+<ins></ins>
+            <span class="n">MovieDisplayUi</span><span class="p">(</span>
+                <span class="n">id</span> <span class="p">=</span> <span class="n">screen</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="n">fetchMovie</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">getMovieWithCast</span><span class="p">,</span>
+<del><span class="c1">//              <span class="n">onActorClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">pushScreen</span><span class="p">(</span><span class="n">ActorDisplay</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">actor</span><span class="p">.</span><span class="n">id</span><span class="p">))</span> <span class="p">},</span></span></del>
+<ins>                <span class="n">onActorClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">pushScreen</span><span class="p">(</span><span class="n">ActorDisplay</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">actor</span><span class="p">.</span><span class="n">id</span><span class="p">))</span> <span class="p">},</span>                <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span></ins>
+<ins>                <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">clearSelectedIds</span><span class="p">,</span></ins>
+<ins>                <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">toggleSelection</span><span class="p">,</span></ins>
+<ins>                <span class="n">onDeleteSelectedMovies</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">deleteSelectedMovies</span><span class="p">,</span></ins>
+<ins>                <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">screen</span><span class="p">,</span></ins>
+<ins>                <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">setScreen</span><span class="p">,</span></ins>
+<ins>                <span class="n">onResetDatabase</span> <span class="p">=</span> <span class="p">{</span></ins>
+<ins>                    <span class="n">scope</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>                        <span class="n">viewModel</span><span class="p">.</span><span class="n">resetDatabase</span><span class="p">()</span></ins>
+<ins>                    <span class="p">}</span></ins>
+<ins>                <span class="p">},</span></ins>
+                <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">is</span> <span class="n">ActorDisplay</span> <span class="p">-&gt;</span> <span class="p">{</span>
+<ins>            <span class="k">val</span> <span class="py">selectedIds</span> <span class="k">by</span> <span class="n">viewModel</span></ins>
+<ins>                <span class="p">.</span><span class="n">selectedIdsFlow</span></ins>
+<ins>                <span class="p">.</span><span class="n">collectAsStateWithLifecycle</span><span class="p">(</span><span class="n">initialValue</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">())</span></ins>
+<ins></ins>
+            <span class="n">ActorDisplayUi</span><span class="p">(</span>
+                <span class="n">id</span> <span class="p">=</span> <span class="n">screen</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="n">fetchActor</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">getActorWithFilmography</span><span class="p">,</span>
+<del><span class="c1">//              <span class="n">onMovieClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">pushScreen</span><span class="p">(</span><span class="n">MovieDisplay</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">id</span><span class="p">))</span> <span class="p">}</span></span></del>
+<ins>                <span class="n">onMovieClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">pushScreen</span><span class="p">(</span><span class="n">MovieDisplay</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">id</span><span class="p">))</span> <span class="p">},</span></ins>
+<ins>                <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span></ins>
+<ins>                <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">clearSelectedIds</span><span class="p">,</span></ins>
+<ins>                <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">toggleSelection</span><span class="p">,</span></ins>
+<ins>                <span class="n">onDeleteSelectedMovies</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">deleteSelectedMovies</span><span class="p">,</span></ins>
+<ins>                <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">screen</span><span class="p">,</span></ins>
+<ins>                <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">setScreen</span><span class="p">,</span></ins>
+<ins>                <span class="n">onResetDatabase</span> <span class="p">=</span> <span class="p">{</span></ins>
+<ins>                    <span class="n">scope</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>                        <span class="n">viewModel</span><span class="p">.</span><span class="n">resetDatabase</span><span class="p">()</span></ins>
+<ins>                    <span class="p">}</span></ins>
+<ins>                <span class="p">}</span></ins>
+            <span class="p">)</span>
+        <span class="p">}</span>
+        <span class="k">is</span> <span class="n">RatingDisplay</span> <span class="p">-&gt;</span> <span class="p">{</span>
+<div id="020-collect-selection"><ins>            <span class="k">val</span> <span class="py">selectedIds</span> <span class="k">by</span> <span class="n">viewModel</span></ins>
+<ins>                <span class="p">.</span><span class="n">selectedIdsFlow</span></ins>
+<ins>                <span class="p">.</span><span class="n">collectAsStateWithLifecycle</span><span class="p">(</span><span class="n">initialValue</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">())</span></ins>
+</div><ins></ins>
+            <span class="n">RatingDisplayUi</span><span class="p">(</span>
+                <span class="n">id</span> <span class="p">=</span> <span class="n">screen</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+                <span class="n">fetchRating</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">getRatingWithMovies</span><span class="p">,</span>
+<del><span class="c1">//              <span class="n">onMovieClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">pushScreen</span><span class="p">(</span><span class="n">MovieDisplay</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">id</span><span class="p">))</span> <span class="p">}</span></span></del>
+<ins>                <span class="n">onMovieClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">pushScreen</span><span class="p">(</span><span class="n">MovieDisplay</span><span class="p">(</span><span class="n">it</span><span class="p">.</span><span class="n">id</span><span class="p">))</span> <span class="p">},</span></ins>
+<div id="020-pass-selection"><ins>                <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span></ins>
+<ins>                <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">clearSelectedIds</span><span class="p">,</span></ins>
+<ins>                <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">toggleSelection</span><span class="p">,</span></ins>
+<ins>                <span class="n">onDeleteSelectedMovies</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">deleteSelectedMovies</span><span class="p">,</span></ins>
+<ins>                <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">screen</span><span class="p">,</span></ins>
+<ins>                <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">setScreen</span><span class="p">,</span></ins>
+<ins>                <span class="n">onResetDatabase</span> <span class="p">=</span> <span class="p">{</span></ins>
+<ins>                    <span class="n">scope</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>                        <span class="n">viewModel</span><span class="p">.</span><span class="n">resetDatabase</span><span class="p">()</span></ins>
+<ins>                    <span class="p">}</span></ins>
+<ins>                <span class="p">}</span></ins>
+</div>            <span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">MovieList</span> <span class="p">-&gt;</span> <span class="p">{</span>
+            <span class="k">val</span> <span class="py">movies</span> <span class="k">by</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">moviesFlow</span><span class="p">.</span><span class="n">collectAsStateWithLifecycle</span><span class="p">(</span>
+                <span class="n">initialValue</span> <span class="p">=</span> <span class="n">emptyList</span><span class="p">()</span>
+            <span class="p">)</span>
+
+            <span class="k">val</span> <span class="py">selectedIds</span> <span class="k">by</span> <span class="n">viewModel</span>
+                <span class="p">.</span><span class="n">selectedIdsFlow</span>
+                <span class="p">.</span><span class="n">collectAsStateWithLifecycle</span><span class="p">(</span><span class="n">initialValue</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">())</span>
+
+            <span class="n">MovieListUi</span><span class="p">(</span>
+                <span class="n">movies</span> <span class="p">=</span> <span class="n">movies</span><span class="p">,</span>
+                <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span><span class="p">,</span>
+                <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span>
+                <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">clearSelectedIds</span><span class="p">,</span>
+                <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">toggleSelection</span><span class="p">,</span>
+                <span class="n">onDeleteSelectedMovies</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">deleteSelectedMovies</span><span class="p">,</span>
+                <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">screen</span><span class="p">,</span>
+                <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">setScreen</span><span class="p">,</span>
+                <span class="n">onResetDatabase</span> <span class="p">=</span> <span class="p">{</span>
+                    <span class="n">scope</span><span class="p">.</span><span class="n">launch</span> <span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">viewModel</span><span class="p">.</span><span class="n">resetDatabase</span><span class="p">()</span>
+                    <span class="p">}</span>
+                <span class="p">},</span>
+                <span class="n">onMovieClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">movie</span> <span class="p">-&gt;</span>
+                    <span class="n">viewModel</span><span class="p">.</span><span class="n">pushScreen</span><span class="p">(</span><span class="n">MovieDisplay</span><span class="p">(</span><span class="n">movie</span><span class="p">.</span><span class="n">id</span><span class="p">))</span>
+                <span class="p">},</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">ActorList</span> <span class="p">-&gt;</span> <span class="p">{</span>
+            <span class="k">val</span> <span class="py">actors</span> <span class="k">by</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">actorsFlow</span><span class="p">.</span><span class="n">collectAsStateWithLifecycle</span><span class="p">(</span><span class="n">initialValue</span> <span class="p">=</span> <span class="n">emptyList</span><span class="p">())</span>
+            <span class="k">val</span> <span class="py">selectedIds</span> <span class="k">by</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">selectedIdsFlow</span><span class="p">.</span><span class="n">collectAsStateWithLifecycle</span><span class="p">(</span><span class="n">initialValue</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">())</span>
+            <span class="n">ActorListUi</span><span class="p">(</span>
+                <span class="n">actors</span> <span class="p">=</span> <span class="n">actors</span><span class="p">,</span>
+                <span class="n">onActorClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">actor</span> <span class="p">-&gt;</span>
+                    <span class="n">viewModel</span><span class="p">.</span><span class="n">pushScreen</span><span class="p">(</span><span class="n">ActorDisplay</span><span class="p">(</span><span class="n">actor</span><span class="p">.</span><span class="n">id</span><span class="p">))</span>
+                <span class="p">},</span>
+                <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span>
+                <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">clearSelectedIds</span><span class="p">,</span>
+                <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">toggleSelection</span><span class="p">,</span>
+                <span class="n">onDeleteSelectedActors</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">deleteSelectedActors</span><span class="p">,</span>
+                <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">screen</span><span class="p">,</span>
+                <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">setScreen</span><span class="p">,</span>
+                <span class="n">onResetDatabase</span> <span class="p">=</span> <span class="p">{</span>
+                    <span class="n">scope</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">viewModel</span><span class="p">.</span><span class="n">resetDatabase</span><span class="p">()</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+        <span class="n">RatingList</span> <span class="p">-&gt;</span> <span class="p">{</span>
+            <span class="k">val</span> <span class="py">ratings</span> <span class="k">by</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">ratingsFlow</span><span class="p">.</span><span class="n">collectAsStateWithLifecycle</span><span class="p">(</span><span class="n">initialValue</span> <span class="p">=</span> <span class="n">emptyList</span><span class="p">())</span>
+            <span class="k">val</span> <span class="py">selectedIds</span> <span class="k">by</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">selectedIdsFlow</span><span class="p">.</span><span class="n">collectAsStateWithLifecycle</span><span class="p">(</span><span class="n">initialValue</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">())</span>
+            <span class="n">RatingListUi</span><span class="p">(</span>
+                <span class="n">ratings</span> <span class="p">=</span> <span class="n">ratings</span><span class="p">,</span>
+                <span class="n">onRatingClicked</span> <span class="p">=</span> <span class="p">{</span> <span class="n">rating</span> <span class="p">-&gt;</span>
+                    <span class="n">viewModel</span><span class="p">.</span><span class="n">pushScreen</span><span class="p">(</span><span class="n">RatingDisplay</span><span class="p">(</span><span class="n">rating</span><span class="p">.</span><span class="n">id</span><span class="p">))</span>
+                <span class="p">},</span>
+                <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span>
+                <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">clearSelectedIds</span><span class="p">,</span>
+                <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">toggleSelection</span><span class="p">,</span>
+                <span class="n">onDeleteSelectedRatings</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">deleteSelectedRatings</span><span class="p">,</span>
+                <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">screen</span><span class="p">,</span>
+                <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">viewModel</span><span class="o">::</span><span class="n">setScreen</span><span class="p">,</span>
+                <span class="n">onResetDatabase</span> <span class="p">=</span> <span class="p">{</span>
+                    <span class="n">scope</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span><span class="n">Dispatchers</span><span class="p">.</span><span class="n">IO</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="n">viewModel</span><span class="p">.</span><span class="n">resetDatabase</span><span class="p">()</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+</div>
+</details>
+
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025. Scott Stanchfield
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.sections", "search.suggest", "search.highlight", "navigation.instant", "content.tabs.link", "toc.follow", "toc.integrate", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>

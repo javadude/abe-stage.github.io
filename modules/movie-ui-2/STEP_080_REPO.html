@@ -1,0 +1,4164 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://androidbyexample.com/modules/movie-ui-2/STEP_080_REPO.html">
+      
+      
+        <link rel="prev" href="STEP_070_REPO.html">
+      
+      
+        <link rel="next" href="STEP_090_FULL.html">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>Better Movie Icon - Android By Example</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');}</style>
+
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Android By Example" class="md-header__button md-logo" aria-label="Android By Example" data-md-component="logo">
+      
+  <img src="../../android.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Android By Example
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Better Movie Icon
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Android By Example" class="md-nav__button md-logo" aria-label="Android By Example" data-md-component="logo">
+      
+  <img src="../../android.png" alt="logo">
+
+    </a>
+    Android By Example
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_010_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About This Site
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Your Instructor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Source Code License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Course Hardware and Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_080_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assignments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_090_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Grading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_100_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Third-Party and Course Sample Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 1 (1/23-1/29)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Week 1 (1/23-1/29)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Kotlin Primer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Kotlin Primer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kotlin-primer/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kotlin-primer/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Domain Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User-Interface Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Events
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_080_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unidirectional Data Flow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Android Studio
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Android Studio
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../android-studio/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 2 (1/30-2/5)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Week 2 (1/30-2/5)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Jetpack Compose Concepts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Jetpack Compose Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compose Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Composable Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    String literals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    State
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compose Optimizations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Where do you store state?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Density
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Initial Movies UI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Initial Movies UI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Initial Movie UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Update versions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create initial screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Refactor Scaffold Use
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flesh out the screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 3 (2/6-2/12)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Week 3 (2/6-2/12)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Room
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Room
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_10_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Relationships
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_20_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Room Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_25_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Room Relations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_30_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Suspending Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_40_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies Database
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies Database
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add new modules
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Room dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_035_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Android SDK and JDK to version catalog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module Dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entities, DAO and Database
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repository Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modifying the view model to use real data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fix movie list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_090_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fetch data for movie display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_100_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Viewing the Database
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 4 (2/13-2/19)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Week 4 (2/13-2/19)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Compose Lists
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Compose Lists
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fixed UIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dynamic UIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies UI - Lists
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies UI - Lists
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convert to LazyColumn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selection Tracking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selections in the UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contextual Top Bar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Refactor time!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Actors and Ratings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="STEP_080_REPO.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Better Movie Icon
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_090_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wrapup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 5 (2/20-2/26)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Week 5 (2/20-2/26)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Compose Text Fields
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            Compose Text Fields
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    State Races
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fixing State Races
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heads up!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies UI - Updates
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies UI - Updates
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Display-screen list cleanup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deleting from the display screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Editing a movie
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 6 (2/27-3/5)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Week 6 (2/27-3/5)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies Widget
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Movies Widget
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Widget Declaration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Widget UI and Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Speech
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Speech
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../speech/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../speech/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 7 (3/6-3/12)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Week 7 (3/6-3/12)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_1" id="__nav_8_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Google Map
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            Google Map
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Find Your Fingerprint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Console Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Set up a map
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add a Marker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Initial Position
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Loading Spinner
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Map Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_090_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Current Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_100_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jump to Current Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_110_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Top Bar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_120_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Copy Icons
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_130_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manage Car Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_140_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dragging a Marker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_150_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Navigating
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_160_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lat/Lon Bounds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    REST services
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            REST services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest server module
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Server code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Server address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST client repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+<h4>Movies UI - Lists</h4>
+
+<h1>Better Movie Icon</h1>
+
+<p>Jetpack Compose comes with some useful Icons, but it's a rather short list.
+You can see available icons at <a href="https://fonts.google.com/icons">Google Fonts</a>.</p>
+<p>Some are in the 
+<code>androidx.compose.material:material-icons-core</code> (pulled in when you include
+<code>androidx.compose.material3:material3</code> as a dependency), and the rest are available in
+<code>androidx.compose.material:material-icons-extended</code>, which you need to pull in yourself.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The extended icons dependency is rather large, and you'll likely only need a few icons from it.
+You can shrink your app size (see 
+<a href="https://developer.android.com/build/shrink-code#shrink-code">Shrink your app</a>) or copy the
+source for the icons into your application. I recommend copying the source for the icons you
+need, as it reduces the build time.</p>
+</div>
+<p>To include the movie icon, first set up the extended icon dependency in the version catalog and
+define the library</p>
+<details class="example" open>
+<summary><a class="find-button" href="#080-icons-extended-catalog">show in full file</a>  gradle/libs.versions.toml</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">[versions]</span>
+<span class="c1">// ...</span>
+<span class="n">lifecycle-compose</span> <span class="o">=</span> <span class="s">&quot;2.8.7&quot;</span>
+
+<ins><span class="n">icons-extended</span> <span class="o">=</span> <span class="s">&quot;1.7.5&quot;</span></ins>
+<ins></ins>
+<span class="k">[libraries]</span>
+<ins><span class="n">icons-extended</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.material&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;material-icons-extended-android&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;icons-extended&quot;</span><span class="p">}</span></ins>
+<span class="n">lifecycle-compose</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.lifecycle&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;lifecycle-runtime-compose&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;lifecycle-compose&quot;</span> <span class="p">}</span>
+<span class="n">androidx-core-ktx</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.core&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;core-ktx&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;coreKtx&quot;</span> <span class="p">}</span>
+<span class="c1">// ...</span>
+<span class="k">[plugins]</span>
+<span class="c1">// ...</span></pre>
+</div>
+</div>
+</details>
+
+<p>Include the dependency in your application build script. (Note that it's commented-out in the
+repository, as the end result of this step has already copied the icon)</p>
+<details class="example" open>
+<summary><a class="find-button" href="#080-icons-extended-dep">show in full file</a>  app/build.gradle.kts</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="n">dependencies</span> <span class="p">{</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">project</span><span class="p">(</span><span class="s">&quot;:repository&quot;</span><span class="p">))</span>
+
+<ins><span class="c1">//    implementation(libs.icons.extended)</span></ins>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">lifecycle</span><span class="p">.</span><span class="n">compose</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">core</span><span class="p">.</span><span class="n">ktx</span><span class="p">)</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>Sync your build scripts (press the elephant icon on the Android Studio tool bar)</p>
+<p>Change the icon  in <code>MovieListUi</code>.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#080-change-icon">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/screens/MovieList.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="nf">MovieListUi</span><span class="p">(</span>
+    <span class="c1">// ...</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="n">ListScaffold</span><span class="p">(</span>
+        <span class="c1">// ...</span>
+    <span class="p">)</span> <span class="p">{</span> <span class="n">movie</span> <span class="p">-&gt;</span>
+        <span class="n">Row</span><span class="p">(</span>
+            <span class="c1">// ...</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="n">Icon</span><span class="p">(</span>
+<del><span class="c1">//              <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Star</span><span class="p">,</span></span></del>
+<ins>                <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Movie</span><span class="p">,</span></ins>
+                <span class="n">contentDescription</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">id</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">movie</span><span class="p">),</span>
+                <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">clickable</span> <span class="p">{</span>
+                    <span class="c1">// ...</span>
+            <span class="p">)</span>
+            <span class="c1">// ...</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>Change the icon in the tab in <code>ListScaffold</code>.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#080-change-icon-tab">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/screens/ListScaffold.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="n">@OptIn</span><span class="p">(</span><span class="n">ExperimentalMaterial3Api</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="n">HasId</span><span class="p">&gt;</span> <span class="nf">ListScaffold</span><span class="p">(</span>
+    <span class="c1">// ...</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="n">Scaffold</span><span class="p">(</span>
+        <span class="c1">// ...</span>
+        <span class="n">bottomBar</span> <span class="p">=</span> <span class="p">{</span>
+            <span class="n">NavigationBar</span> <span class="p">{</span>
+                <span class="c1">// ...</span>
+                <span class="n">ScreenSelectButton</span><span class="p">(</span>
+                    <span class="n">targetScreen</span> <span class="p">=</span> <span class="n">MovieList</span><span class="p">,</span>
+<del><span class="c1">//                  <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Star</span><span class="p">,</span></span></del>
+<ins>                    <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Movie</span><span class="p">,</span></ins>
+                    <span class="n">labelId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">movies</span><span class="p">,</span>
+                    <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">currentScreen</span><span class="p">,</span>
+                    <span class="c1">// ...</span>
+                <span class="p">)</span>
+                <span class="c1">// ...</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+    <span class="p">)</span> <span class="p">{</span> <span class="n">paddingValues</span> <span class="p">-&gt;</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>At this point you can run the application you'll now see movie icons.</p>
+<p><img alt="Movie icons in app" src="screenshots/movie-icon.png" width="400" /></p>
+<p>Now we need to either shrink the app to remove all of the extra icons (this slows down the build!)
+or copy the source for the icons we need. We'll copy the source.</p>
+<ol>
+<li>Open <code>MovieListUi</code> in the editor</li>
+<li>Find <code>Icons.Default.Movie</code></li>
+<li>Control-click on <code>Movie</code> to go to its source code. (If you don't see the source you'll need
+      to try a different version of <code>material-icons-extended</code>)</li>
+<li>Copy the package name from the source</li>
+<li>Right-click on <code>java</code> under <code>app/src/main</code></li>
+<li>Choose <strong>New &gt; Package</strong></li>
+<li>Paste the package name</li>
+<li>Copy the entire source (including the copyright header at the top) for the <code>Movie</code> icon</li>
+<li>Right-click the package you just created</li>
+<li>Choose <strong>New &gt; Kotlin Class/File</strong></li>
+<li>Type "Movie" as the name and choose <strong>File</strong></li>
+<li>Delete the package statement and paste the source code</li>
+</ol>
+<p>We now have a copy of the icon.</p>
+<p>Next, remove the huge dependency by deleting or commenting out the
+implementation line from <code>app/build.gradle.kts</code>. Be sure to re-sync the Gradle info by clicking
+the elephant on the tool bar.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#080-icons-extended-dep">show in full file</a>  app/build.gradle.kts</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="n">dependencies</span> <span class="p">{</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">project</span><span class="p">(</span><span class="s">&quot;:repository&quot;</span><span class="p">))</span>
+
+<ins><span class="c1">//    implementation(libs.icons.extended)</span></ins>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">lifecycle</span><span class="p">.</span><span class="n">compose</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">core</span><span class="p">.</span><span class="n">ktx</span><span class="p">)</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You do <strong>not</strong> need to delete the dependency information from the version catalog. This will
+allow you to more easily copy in other icons if you need to at a later date. I recommend
+leaving it and commenting out the dependency.</p>
+</div>
+<hr/>
+<h2>All code changes</h2>
+<details class="example" open>
+<summary>CHANGED: app/build.gradle.kts</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="n">plugins</span> <span class="p">{</span>
+    <span class="n">alias</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">application</span><span class="p">)</span>
+    <span class="n">alias</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">kotlin</span><span class="p">.</span><span class="n">android</span><span class="p">)</span>
+    <span class="n">alias</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">kotlin</span><span class="p">.</span><span class="n">compose</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="n">android</span> <span class="p">{</span>
+    <span class="n">namespace</span> <span class="p">=</span> <span class="s">&quot;com.androidbyexample.compose.movies&quot;</span>
+    <span class="n">compileSdk</span> <span class="p">=</span> <span class="n">libs</span><span class="p">.</span><span class="n">versions</span><span class="p">.</span><span class="n">compileSdk</span><span class="p">.</span><span class="k">get</span><span class="p">().</span><span class="n">toInt</span><span class="p">()</span>
+
+    <span class="n">defaultConfig</span> <span class="p">{</span>
+        <span class="n">applicationId</span> <span class="p">=</span> <span class="s">&quot;com.androidbyexample.compose.movies&quot;</span>
+        <span class="n">minSdk</span> <span class="p">=</span> <span class="n">libs</span><span class="p">.</span><span class="n">versions</span><span class="p">.</span><span class="n">minSdk</span><span class="p">.</span><span class="k">get</span><span class="p">().</span><span class="n">toInt</span><span class="p">()</span>
+        <span class="n">targetSdk</span> <span class="p">=</span> <span class="n">libs</span><span class="p">.</span><span class="n">versions</span><span class="p">.</span><span class="n">targetSdk</span><span class="p">.</span><span class="k">get</span><span class="p">().</span><span class="n">toInt</span><span class="p">()</span>
+        <span class="n">versionCode</span> <span class="p">=</span> <span class="m">1</span>
+        <span class="n">versionName</span> <span class="p">=</span> <span class="s">&quot;1.0&quot;</span>
+
+        <span class="n">testInstrumentationRunner</span> <span class="p">=</span> <span class="s">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span>
+    <span class="p">}</span>
+
+    <span class="n">buildTypes</span> <span class="p">{</span>
+        <span class="n">release</span> <span class="p">{</span>
+            <span class="n">isMinifyEnabled</span> <span class="p">=</span> <span class="k">false</span>
+            <span class="n">proguardFiles</span><span class="p">(</span>
+                <span class="n">getDefaultProguardFile</span><span class="p">(</span><span class="s">&quot;proguard-android-optimize.txt&quot;</span><span class="p">),</span>
+                <span class="s">&quot;proguard-rules.pro&quot;</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">compileOptions</span> <span class="p">{</span>
+        <span class="n">sourceCompatibility</span> <span class="p">=</span> <span class="n">JavaVersion</span><span class="p">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">versions</span><span class="p">.</span><span class="n">javaVersion</span><span class="p">.</span><span class="k">get</span><span class="p">())</span>
+        <span class="n">targetCompatibility</span> <span class="p">=</span> <span class="n">JavaVersion</span><span class="p">.</span><span class="n">valueOf</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">versions</span><span class="p">.</span><span class="n">javaVersion</span><span class="p">.</span><span class="k">get</span><span class="p">())</span>
+    <span class="p">}</span>
+    <span class="n">kotlinOptions</span> <span class="p">{</span>
+        <span class="n">jvmTarget</span> <span class="p">=</span> <span class="n">libs</span><span class="p">.</span><span class="n">versions</span><span class="p">.</span><span class="n">jvmTarget</span><span class="p">.</span><span class="k">get</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="n">buildFeatures</span> <span class="p">{</span>
+        <span class="n">compose</span> <span class="p">=</span> <span class="k">true</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">dependencies</span> <span class="p">{</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">project</span><span class="p">(</span><span class="s">&quot;:repository&quot;</span><span class="p">))</span>
+
+<div id="080-icons-extended-dep"><ins><span class="c1">//    implementation(libs.icons.extended)</span></ins>
+</div>    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">lifecycle</span><span class="p">.</span><span class="n">compose</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">core</span><span class="p">.</span><span class="n">ktx</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">lifecycle</span><span class="p">.</span><span class="n">runtime</span><span class="p">.</span><span class="n">ktx</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">activity</span><span class="p">.</span><span class="n">compose</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">platform</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">compose</span><span class="p">.</span><span class="n">bom</span><span class="p">))</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">ui</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">graphics</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">tooling</span><span class="p">.</span><span class="n">preview</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">material3</span><span class="p">)</span>
+    <span class="n">testImplementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">junit</span><span class="p">)</span>
+    <span class="n">androidTestImplementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">junit</span><span class="p">)</span>
+    <span class="n">androidTestImplementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">espresso</span><span class="p">.</span><span class="n">core</span><span class="p">)</span>
+    <span class="n">androidTestImplementation</span><span class="p">(</span><span class="n">platform</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">compose</span><span class="p">.</span><span class="n">bom</span><span class="p">))</span>
+    <span class="n">androidTestImplementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">junit4</span><span class="p">)</span>
+    <span class="n">debugImplementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">tooling</span><span class="p">)</span>
+    <span class="n">debugImplementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">manifest</span><span class="p">)</span>
+<span class="p">}</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="success" open>
+<summary>ADDED: app/src/main/java/androidx/compose/material/icons/filled/Movie.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><ins><span></span><span class="cm">/*</span></ins>
+<ins><span class="cm"> * Copyright 2024 The Android Open Source Project</span></ins>
+<ins><span class="cm"> *</span></ins>
+<ins><span class="cm"> * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span></ins>
+<ins><span class="cm"> * you may not use this file except in compliance with the License.</span></ins>
+<ins><span class="cm"> * You may obtain a copy of the License at</span></ins>
+<ins><span class="cm"> *</span></ins>
+<ins><span class="cm"> *      http://www.apache.org/licenses/LICENSE-2.0</span></ins>
+<ins><span class="cm"> *</span></ins>
+<ins><span class="cm"> * Unless required by applicable law or agreed to in writing, software</span></ins>
+<ins><span class="cm"> * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span></ins>
+<ins><span class="cm"> * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></ins>
+<ins><span class="cm"> * See the License for the specific language governing permissions and</span></ins>
+<ins><span class="cm"> * limitations under the License.</span></ins>
+<ins><span class="cm"> */</span></ins>
+<ins></ins>
+<ins><span class="k">package</span> <span class="nn">androidx.compose.material.icons.filled</span></ins>
+<ins></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.material.icons.Icons</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.material.icons.materialIcon</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.material.icons.materialPath</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.ui.graphics.vector.ImageVector</span></ins>
+<ins></ins>
+<ins><span class="k">public</span> <span class="k">val</span> <span class="py">Icons</span><span class="p">.</span><span class="n">Filled</span><span class="p">.</span><span class="n">Movie</span><span class="p">:</span> <span class="n">ImageVector</span></ins>
+<ins>    <span class="k">get</span><span class="p">()</span> <span class="p">{</span></ins>
+<ins>        <span class="k">if</span> <span class="p">(</span><span class="n">_movie</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>            <span class="k">return</span> <span class="n">_movie</span><span class="o">!!</span></ins>
+<ins>        <span class="p">}</span></ins>
+<ins>        <span class="n">_movie</span> <span class="p">=</span> <span class="n">materialIcon</span><span class="p">(</span><span class="n">name</span> <span class="p">=</span> <span class="s">&quot;Filled.Movie&quot;</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>            <span class="n">materialPath</span> <span class="p">{</span></ins>
+<ins>                <span class="n">moveTo</span><span class="p">(</span><span class="m">18.0f</span><span class="p">,</span> <span class="m">4.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">lineToRelative</span><span class="p">(</span><span class="m">2.0f</span><span class="p">,</span> <span class="m">4.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">horizontalLineToRelative</span><span class="p">(-</span><span class="m">3.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">lineToRelative</span><span class="p">(-</span><span class="m">2.0f</span><span class="p">,</span> <span class="p">-</span><span class="m">4.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">horizontalLineToRelative</span><span class="p">(-</span><span class="m">2.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">lineToRelative</span><span class="p">(</span><span class="m">2.0f</span><span class="p">,</span> <span class="m">4.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">horizontalLineToRelative</span><span class="p">(-</span><span class="m">3.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">lineToRelative</span><span class="p">(-</span><span class="m">2.0f</span><span class="p">,</span> <span class="p">-</span><span class="m">4.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">horizontalLineTo</span><span class="p">(</span><span class="m">8.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">lineToRelative</span><span class="p">(</span><span class="m">2.0f</span><span class="p">,</span> <span class="m">4.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">horizontalLineTo</span><span class="p">(</span><span class="m">7.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">lineTo</span><span class="p">(</span><span class="m">5.0f</span><span class="p">,</span> <span class="m">4.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">horizontalLineTo</span><span class="p">(</span><span class="m">4.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">curveToRelative</span><span class="p">(-</span><span class="m">1.1f</span><span class="p">,</span> <span class="m">0.0f</span><span class="p">,</span> <span class="p">-</span><span class="m">1.99f</span><span class="p">,</span> <span class="m">0.9f</span><span class="p">,</span> <span class="p">-</span><span class="m">1.99f</span><span class="p">,</span> <span class="m">2.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">lineTo</span><span class="p">(</span><span class="m">2.0f</span><span class="p">,</span> <span class="m">18.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">curveToRelative</span><span class="p">(</span><span class="m">0.0f</span><span class="p">,</span> <span class="m">1.1f</span><span class="p">,</span> <span class="m">0.9f</span><span class="p">,</span> <span class="m">2.0f</span><span class="p">,</span> <span class="m">2.0f</span><span class="p">,</span> <span class="m">2.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">horizontalLineToRelative</span><span class="p">(</span><span class="m">16.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">curveToRelative</span><span class="p">(</span><span class="m">1.1f</span><span class="p">,</span> <span class="m">0.0f</span><span class="p">,</span> <span class="m">2.0f</span><span class="p">,</span> <span class="p">-</span><span class="m">0.9f</span><span class="p">,</span> <span class="m">2.0f</span><span class="p">,</span> <span class="p">-</span><span class="m">2.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">verticalLineTo</span><span class="p">(</span><span class="m">4.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">horizontalLineToRelative</span><span class="p">(-</span><span class="m">4.0f</span><span class="p">)</span></ins>
+<ins>                <span class="n">close</span><span class="p">()</span></ins>
+<ins>            <span class="p">}</span></ins>
+<ins>        <span class="p">}</span></ins>
+<ins>        <span class="k">return</span> <span class="n">_movie</span><span class="o">!!</span></ins>
+<ins>    <span class="p">}</span></ins>
+<ins></ins>
+<ins><span class="k">private</span> <span class="k">var</span> <span class="py">_movie</span><span class="p">:</span> <span class="n">ImageVector</span><span class="p">?</span> <span class="p">=</span> <span class="k">null</span></ins>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/movies/screens/ListScaffold.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.screens</span>
+
+<span class="k">import</span> <span class="nn">androidx.annotation.StringRes</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.clickable</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.ColumnScope</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.fillMaxSize</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.padding</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.Icons</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.automirrored.filled.ArrowBack</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.filled.Delete</span>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.material.icons.filled.Movie</span></ins>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.filled.Person</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.filled.Refresh</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.filled.Star</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.ExperimentalMaterial3Api</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.Icon</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.IconButton</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.NavigationBar</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.Scaffold</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.Text</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.TopAppBar</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.Composable</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.Modifier</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.res.stringResource</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.unit.dp</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.R</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.components.ScreenSelectButton</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.HasId</span>
+
+<span class="n">@OptIn</span><span class="p">(</span><span class="n">ExperimentalMaterial3Api</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<div id="070-list-scaffold"><span class="n">@Composable</span>
+<span class="k">fun</span> <span class="p">&lt;</span><span class="n">T</span><span class="p">:</span> <span class="n">HasId</span><span class="p">&gt;</span> <span class="nf">ListScaffold</span><span class="p">(</span>
+    <span class="n">@StringRes</span> <span class="n">titleId</span><span class="p">:</span> <span class="n">Int</span><span class="p">,</span>
+    <span class="n">items</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span>
+    <span class="n">onItemClicked</span><span class="p">:</span> <span class="p">(</span><span class="n">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">selectedIds</span><span class="p">:</span> <span class="n">Set</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;,</span>
+    <span class="n">onSelectionToggle</span><span class="p">:</span> <span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">onClearSelections</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">onDeleteSelectedItems</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">currentScreen</span><span class="p">:</span> <span class="n">Screen</span><span class="p">,</span>
+    <span class="n">onSelectListScreen</span><span class="p">:</span> <span class="p">(</span><span class="n">Screen</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">onResetDatabase</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">,</span>
+    <span class="n">itemContent</span><span class="p">:</span> <span class="n">@Composable</span> <span class="n">ColumnScope</span><span class="p">.(</span><span class="n">T</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="n">Scaffold</span><span class="p">(</span>
+        <span class="n">topBar</span> <span class="p">=</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">selectedIds</span><span class="p">.</span><span class="n">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">TopAppBar</span><span class="p">(</span>
+                    <span class="n">title</span> <span class="p">=</span> <span class="p">{</span> <span class="n">Text</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">titleId</span><span class="p">))</span> <span class="p">},</span>
+                    <span class="n">actions</span> <span class="p">=</span> <span class="p">{</span>
+                        <span class="n">IconButton</span><span class="p">(</span><span class="n">onClick</span> <span class="p">=</span> <span class="n">onResetDatabase</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="n">Icon</span><span class="p">(</span>
+                                <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Refresh</span><span class="p">,</span>
+                                <span class="n">contentDescription</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">reset_database</span><span class="p">)</span>
+                            <span class="p">)</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">TopAppBar</span><span class="p">(</span>
+                    <span class="n">navigationIcon</span> <span class="p">=</span> <span class="p">{</span>
+                        <span class="n">Icon</span><span class="p">(</span>
+                            <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">AutoMirrored</span><span class="p">.</span><span class="n">Filled</span><span class="p">.</span><span class="n">ArrowBack</span><span class="p">,</span>
+                            <span class="n">contentDescription</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">clear_selections</span><span class="p">),</span>
+                            <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">clickable</span><span class="p">(</span><span class="n">onClick</span> <span class="p">=</span> <span class="n">onClearSelections</span><span class="p">),</span>
+                        <span class="p">)</span>
+                    <span class="p">},</span>
+                    <span class="n">title</span> <span class="p">=</span> <span class="p">{</span> <span class="n">Text</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span> <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="m">8.</span><span class="n">dp</span><span class="p">))</span> <span class="p">},</span>
+                    <span class="n">actions</span> <span class="p">=</span> <span class="p">{</span>
+                        <span class="n">IconButton</span><span class="p">(</span><span class="n">onClick</span> <span class="p">=</span> <span class="n">onDeleteSelectedItems</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="n">Icon</span><span class="p">(</span>
+                                <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Delete</span><span class="p">,</span>
+                                <span class="n">contentDescription</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">delete_selected_items</span><span class="p">)</span>
+                            <span class="p">)</span>
+                        <span class="p">}</span>
+                    <span class="p">},</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="n">bottomBar</span> <span class="p">=</span> <span class="p">{</span>
+            <span class="n">NavigationBar</span> <span class="p">{</span>
+                <span class="n">ScreenSelectButton</span><span class="p">(</span>
+                    <span class="n">targetScreen</span> <span class="p">=</span> <span class="n">RatingList</span><span class="p">,</span>
+                    <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Star</span><span class="p">,</span>
+                    <span class="n">labelId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">ratings</span><span class="p">,</span>
+                    <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">currentScreen</span><span class="p">,</span>
+                    <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">onSelectListScreen</span>
+                <span class="p">)</span>
+                <span class="n">ScreenSelectButton</span><span class="p">(</span>
+                    <span class="n">targetScreen</span> <span class="p">=</span> <span class="n">MovieList</span><span class="p">,</span>
+<div id="080-change-icon-tab"><del><span class="c1">//                  <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Star</span><span class="p">,</span></span></del>
+<ins>                    <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Movie</span><span class="p">,</span></ins>
+</div>                    <span class="n">labelId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">movies</span><span class="p">,</span>
+                    <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">currentScreen</span><span class="p">,</span>
+                    <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">onSelectListScreen</span>
+                <span class="p">)</span>
+                <span class="n">ScreenSelectButton</span><span class="p">(</span>
+                    <span class="n">targetScreen</span> <span class="p">=</span> <span class="n">ActorList</span><span class="p">,</span>
+                    <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Person</span><span class="p">,</span>
+                    <span class="n">labelId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">actors</span><span class="p">,</span>
+                    <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">currentScreen</span><span class="p">,</span>
+                    <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">onSelectListScreen</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span>
+    <span class="p">)</span> <span class="p">{</span> <span class="n">paddingValues</span> <span class="p">-&gt;</span>
+        <span class="n">List</span><span class="p">(</span>
+            <span class="n">items</span> <span class="p">=</span> <span class="n">items</span><span class="p">,</span>
+            <span class="n">onItemClicked</span> <span class="p">=</span> <span class="n">onItemClicked</span><span class="p">,</span>
+            <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span>
+            <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">onSelectionToggle</span><span class="p">,</span>
+            <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">onClearSelections</span><span class="p">,</span>
+            <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span>
+                <span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="n">paddingValues</span><span class="p">)</span>
+                <span class="p">.</span><span class="n">fillMaxSize</span><span class="p">(),</span>
+            <span class="n">itemContent</span> <span class="p">=</span> <span class="n">itemContent</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</div></pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/movies/screens/MovieList.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.screens</span>
+
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.ExperimentalFoundationApi</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.clickable</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.Row</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.padding</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.Icons</span>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.material.icons.filled.Movie</span></ins>
+<span class="k">import</span> <span class="nn">androidx.compose.material.icons.filled.Star</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.ExperimentalMaterial3Api</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.Icon</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.Composable</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.Alignment</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.Modifier</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.res.stringResource</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.unit.dp</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.R</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.components.Display</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.MovieDto</span>
+
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="nf">MovieListUi</span><span class="p">(</span>
+    <span class="n">movies</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;,</span>
+    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">,</span>
+    <span class="n">onMovieClicked</span><span class="p">:</span> <span class="p">(</span><span class="n">MovieDto</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+<div id="040-movie-list-selection-params">    <span class="n">selectedIds</span><span class="p">:</span> <span class="n">Set</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;,</span>
+    <span class="n">onSelectionToggle</span><span class="p">:</span> <span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+    <span class="n">onClearSelections</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+</div><div id="070-movie-list-extra-params">    <span class="n">currentScreen</span><span class="p">:</span> <span class="n">Screen</span><span class="p">,</span>
+    <span class="n">onSelectListScreen</span><span class="p">:</span> <span class="p">(</span><span class="n">Screen</span><span class="p">)</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+</div><div id="050-delete-movies-param">    <span class="n">onDeleteSelectedMovies</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+</div>    <span class="n">onResetDatabase</span><span class="p">:</span> <span class="p">()</span> <span class="p">-&gt;</span> <span class="n">Unit</span><span class="p">,</span>
+<span class="p">)</span> <span class="p">{</span>
+<div id="070-movie-list-using-list-scaffold">    <span class="n">ListScaffold</span><span class="p">(</span>
+        <span class="n">titleId</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">movies</span><span class="p">,</span>
+        <span class="n">items</span> <span class="p">=</span> <span class="n">movies</span><span class="p">,</span>
+        <span class="n">onItemClicked</span> <span class="p">=</span> <span class="n">onMovieClicked</span><span class="p">,</span>
+        <span class="n">selectedIds</span> <span class="p">=</span> <span class="n">selectedIds</span><span class="p">,</span>
+        <span class="n">onSelectionToggle</span> <span class="p">=</span> <span class="n">onSelectionToggle</span><span class="p">,</span>
+        <span class="n">onClearSelections</span> <span class="p">=</span> <span class="n">onClearSelections</span><span class="p">,</span>
+        <span class="n">onDeleteSelectedItems</span> <span class="p">=</span> <span class="n">onDeleteSelectedMovies</span><span class="p">,</span>
+        <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">currentScreen</span><span class="p">,</span>
+        <span class="n">onSelectListScreen</span> <span class="p">=</span> <span class="n">onSelectListScreen</span><span class="p">,</span>
+        <span class="n">onResetDatabase</span> <span class="p">=</span> <span class="n">onResetDatabase</span><span class="p">,</span>
+        <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span><span class="p">,</span>
+    <span class="p">)</span> <span class="p">{</span> <span class="n">movie</span> <span class="p">-&gt;</span>
+        <span class="n">Row</span><span class="p">(</span>
+            <span class="n">verticalAlignment</span> <span class="p">=</span> <span class="n">Alignment</span><span class="p">.</span><span class="n">CenterVertically</span><span class="p">,</span>
+            <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="m">8.</span><span class="n">dp</span><span class="p">)</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="n">Icon</span><span class="p">(</span>
+<div id="080-change-icon"><del><span class="c1">//              <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Star</span><span class="p">,</span></span></del>
+<ins>                <span class="n">imageVector</span> <span class="p">=</span> <span class="n">Icons</span><span class="p">.</span><span class="n">Default</span><span class="p">.</span><span class="n">Movie</span><span class="p">,</span></ins>
+</div>                <span class="n">contentDescription</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span><span class="n">id</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">movie</span><span class="p">),</span>
+                <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">clickable</span> <span class="p">{</span>
+                    <span class="n">onSelectionToggle</span><span class="p">(</span><span class="n">movie</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">)</span>
+            <span class="n">Display</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="n">movie</span><span class="p">.</span><span class="n">title</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+</div><span class="p">}</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: gradle/libs.versions.toml</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">[versions]</span>
+<span class="n">agp</span> <span class="o">=</span> <span class="s">&quot;8.7.2&quot;</span>
+<span class="n">kotlin</span> <span class="o">=</span> <span class="s">&quot;2.0.21&quot;</span>
+<span class="n">coreKtx</span> <span class="o">=</span> <span class="s">&quot;1.15.0&quot;</span>
+<span class="n">junit</span> <span class="o">=</span> <span class="s">&quot;4.13.2&quot;</span>
+<span class="n">junitVersion</span> <span class="o">=</span> <span class="s">&quot;1.2.1&quot;</span>
+<span class="n">espressoCore</span> <span class="o">=</span> <span class="s">&quot;3.6.1&quot;</span>
+<span class="n">lifecycleRuntimeKtx</span> <span class="o">=</span> <span class="s">&quot;2.8.7&quot;</span>
+<span class="n">activityCompose</span> <span class="o">=</span> <span class="s">&quot;1.9.3&quot;</span>
+<span class="n">composeBom</span> <span class="o">=</span> <span class="s">&quot;2024.11.00&quot;</span>
+<span class="n">appcompat</span> <span class="o">=</span> <span class="s">&quot;1.7.0&quot;</span>
+<span class="n">material</span> <span class="o">=</span> <span class="s">&quot;1.12.0&quot;</span>
+<span class="n">room</span> <span class="o">=</span> <span class="s">&quot;2.6.1&quot;</span>
+<span class="n">ksp</span> <span class="o">=</span> <span class="s">&quot;2.0.21-1.0.28&quot;</span>
+
+<span class="n">compileSdk</span> <span class="o">=</span> <span class="s">&quot;35&quot;</span>
+<span class="n">targetSdk</span> <span class="o">=</span> <span class="s">&quot;35&quot;</span>
+<span class="n">minSdk</span> <span class="o">=</span> <span class="s">&quot;24&quot;</span>
+
+<span class="n">jvmTarget</span> <span class="o">=</span> <span class="s">&quot;11&quot;</span>
+<span class="n">javaVersion</span> <span class="o">=</span> <span class="s">&quot;VERSION_11&quot;</span>
+
+<span class="n">lifecycle-compose</span> <span class="o">=</span> <span class="s">&quot;2.8.7&quot;</span>
+
+<div id="080-icons-extended-catalog"><ins><span class="n">icons-extended</span> <span class="o">=</span> <span class="s">&quot;1.7.5&quot;</span></ins>
+<ins></ins>
+<span class="k">[libraries]</span>
+<ins><span class="n">icons-extended</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.material&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;material-icons-extended-android&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;icons-extended&quot;</span><span class="p">}</span></ins>
+</div><span class="n">lifecycle-compose</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.lifecycle&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;lifecycle-runtime-compose&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;lifecycle-compose&quot;</span> <span class="p">}</span>
+<span class="n">androidx-core-ktx</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.core&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;core-ktx&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;coreKtx&quot;</span> <span class="p">}</span>
+<span class="n">junit</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;junit&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;junit&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;junit&quot;</span> <span class="p">}</span>
+<span class="n">androidx-junit</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.test.ext&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;junit&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;junitVersion&quot;</span> <span class="p">}</span>
+<span class="n">androidx-espresso-core</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.test.espresso&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;espresso-core&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;espressoCore&quot;</span> <span class="p">}</span>
+<span class="n">androidx-lifecycle-runtime-ktx</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.lifecycle&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;lifecycle-runtime-ktx&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;lifecycleRuntimeKtx&quot;</span> <span class="p">}</span>
+<span class="n">androidx-activity-compose</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.activity&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;activity-compose&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;activityCompose&quot;</span> <span class="p">}</span>
+<span class="n">androidx-compose-bom</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;compose-bom&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;composeBom&quot;</span> <span class="p">}</span>
+<span class="n">androidx-ui</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ui&quot;</span> <span class="p">}</span>
+<span class="n">androidx-ui-graphics</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ui-graphics&quot;</span> <span class="p">}</span>
+<span class="n">androidx-ui-tooling</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ui-tooling&quot;</span> <span class="p">}</span>
+<span class="n">androidx-ui-tooling-preview</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ui-tooling-preview&quot;</span> <span class="p">}</span>
+<span class="n">androidx-ui-test-manifest</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ui-test-manifest&quot;</span> <span class="p">}</span>
+<span class="n">androidx-ui-test-junit4</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ui-test-junit4&quot;</span> <span class="p">}</span>
+<span class="n">androidx-material3</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.material3&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;material3&quot;</span> <span class="p">}</span>
+<span class="n">androidx-appcompat</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.appcompat&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;appcompat&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;appcompat&quot;</span> <span class="p">}</span>
+<span class="n">material</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;com.google.android.material&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;material&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;material&quot;</span> <span class="p">}</span>
+<span class="n">room-runtime</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.room&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;room-runtime&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;room&quot;</span> <span class="p">}</span>
+<span class="n">room-ktx</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.room&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;room-ktx&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;room&quot;</span> <span class="p">}</span>
+<span class="n">room-compiler</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.room&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;room-compiler&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;room&quot;</span> <span class="p">}</span>
+
+<span class="k">[plugins]</span>
+<span class="n">android-application</span> <span class="o">=</span> <span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s">&quot;com.android.application&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;agp&quot;</span> <span class="p">}</span>
+<span class="n">kotlin-android</span> <span class="o">=</span> <span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s">&quot;org.jetbrains.kotlin.android&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;kotlin&quot;</span> <span class="p">}</span>
+<span class="n">kotlin-compose</span> <span class="o">=</span> <span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s">&quot;org.jetbrains.kotlin.plugin.compose&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;kotlin&quot;</span> <span class="p">}</span>
+<span class="n">android-library</span> <span class="o">=</span> <span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s">&quot;com.android.library&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;agp&quot;</span> <span class="p">}</span>
+<span class="n">ksp</span> <span class="o">=</span> <span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s">&quot;com.google.devtools.ksp&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;ksp&quot;</span> <span class="p">}</span>
+</pre>
+</div>
+</div>
+</details>
+
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025. Scott Stanchfield
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.sections", "search.suggest", "search.highlight", "navigation.instant", "content.tabs.link", "toc.follow", "toc.integrate", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,4597 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://androidbyexample.com/modules/google-maps/STEP_090_REPO.html">
+      
+      
+        <link rel="prev" href="STEP_080_REPO.html">
+      
+      
+        <link rel="next" href="STEP_100_REPO.html">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>Current Location - Android By Example</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');}</style>
+
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Android By Example" class="md-header__button md-logo" aria-label="Android By Example" data-md-component="logo">
+      
+  <img src="../../android.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Android By Example
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Current Location
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Android By Example" class="md-nav__button md-logo" aria-label="Android By Example" data-md-component="logo">
+      
+  <img src="../../android.png" alt="logo">
+
+    </a>
+    Android By Example
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_010_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About This Site
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Your Instructor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Source Code License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Course Hardware and Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_080_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assignments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_090_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Grading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_100_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Third-Party and Course Sample Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 1 (1/23-1/29)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Week 1 (1/23-1/29)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Kotlin Primer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Kotlin Primer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kotlin-primer/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kotlin-primer/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Domain Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User-Interface Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Events
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_080_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unidirectional Data Flow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Android Studio
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Android Studio
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../android-studio/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 2 (1/30-2/5)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Week 2 (1/30-2/5)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Jetpack Compose Concepts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Jetpack Compose Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compose Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Composable Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    String literals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    State
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compose Optimizations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Where do you store state?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Density
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Initial Movies UI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Initial Movies UI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Initial Movie UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Update versions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create initial screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Refactor Scaffold Use
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flesh out the screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 3 (2/6-2/12)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Week 3 (2/6-2/12)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Room
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Room
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_10_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Relationships
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_20_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Room Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_25_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Room Relations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_30_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Suspending Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_40_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies Database
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies Database
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add new modules
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Room dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_035_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Android SDK and JDK to version catalog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module Dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entities, DAO and Database
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repository Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modifying the view model to use real data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fix movie list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_090_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fetch data for movie display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_100_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Viewing the Database
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 4 (2/13-2/19)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Week 4 (2/13-2/19)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Compose Lists
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Compose Lists
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fixed UIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dynamic UIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies UI - Lists
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies UI - Lists
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convert to LazyColumn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selection Tracking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selections in the UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contextual Top Bar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Refactor time!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Actors and Ratings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Better Movie Icon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_090_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wrapup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 5 (2/20-2/26)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Week 5 (2/20-2/26)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Compose Text Fields
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            Compose Text Fields
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    State Races
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fixing State Races
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heads up!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies UI - Updates
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies UI - Updates
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Display-screen list cleanup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deleting from the display screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Editing a movie
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 6 (2/27-3/5)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Week 6 (2/27-3/5)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies Widget
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Movies Widget
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Widget Declaration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-widget/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Widget UI and Data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Speech
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Speech
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../speech/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../speech/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 7 (3/6-3/12)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Week 7 (3/6-3/12)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_8_1" id="__nav_8_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Google Map
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            Google Map
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Find Your Fingerprint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Console Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Set up a map
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add a Marker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Initial Position
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Loading Spinner
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Map Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="STEP_090_REPO.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Current Location
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_100_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jump to Current Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_110_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Top Bar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_120_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Copy Icons
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_130_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manage Car Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_140_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dragging a Marker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_150_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Navigating
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_160_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lat/Lon Bounds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    REST services
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            REST services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest server module
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Server code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Server address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST client repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+<h4>Google Map</h4>
+
+<h1>Current Location</h1>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You only need to add the Google Play Services support here if your application needs to
+display the user's current location.</p>
+</div>
+<p>Next, let's add the user's current location. A little later we'll use this for the initial map
+position and to keep track of where the user parked their car.</p>
+<p>The user's Location is determined by the "Fused Location Provider". This service uses technologies
+such as GPS, cell towers, and wi-fi to determine the current location. Some of these provide
+precise location (such as GPS), while others might only be able to approximate user location.</p>
+<p>Because an application could send location information somewhere else (a server on the internet,
+for example), location is considered a "dangerous" permission, and we must ask the user if it's ok
+to use while the application is running.</p>
+<p>The user has a choice: they can allow precise or approximate location information, for all runs of
+the application or just the current run, or deny the request. Ideally, your application should
+gracefully handle denied function. For our car-finder application, if the user denies current
+location tracking, we could, for example, allow the user to tap the location of their car on the
+map rather than automatically using the current location. (For this example application, we won't
+do that; we'll just tell the user the application cannot function without location.)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Requesting permissions at runtime can be a bit tricky, and support for permissions when using
+Jetpack Compose is still experimental (and a bit difficult to use properly). For now, we'll
+be requesting permissions and listening for location using the <code>Activity</code> and updating a view
+model with the reported locations.</p>
+</div>
+<p>Any needed permissions <em>must</em> be declared first in the <code>AndroidManifest.xml</code>. Here we declare </p>
+<details class="example" open>
+<summary><a class="find-button" href="#090-manifest-permissions">show in full file</a>  app/src/main/AndroidManifest.xml</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">xmlns:tools=</span><span class="s">&quot;http://schemas.android.com/tools&quot;</span><span class="nt">&gt;</span>
+
+<ins>    <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.ACCESS_COARSE_LOCATION&quot;</span> <span class="nt">/&gt;</span></ins>
+<ins>    <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.ACCESS_FINE_LOCATION&quot;</span> <span class="nt">/&gt;</span></ins>
+
+    <span class="nt">&lt;application</span>
+        <span class="c1">// ...</span>
+<span class="nt">&lt;/manifest&gt;</span></pre>
+</div>
+</div>
+</details>
+
+<ul>
+<li>Coarse Location (for "approximate" location)</li>
+<li>Fine Location (for "precise" location)</li>
+</ul>
+<p>Both of these are "dangerous" permissions and must be requested at runtime.</p>
+<p>The Google Play Location Services allows us to set up a listener to receive location updates. We'll
+want to store the current location somewhere, and we'll need it when setting the car's location.
+The car's location will be persisted and we want to ensure it stays across configuration changes.
+This sounds like a job for a View Model.</p>
+<p>We access Play Location Services by adding a new dependency. While we're here we'll also add
+lifecycle support for compose.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#090-add-location-deps-vc">show in full file</a>  gradle/libs.versions.toml</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">[versions]</span>
+<span class="c1">// ...</span>
+<span class="sas1-strike"><span class="c1">//</span></span>
+<span class="n">maps-compose</span> <span class="o">=</span> <span class="s">&quot;6.2.1&quot;</span>
+<ins><span class="n">location-services</span> <span class="o">=</span> <span class="s">&quot;21.3.0&quot;</span></ins>
+<ins><span class="n">lifecycle-runtime-compose</span> <span class="o">=</span> <span class="s">&quot;2.8.7&quot;</span></ins>
+
+<span class="k">[libraries]</span>
+<ins><span class="n">location-services</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;com.google.android.gms&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;play-services-location&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;location-services&quot;</span> <span class="p">}</span></ins>
+<ins><span class="n">lifecycle-runtime-compose</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.lifecycle&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;lifecycle-runtime-compose&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;lifecycle-runtime-compose&quot;</span> <span class="p">}</span></ins>
+<span class="n">maps-compose</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;com.google.maps.android&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;maps-compose&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;maps-compose&quot;</span> <span class="p">}</span>
+<span class="n">maps-compose-utils</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;com.google.maps.android&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;maps-compose-utils&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;maps-compose&quot;</span> <span class="p">}</span>
+<span class="c1">// ...</span>
+<span class="k">[plugins]</span>
+<span class="c1">// ...</span></pre>
+</div>
+</div>
+</details>
+
+<details class="example" open>
+<summary><a class="find-button" href="#090-add-location-deps">show in full file</a>  app/build.gradle.kts</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="n">dependencies</span> <span class="p">{</span>
+<ins>    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">location</span><span class="p">.</span><span class="n">services</span><span class="p">)</span></ins>
+<ins>    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">lifecycle</span><span class="p">.</span><span class="n">runtime</span><span class="p">.</span><span class="n">compose</span><span class="p">)</span></ins>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">maps</span><span class="p">.</span><span class="n">compose</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">maps</span><span class="p">.</span><span class="n">compose</span><span class="p">.</span><span class="n">utils</span><span class="p">)</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+<span class="c1">// ...</span></pre>
+</div>
+</div>
+</details>
+
+<p>We'll need to track the location. We create a <code>CarViewModel</code> and set up a <code>MutableStateFlow</code>
+as a <code>private</code> property in the view model. By convention, we prefix it with an underscore,
+indicating it's the <em>actual</em> flow that we'll emit to. We want our view model to keep control of
+emitted values, so we only expose a read-only <code>Flow</code> publicly.</p>
+<p>But our <code>MainActivity</code> will be the thing that actually talks with the Fused Location Provider;
+it'll need to update the current location (by calling <code>updateLocation</code>).</p>
+<details class="success" open>
+<summary><a class="find-button" href="#090-view-model">show in full file</a>  app/src/main/java/com/androidbyexample/compose/google/google/maps/CarViewModel.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span>
+
+<ins><span class="k">class</span> <span class="nc">CarViewModel</span><span class="p">(</span><span class="n">application</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="p">:</span> <span class="n">AndroidViewModel</span><span class="p">(</span><span class="n">application</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>    <span class="k">private</span> <span class="k">val</span> <span class="py">_currentLocation</span> <span class="p">=</span> <span class="n">MutableStateFlow</span><span class="p">&lt;</span><span class="n">Location</span><span class="p">?&gt;(</span><span class="k">null</span><span class="p">)</span></ins>
+<ins></ins>
+<ins>    <span class="k">val</span> <span class="py">currentLocation</span><span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Location</span><span class="p">?&gt;</span></ins>
+<ins>        <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">_currentLocation</span></ins>
+<ins></ins>
+<ins>    <span class="k">fun</span> <span class="nf">updateLocation</span><span class="p">(</span><span class="n">location</span><span class="p">:</span> <span class="n">Location</span><span class="p">?)</span> <span class="p">{</span></ins>
+<ins>        <span class="n">_currentLocation</span><span class="p">.</span><span class="n">value</span> <span class="p">=</span> <span class="n">location</span></ins>
+<ins>    <span class="p">}</span></ins>
+<ins><span class="p">}</span></ins></pre>
+</div>
+</div>
+</details>
+
+<p>In the <code>MainActivity</code>, we define properties for the fused location provider client and the callback
+that we'll register to receive location updates.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#090-location-client-and-callback">show in full file</a>  app/src/main/java/com/androidbyexample/compose/google/google/maps/MainActivity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">ComponentActivity</span><span class="p">()</span> <span class="p">{</span>
+<del><span class="c1">//  <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span></span></del>
+<del><span class="c1">//      <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span></span></del>
+<ins>    <span class="k">private</span> <span class="k">val</span> <span class="py">viewModel</span><span class="p">:</span> <span class="n">CarViewModel</span> <span class="k">by</span> <span class="n">viewModels</span><span class="p">()</span></ins>
+<ins></ins>
+<ins>    <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">fusedLocationProviderClient</span><span class="p">:</span> <span class="n">FusedLocationProviderClient</span></ins>
+<ins>    <span class="k">private</span> <span class="k">val</span> <span class="py">locationCallback</span> <span class="p">=</span> <span class="k">object</span> <span class="p">:</span> <span class="nc">LocationCallback</span><span class="p">()</span> <span class="p">{</span></ins>
+<ins>        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onLocationResult</span><span class="p">(</span><span class="n">locationResult</span><span class="p">:</span> <span class="n">LocationResult</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>            <span class="n">viewModel</span><span class="p">.</span><span class="n">updateLocation</span><span class="p">(</span><span class="n">locationResult</span><span class="p">.</span><span class="n">lastLocation</span><span class="p">)</span></ins>
+<ins>        <span class="p">}</span></ins>
+<ins>    <span class="p">}</span></ins>
+
+    <span class="k">private</span> <span class="k">val</span> <span class="py">getLocationPermission</span> <span class="p">=</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>We have to set up a new sequence of events to start our activity. This sequence looks like</p>
+<pre class="mermaid"><code>graph TD
+    A{Check Google Play Services}
+    X[Cannot run - exit]
+    X2[Cannot run - exit]
+    A --&gt;|Not Available|X
+    A --&gt;|Available|B
+
+    B{Do we have location permission?}
+    B --&gt;|Yes|C
+    B --&gt;|No|E
+    C[Start location request]
+    C --&gt; D
+    D[Setup Map]
+
+    E[Request Location Permissions]
+    E --&gt; F
+    F{Were permissions granted?}
+    F --&gt;|No|G
+    F --&gt;|Yes|C
+    G[Show rationale]
+    G --&gt; H
+    H{Does user agree?}
+    H --&gt;|Yes|I
+    H --&gt;|No|X2
+    I[Application Info Screen to change permissions - exits application]</code></pre>
+<p>We move the UI setup out of <code>onCreate</code> (we'll see it again soon), and check Google Play Services
+Availability. If Play Services aren't available,  we can't run and must exit.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#090-check-play-services">show in full file</a>  app/src/main/java/com/androidbyexample/compose/google/google/maps/MainActivity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">ComponentActivity</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+
+<ins>        <span class="n">GoogleApiAvailability</span><span class="p">.</span><span class="n">getInstance</span><span class="p">()</span></ins>
+<ins>            <span class="p">.</span><span class="n">makeGooglePlayServicesAvailable</span><span class="p">(</span><span class="k">this</span><span class="p">)</span></ins>
+<ins>            <span class="p">.</span><span class="n">addOnSuccessListener</span> <span class="p">{</span></ins>
+<ins>                <span class="k">if</span> <span class="p">(</span><span class="n">ActivityCompat</span><span class="p">.</span><span class="n">checkSelfPermission</span><span class="p">(</span></ins>
+<ins>                        <span class="k">this</span><span class="p">,</span></ins>
+<ins>                        <span class="n">android</span><span class="p">.</span><span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_FINE_LOCATION</span></ins>
+<ins>                    <span class="p">)</span> <span class="p">!=</span> <span class="n">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span> <span class="p">&amp;&amp;</span></ins>
+<ins>                    <span class="n">ActivityCompat</span><span class="p">.</span><span class="n">checkSelfPermission</span><span class="p">(</span></ins>
+<ins>                        <span class="k">this</span><span class="p">,</span></ins>
+<ins>                        <span class="n">android</span><span class="p">.</span><span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_COARSE_LOCATION</span></ins>
+<ins>                    <span class="p">)</span> <span class="p">!=</span> <span class="n">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span></ins>
+<ins>                <span class="p">)</span> <span class="p">{</span></ins>
+<ins>                    <span class="n">getLocationPermission</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span></ins>
+<ins>                        <span class="n">arrayOf</span><span class="p">(</span></ins>
+<ins>                            <span class="n">android</span><span class="p">.</span><span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_FINE_LOCATION</span><span class="p">,</span></ins>
+<ins>                            <span class="n">android</span><span class="p">.</span><span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_COARSE_LOCATION</span><span class="p">,</span></ins>
+<ins>                        <span class="p">)</span></ins>
+<ins>                    <span class="p">)</span></ins>
+<ins>                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></ins>
+<ins>                    <span class="n">startLocationAndMap</span><span class="p">()</span></ins>
+<ins>                <span class="p">}</span></ins>
+<ins>            <span class="p">}.</span><span class="n">addOnFailureListener</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>                <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span></ins>
+<ins>                    <span class="k">this</span><span class="p">,</span></ins>
+<ins>                    <span class="s">&quot;Google Play services required (or upgrade required)&quot;</span><span class="p">,</span></ins>
+<ins>                    <span class="n">Toast</span><span class="p">.</span><span class="n">LENGTH_SHORT</span></ins>
+<ins>                <span class="p">).</span><span class="n">show</span><span class="p">()</span></ins>
+<ins>                <span class="n">finish</span><span class="p">()</span></ins>
+<ins>            <span class="p">}</span></ins>
+
+    <span class="p">}</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>If Play Services are available, we check if we have location permissions. If not, we request
+permission. If so, we just go ahead and start our location request and set up the UI.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#090-have-permission">show in full file</a>  app/src/main/java/com/androidbyexample/compose/google/google/maps/MainActivity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">ComponentActivity</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="n">GoogleApiAvailability</span><span class="p">.</span><span class="n">getInstance</span><span class="p">()</span>
+            <span class="p">.</span><span class="n">makeGooglePlayServicesAvailable</span><span class="p">(</span><span class="k">this</span><span class="p">)</span>
+            <span class="p">.</span><span class="n">addOnSuccessListener</span> <span class="p">{</span>
+<ins>                <span class="k">if</span> <span class="p">(</span><span class="n">ActivityCompat</span><span class="p">.</span><span class="n">checkSelfPermission</span><span class="p">(</span></ins>
+<ins>                        <span class="k">this</span><span class="p">,</span></ins>
+<ins>                        <span class="n">android</span><span class="p">.</span><span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_FINE_LOCATION</span></ins>
+<ins>                    <span class="p">)</span> <span class="p">!=</span> <span class="n">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span> <span class="p">&amp;&amp;</span></ins>
+<ins>                    <span class="n">ActivityCompat</span><span class="p">.</span><span class="n">checkSelfPermission</span><span class="p">(</span></ins>
+<ins>                        <span class="k">this</span><span class="p">,</span></ins>
+<ins>                        <span class="n">android</span><span class="p">.</span><span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_COARSE_LOCATION</span></ins>
+<ins>                    <span class="p">)</span> <span class="p">!=</span> <span class="n">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span></ins>
+<ins>                <span class="p">)</span> <span class="p">{</span></ins>
+<ins>                    <span class="n">getLocationPermission</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span></ins>
+<ins>                        <span class="n">arrayOf</span><span class="p">(</span></ins>
+<ins>                            <span class="n">android</span><span class="p">.</span><span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_FINE_LOCATION</span><span class="p">,</span></ins>
+<ins>                            <span class="n">android</span><span class="p">.</span><span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_COARSE_LOCATION</span><span class="p">,</span></ins>
+<ins>                        <span class="p">)</span></ins>
+<ins>                    <span class="p">)</span></ins>
+<ins>                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></ins>
+<ins>                    <span class="n">startLocationAndMap</span><span class="p">()</span></ins>
+<ins>                <span class="p">}</span></ins>
+            <span class="p">}.</span><span class="n">addOnFailureListener</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span>
+                    <span class="c1">// ...</span>
+            <span class="p">}</span>
+    <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>Requesting permissions has gotten a bit easier over the years... We register a launcher that will
+invoke the system permission requester and return whether the user granted or denied permissions.
+If granted, we go ahead and start the location request and set up the UI. If not granted, we go
+into rationale mode.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#090-permission-launcher">show in full file</a>  app/src/main/java/com/androidbyexample/compose/google/google/maps/MainActivity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">ComponentActivity</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+<ins>    <span class="k">private</span> <span class="k">val</span> <span class="py">getLocationPermission</span> <span class="p">=</span></ins>
+<ins>        <span class="n">registerForActivityResult</span><span class="p">(</span></ins>
+<ins>            <span class="n">ActivityResultContracts</span><span class="p">.</span><span class="n">RequestMultiplePermissions</span><span class="p">()</span></ins>
+<ins>        <span class="p">)</span> <span class="p">{</span> <span class="n">isGranted</span> <span class="p">-&gt;</span></ins>
+<ins>            <span class="k">if</span> <span class="p">(</span><span class="n">isGranted</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">any</span> <span class="p">{</span> <span class="n">it</span> <span class="p">})</span> <span class="p">{</span></ins>
+<ins>                <span class="n">startLocationAndMap</span><span class="p">()</span></ins>
+<ins>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></ins>
+<ins>                <span class="c1">// if the user denied permissions, tell them they</span></ins>
+<ins>                <span class="c1">//   cannot use the app without them. In general,</span></ins>
+<ins>                <span class="c1">//   you should try to just reduce function and let the</span></ins>
+<ins>                <span class="c1">//   user continue, but location is a key part of this</span></ins>
+<ins>                <span class="c1">//   application.</span></ins>
+<ins>                <span class="c1">//   (Note that a real version of this application</span></ins>
+<ins>                <span class="c1">//   might allow the user to manually click on the map</span></ins>
+<ins>                <span class="c1">//   to set their current location, and we wouldn&#39;t</span></ins>
+<ins>                <span class="c1">//   show this dialog, or perhaps only show it once)</span></ins>
+<ins>                <span class="c1">// NOTE: This is a normal Android-View-based dialog, not a compose one!</span></ins>
+<ins>                <span class="n">AlertDialog</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span><span class="k">this</span><span class="p">)</span></ins>
+<ins>                    <span class="p">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s">&quot;Permissions Needed&quot;</span><span class="p">)</span></ins>
+<ins>                    <span class="p">.</span><span class="n">setMessage</span><span class="p">(</span></ins>
+<ins>                        <span class="s">&quot;We need coarse-location or fine-location permission &quot;</span> <span class="p">+</span></ins>
+<ins>                                <span class="s">&quot;to locate a car (fine location is highly &quot;</span> <span class="p">+</span></ins>
+<ins>                                <span class="s">&quot;recommended for accurate car locating). &quot;</span> <span class="p">+</span></ins>
+<ins>                                <span class="s">&quot;Please allow these permissions via App Info &quot;</span> <span class="p">+</span></ins>
+<ins>                                <span class="s">&quot;settings&quot;</span><span class="p">)</span></ins>
+<ins>                    <span class="p">.</span><span class="n">setCancelable</span><span class="p">(</span><span class="k">false</span><span class="p">)</span></ins>
+<ins>                    <span class="p">.</span><span class="n">setNegativeButton</span><span class="p">(</span><span class="s">&quot;Quit&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="p">-&gt;</span> <span class="n">finish</span><span class="p">()</span> <span class="p">}</span></ins>
+<ins>                    <span class="p">.</span><span class="n">setPositiveButton</span><span class="p">(</span><span class="s">&quot;App Info&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="p">-&gt;</span></ins>
+<ins>                        <span class="n">startActivity</span><span class="p">(</span></ins>
+<ins>                            <span class="n">Intent</span><span class="p">(</span></ins>
+<ins>                                <span class="n">Settings</span><span class="p">.</span><span class="n">ACTION_APPLICATION_DETAILS_SETTINGS</span></ins>
+<ins>                            <span class="p">).</span><span class="n">apply</span> <span class="p">{</span></ins>
+<ins>                                <span class="k">data</span> <span class="p">=</span> <span class="n">Uri</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;package:$packageName&quot;</span><span class="p">)</span></ins>
+<ins>                            <span class="p">}</span></ins>
+<ins>                        <span class="p">)</span></ins>
+<ins>                        <span class="n">finish</span><span class="p">()</span></ins>
+<ins>                    <span class="p">}</span></ins>
+<ins>                    <span class="p">.</span><span class="n">show</span><span class="p">()</span></ins>
+<ins>            <span class="p">}</span></ins>
+<ins>        <span class="p">}</span></ins>
+
+    <span class="n">@SuppressLint</span><span class="p">(</span><span class="s">&quot;MissingPermission&quot;</span><span class="p">)</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>We've decided that our car finder simply cannot run without knowing the current location, so we
+display this rationale to the user in a dialog. (Note that this is an old-style "views" dialog,
+not a Jetpack Compose dialog.) The user can agree to go change the permissions (and we'll send
+them to the system Application Info screen to do so), or they can say "nope!" and we'll quit the
+application by calling <code>finish()</code> on the <code>Activity</code> (which pops it off the back stack - because
+we only have one <code>Activity</code> on the back stack, the application exits).</p>
+<p>After all of the availability and permission checking, we can finally start the application in
+<code>startLocationAndMap()</code>. The first thing we do is request location updates from the fused location
+provider, which will use our <code>locationCallback</code> to send the results to the view model.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#090-request-location-updates">show in full file</a>  app/src/main/java/com/androidbyexample/compose/google/google/maps/MainActivity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">ComponentActivity</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+        <span class="p">}</span>
+
+<ins>    <span class="n">@SuppressLint</span><span class="p">(</span><span class="s">&quot;MissingPermission&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">fun</span> <span class="nf">startLocationAndMap</span><span class="p">()</span> <span class="p">{</span></ins>
+<ins>        <span class="k">val</span> <span class="py">locationRequest</span> <span class="p">=</span></ins>
+<ins>            <span class="n">LocationRequest</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span><span class="n">Priority</span><span class="p">.</span><span class="n">PRIORITY_HIGH_ACCURACY</span><span class="p">,</span> <span class="m">5000</span><span class="p">)</span></ins>
+<ins>                <span class="p">.</span><span class="n">setWaitForAccurateLocation</span><span class="p">(</span><span class="k">false</span><span class="p">)</span></ins>
+<ins>                <span class="p">.</span><span class="n">setMinUpdateIntervalMillis</span><span class="p">(</span><span class="m">0</span><span class="p">)</span></ins>
+<ins>                <span class="p">.</span><span class="n">setMaxUpdateDelayMillis</span><span class="p">(</span><span class="m">5000</span><span class="p">)</span></ins>
+<ins>                <span class="p">.</span><span class="n">build</span><span class="p">()</span></ins>
+<ins>        <span class="n">fusedLocationProviderClient</span> <span class="p">=</span></ins>
+<ins>            <span class="n">LocationServices</span><span class="p">.</span><span class="n">getFusedLocationProviderClient</span><span class="p">(</span><span class="k">this</span><span class="p">)</span></ins>
+<ins>        <span class="n">fusedLocationProviderClient</span><span class="p">.</span><span class="n">requestLocationUpdates</span><span class="p">(</span></ins>
+<ins>            <span class="n">locationRequest</span><span class="p">,</span></ins>
+<ins>            <span class="n">locationCallback</span><span class="p">,</span></ins>
+<ins>            <span class="n">Looper</span><span class="p">.</span><span class="n">getMainLooper</span><span class="p">()</span></ins>
+<ins>        <span class="p">)</span></ins>
+
+        <span class="n">enableEdgeToEdge</span><span class="p">()</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>This will emit the location, which is collected and made available to our composition.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#090-collect-location-state">show in full file</a>  app/src/main/java/com/androidbyexample/compose/google/google/maps/MainActivity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">ComponentActivity</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="n">@SuppressLint</span><span class="p">(</span><span class="s">&quot;MissingPermission&quot;</span><span class="p">)</span>
+    <span class="k">fun</span> <span class="nf">startLocationAndMap</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="n">setContent</span> <span class="p">{</span>
+            <span class="n">GoogleMapsTheme</span> <span class="p">{</span>
+                <span class="n">Scaffold</span><span class="p">(</span><span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">fillMaxSize</span><span class="p">())</span> <span class="p">{</span> <span class="n">innerPadding</span> <span class="p">-&gt;</span>
+                    <span class="c1">// ...</span>
+                    <span class="p">}</span>
+
+<ins>                    <span class="k">val</span> <span class="py">currentLocation</span> <span class="k">by</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">currentLocation</span><span class="p">.</span><span class="n">collectAsStateWithLifecycle</span><span class="p">(</span></ins>
+<ins>                        <span class="n">initialValue</span> <span class="p">=</span> <span class="k">null</span></ins>
+<ins>                    <span class="p">)</span></ins>
+<ins></ins>
+                    <span class="n">GoogleMapDisplay</span><span class="p">(</span>
+<del><span class="c1">//                      <span class="n">place</span> <span class="p">=</span> <span class="n">googleHQ</span><span class="p">,</span></span></del>
+<del><span class="c1">//                      <span class="n">placeDescription</span> <span class="p">=</span> <span class="s">&quot;Google HQ&quot;</span><span class="p">,</span></span></del>
+<ins>                        <span class="n">currentLocation</span> <span class="p">=</span> <span class="n">currentLocation</span><span class="p">,</span></ins>
+                        <span class="n">cameraPositionState</span> <span class="p">=</span> <span class="n">cameraPositionState</span><span class="p">,</span>
+                        <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="n">innerPadding</span><span class="p">).</span><span class="n">fillMaxSize</span><span class="p">(),</span>
+                    <span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>We pass the location to the <code>GoogleMapDisplay</code> and create a <code>MarkerState</code> to give us a location
+for a new <code>Marker</code>.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#090-current-location-state">show in full file</a>  app/src/main/java/com/androidbyexample/compose/google/google/maps/GoogleMapDisplay.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="nf">GoogleMapDisplay</span><span class="p">(</span>
+<del><span class="c1">//  <span class="n">place</span><span class="p">:</span> <span class="n">LatLng</span><span class="p">,</span></span></del>
+<del><span class="c1">//  <span class="n">placeDescription</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></span></del>
+<ins>    <span class="n">currentLocation</span><span class="p">:</span> <span class="n">Location</span><span class="p">?,</span></ins>
+    <span class="n">cameraPositionState</span><span class="p">:</span> <span class="n">CameraPositionState</span><span class="p">,</span>
+    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span><span class="p">,</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">mapLoaded</span> <span class="k">by</span> <span class="n">remember</span> <span class="p">{</span> <span class="n">mutableStateOf</span><span class="p">(</span><span class="k">false</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="k">var</span> <span class="py">currentMapType</span> <span class="k">by</span> <span class="n">remember</span> <span class="p">{</span> <span class="n">mutableStateOf</span><span class="p">(</span><span class="n">MapType</span><span class="p">.</span><span class="n">NORMAL</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="py">mapProperties</span> <span class="k">by</span> <span class="n">remember</span> <span class="p">{</span>
+        <span class="n">mutableStateOf</span><span class="p">(</span><span class="n">MapProperties</span><span class="p">(</span><span class="n">mapType</span> <span class="p">=</span> <span class="n">MapType</span><span class="p">.</span><span class="n">NORMAL</span><span class="p">))</span>
+    <span class="p">}</span>
+
+<del><span class="c1">//  <span class="k">val</span> <span class="py">placeState</span> <span class="p">=</span></span></del>
+<del><span class="c1">//      <span class="n">rememberMarkerState</span><span class="p">(</span><span class="n">key</span> <span class="p">=</span> <span class="n">place</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span> <span class="n">position</span> <span class="p">=</span> <span class="n">place</span><span class="p">)</span></span></del>
+<ins>    <span class="k">val</span> <span class="py">currentLocationState</span> <span class="p">=</span> <span class="n">remember</span><span class="p">(</span><span class="n">currentLocation</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>        <span class="n">currentLocation</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span></ins>
+<ins>            <span class="n">MarkerState</span><span class="p">(</span></ins>
+<ins>                <span class="n">LatLng</span><span class="p">(</span></ins>
+<ins>                    <span class="n">it</span><span class="p">.</span><span class="n">latitude</span><span class="p">,</span></ins>
+<ins>                    <span class="n">it</span><span class="p">.</span><span class="n">longitude</span></ins>
+<ins>                <span class="p">)</span></ins>
+<ins>            <span class="p">)</span></ins>
+<ins>        <span class="p">}</span></ins>
+<ins>    <span class="p">}</span></ins>
+
+    <span class="n">Box</span><span class="p">(</span>
+        <span class="c1">// ...</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="n">Column</span><span class="p">(</span>
+            <span class="c1">// ...</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// ...</span>
+            <span class="n">GoogleMap</span><span class="p">(</span>
+                <span class="c1">// ...</span>
+                    <span class="p">.</span><span class="n">weight</span><span class="p">(</span><span class="m">1f</span><span class="p">),</span>
+            <span class="p">)</span> <span class="p">{</span>
+<ins>                <span class="n">currentLocationState</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span></ins>
+                    <span class="n">MarkerInfoWindowContent</span><span class="p">(</span>
+<del><span class="c1">//                  <span class="n">state</span> <span class="p">=</span> <span class="n">placeState</span><span class="p">,</span></span></del>
+<del><span class="c1">//                  <span class="n">title</span> <span class="p">=</span> <span class="n">placeDescription</span><span class="p">,</span></span></del>
+<del><span class="c1">//                  <span class="n">onClick</span> <span class="p">=</span> <span class="p">{</span></span></del>
+<del><span class="c1">//                      <span class="n">placeState</span><span class="p">.</span><span class="n">showInfoWindow</span><span class="p">()</span></span></del>
+<del><span class="c1">//                      <span class="k">true</span></span></del>
+<del><span class="c1">//                  <span class="p">}</span></span></del>
+<ins>                        <span class="n">state</span> <span class="p">=</span> <span class="n">it</span><span class="p">,</span></ins>
+<ins>                        <span class="n">anchor</span> <span class="p">=</span> <span class="n">Offset</span><span class="p">(</span><span class="m">0.5f</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">),</span></ins>
+<ins>                        <span class="n">title</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span></ins>
+<ins>                            <span class="n">id</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">current_location</span></ins>
+<ins>                        <span class="p">),</span></ins>
+                    <span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>When we run the app, the location marker appears when it's available.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can use the "Extended Controls" at the top of the emulator to set a fake location. This
+will prove very useful when testing this application, as we can set a location, save the car
+at that location, change the location to simulate walking away from the car, then press
+navigate to see how to get back to the car.</p>
+</div>
+<hr/>
+<h2>All code changes</h2>
+<details class="example" open>
+<summary>CHANGED: app/build.gradle.kts</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="n">plugins</span> <span class="p">{</span>
+    <span class="n">alias</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">android</span><span class="p">.</span><span class="n">application</span><span class="p">)</span>
+    <span class="n">alias</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">kotlin</span><span class="p">.</span><span class="n">android</span><span class="p">)</span>
+    <span class="n">alias</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">kotlin</span><span class="p">.</span><span class="n">compose</span><span class="p">)</span>
+<div id="040-apply-plugin">    <span class="n">alias</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">plugins</span><span class="p">.</span><span class="n">secrets</span><span class="p">)</span>
+</div><span class="p">}</span>
+
+<span class="n">android</span> <span class="p">{</span>
+    <span class="n">namespace</span> <span class="p">=</span> <span class="s">&quot;com.androidbyexample.compose.google.google.maps&quot;</span>
+    <span class="n">compileSdk</span> <span class="p">=</span> <span class="m">35</span>
+
+    <span class="n">defaultConfig</span> <span class="p">{</span>
+        <span class="n">applicationId</span> <span class="p">=</span> <span class="s">&quot;com.androidbyexample.compose.google.google.maps&quot;</span>
+        <span class="n">minSdk</span> <span class="p">=</span> <span class="m">24</span>
+        <span class="n">targetSdk</span> <span class="p">=</span> <span class="m">35</span>
+        <span class="n">versionCode</span> <span class="p">=</span> <span class="m">1</span>
+        <span class="n">versionName</span> <span class="p">=</span> <span class="s">&quot;1.0&quot;</span>
+
+        <span class="n">testInstrumentationRunner</span> <span class="p">=</span> <span class="s">&quot;androidx.test.runner.AndroidJUnitRunner&quot;</span>
+    <span class="p">}</span>
+
+    <span class="n">buildTypes</span> <span class="p">{</span>
+        <span class="n">release</span> <span class="p">{</span>
+            <span class="n">isMinifyEnabled</span> <span class="p">=</span> <span class="k">false</span>
+            <span class="n">proguardFiles</span><span class="p">(</span>
+                <span class="n">getDefaultProguardFile</span><span class="p">(</span><span class="s">&quot;proguard-android-optimize.txt&quot;</span><span class="p">),</span>
+                <span class="s">&quot;proguard-rules.pro&quot;</span>
+            <span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">compileOptions</span> <span class="p">{</span>
+        <span class="n">sourceCompatibility</span> <span class="p">=</span> <span class="n">JavaVersion</span><span class="p">.</span><span class="n">VERSION_11</span>
+        <span class="n">targetCompatibility</span> <span class="p">=</span> <span class="n">JavaVersion</span><span class="p">.</span><span class="n">VERSION_11</span>
+    <span class="p">}</span>
+    <span class="n">kotlinOptions</span> <span class="p">{</span>
+        <span class="n">jvmTarget</span> <span class="p">=</span> <span class="s">&quot;11&quot;</span>
+    <span class="p">}</span>
+    <span class="n">buildFeatures</span> <span class="p">{</span>
+        <span class="n">compose</span> <span class="p">=</span> <span class="k">true</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">dependencies</span> <span class="p">{</span>
+<div id="090-add-location-deps"><ins>    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">location</span><span class="p">.</span><span class="n">services</span><span class="p">)</span></ins>
+<ins>    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">lifecycle</span><span class="p">.</span><span class="n">runtime</span><span class="p">.</span><span class="n">compose</span><span class="p">)</span></ins>
+</div><div id="040-add-deps">    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">maps</span><span class="p">.</span><span class="n">compose</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">maps</span><span class="p">.</span><span class="n">compose</span><span class="p">.</span><span class="n">utils</span><span class="p">)</span>
+</div>    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">core</span><span class="p">.</span><span class="n">ktx</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">lifecycle</span><span class="p">.</span><span class="n">runtime</span><span class="p">.</span><span class="n">ktx</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">activity</span><span class="p">.</span><span class="n">compose</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">platform</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">compose</span><span class="p">.</span><span class="n">bom</span><span class="p">))</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">ui</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">graphics</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">tooling</span><span class="p">.</span><span class="n">preview</span><span class="p">)</span>
+    <span class="n">implementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">material3</span><span class="p">)</span>
+    <span class="n">testImplementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">junit</span><span class="p">)</span>
+    <span class="n">androidTestImplementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">junit</span><span class="p">)</span>
+    <span class="n">androidTestImplementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">espresso</span><span class="p">.</span><span class="n">core</span><span class="p">)</span>
+    <span class="n">androidTestImplementation</span><span class="p">(</span><span class="n">platform</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">compose</span><span class="p">.</span><span class="n">bom</span><span class="p">))</span>
+    <span class="n">androidTestImplementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">junit4</span><span class="p">)</span>
+    <span class="n">debugImplementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">tooling</span><span class="p">)</span>
+    <span class="n">debugImplementation</span><span class="p">(</span><span class="n">libs</span><span class="p">.</span><span class="n">androidx</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="n">test</span><span class="p">.</span><span class="n">manifest</span><span class="p">)</span>
+<span class="p">}</span>
+
+<div id="040-configure-secrets"><span class="n">secrets</span> <span class="p">{</span>
+    <span class="n">propertiesFileName</span> <span class="p">=</span> <span class="s">&quot;secrets.properties&quot;</span>
+<span class="p">}</span>
+</div></pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/AndroidManifest.xml</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">xmlns:tools=</span><span class="s">&quot;http://schemas.android.com/tools&quot;</span><span class="nt">&gt;</span>
+
+<div id="090-manifest-permissions"><ins>    <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.ACCESS_COARSE_LOCATION&quot;</span> <span class="nt">/&gt;</span></ins>
+<ins>    <span class="nt">&lt;uses-permission</span> <span class="na">android:name=</span><span class="s">&quot;android.permission.ACCESS_FINE_LOCATION&quot;</span> <span class="nt">/&gt;</span></ins>
+</div>
+    <span class="nt">&lt;application</span>
+        <span class="na">android:allowBackup=</span><span class="s">&quot;true&quot;</span>
+        <span class="na">android:dataExtractionRules=</span><span class="s">&quot;@xml/data_extraction_rules&quot;</span>
+        <span class="na">android:fullBackupContent=</span><span class="s">&quot;@xml/backup_rules&quot;</span>
+        <span class="na">android:icon=</span><span class="s">&quot;@mipmap/ic_launcher&quot;</span>
+        <span class="na">android:label=</span><span class="s">&quot;@string/app_name&quot;</span>
+        <span class="na">android:roundIcon=</span><span class="s">&quot;@mipmap/ic_launcher_round&quot;</span>
+        <span class="na">android:supportsRtl=</span><span class="s">&quot;true&quot;</span>
+        <span class="na">android:theme=</span><span class="s">&quot;@style/Theme.GoogleMaps&quot;</span>
+        <span class="na">tools:targetApi=</span><span class="s">&quot;31&quot;</span><span class="nt">&gt;</span>
+
+<div id="040-manifest-key">        <span class="nt">&lt;meta-data</span>
+            <span class="na">android:name=</span><span class="s">&quot;com.google.android.geo.API_KEY&quot;</span>
+            <span class="na">android:value=</span><span class="s">&quot;${MAPS_API_KEY}&quot;</span> <span class="nt">/&gt;</span>
+</div>
+        <span class="nt">&lt;activity</span>
+            <span class="na">android:name=</span><span class="s">&quot;.MainActivity&quot;</span>
+            <span class="na">android:exported=</span><span class="s">&quot;true&quot;</span>
+            <span class="na">android:label=</span><span class="s">&quot;@string/app_name&quot;</span>
+            <span class="na">android:theme=</span><span class="s">&quot;@style/Theme.GoogleMaps&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">&quot;android.intent.action.MAIN&quot;</span> <span class="nt">/&gt;</span>
+
+                <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">&quot;android.intent.category.LAUNCHER&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+        <span class="nt">&lt;/activity&gt;</span>
+    <span class="nt">&lt;/application&gt;</span>
+
+<span class="nt">&lt;/manifest&gt;</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="success" open>
+<summary>ADDED: app/src/main/java/com/androidbyexample/compose/google/google/maps/CarViewModel.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><ins><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.google.google.maps</span></ins>
+<ins></ins>
+<ins><span class="k">import</span> <span class="nn">android.app.Application</span></ins>
+<ins><span class="k">import</span> <span class="nn">android.location.Location</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.lifecycle.AndroidViewModel</span></ins>
+<ins><span class="k">import</span> <span class="nn">kotlinx.coroutines.flow.Flow</span></ins>
+<ins><span class="k">import</span> <span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span></ins>
+<ins></ins>
+<div id="090-view-model"><ins><span class="k">class</span> <span class="nc">CarViewModel</span><span class="p">(</span><span class="n">application</span><span class="p">:</span> <span class="n">Application</span><span class="p">)</span> <span class="p">:</span> <span class="n">AndroidViewModel</span><span class="p">(</span><span class="n">application</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>    <span class="k">private</span> <span class="k">val</span> <span class="py">_currentLocation</span> <span class="p">=</span> <span class="n">MutableStateFlow</span><span class="p">&lt;</span><span class="n">Location</span><span class="p">?&gt;(</span><span class="k">null</span><span class="p">)</span></ins>
+<ins></ins>
+<ins>    <span class="k">val</span> <span class="py">currentLocation</span><span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Location</span><span class="p">?&gt;</span></ins>
+<ins>        <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">_currentLocation</span></ins>
+<ins></ins>
+<ins>    <span class="k">fun</span> <span class="nf">updateLocation</span><span class="p">(</span><span class="n">location</span><span class="p">:</span> <span class="n">Location</span><span class="p">?)</span> <span class="p">{</span></ins>
+<ins>        <span class="n">_currentLocation</span><span class="p">.</span><span class="n">value</span> <span class="p">=</span> <span class="n">location</span></ins>
+<ins>    <span class="p">}</span></ins>
+<ins><span class="p">}</span></ins>
+</div></pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/google/google/maps/GoogleMapDisplay.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.google.google.maps</span>
+
+<ins><span class="k">import</span> <span class="nn">android.location.Location</span></ins>
+<span class="k">import</span> <span class="nn">androidx.compose.animation.AnimatedVisibility</span>
+<span class="k">import</span> <span class="nn">androidx.compose.animation.EnterTransition</span>
+<span class="k">import</span> <span class="nn">androidx.compose.animation.fadeOut</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.background</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.Box</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.Column</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.fillMaxSize</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.fillMaxWidth</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.wrapContentSize</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.CircularProgressIndicator</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.MaterialTheme</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.Composable</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.getValue</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.mutableStateOf</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.remember</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.setValue</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.Modifier</span>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.ui.geometry.Offset</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.ui.res.stringResource</span></ins>
+<span class="k">import</span> <span class="nn">com.google.android.gms.maps.model.LatLng</span>
+<span class="k">import</span> <span class="nn">com.google.maps.android.compose.CameraPositionState</span>
+<span class="k">import</span> <span class="nn">com.google.maps.android.compose.GoogleMap</span>
+<span class="k">import</span> <span class="nn">com.google.maps.android.compose.MapProperties</span>
+<span class="k">import</span> <span class="nn">com.google.maps.android.compose.MapType</span>
+<span class="k">import</span> <span class="nn">com.google.maps.android.compose.MarkerInfoWindowContent</span>
+<ins><span class="k">import</span> <span class="nn">com.google.maps.android.compose.MarkerState</span></ins>
+<span class="k">import</span> <span class="nn">com.google.maps.android.compose.rememberMarkerState</span>
+
+<span class="n">@Composable</span>
+<span class="k">fun</span> <span class="nf">GoogleMapDisplay</span><span class="p">(</span>
+<div id="090-current-location-state"><del><span class="c1">//  <span class="n">place</span><span class="p">:</span> <span class="n">LatLng</span><span class="p">,</span></span></del>
+<del><span class="c1">//  <span class="n">placeDescription</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span></span></del>
+<ins>    <span class="n">currentLocation</span><span class="p">:</span> <span class="n">Location</span><span class="p">?,</span></ins>
+    <span class="n">cameraPositionState</span><span class="p">:</span> <span class="n">CameraPositionState</span><span class="p">,</span>
+    <span class="n">modifier</span><span class="p">:</span> <span class="n">Modifier</span><span class="p">,</span>
+<span class="p">)</span> <span class="p">{</span>
+    <span class="k">var</span> <span class="py">mapLoaded</span> <span class="k">by</span> <span class="n">remember</span> <span class="p">{</span> <span class="n">mutableStateOf</span><span class="p">(</span><span class="k">false</span><span class="p">)</span> <span class="p">}</span>
+
+    <span class="k">var</span> <span class="py">currentMapType</span> <span class="k">by</span> <span class="n">remember</span> <span class="p">{</span> <span class="n">mutableStateOf</span><span class="p">(</span><span class="n">MapType</span><span class="p">.</span><span class="n">NORMAL</span><span class="p">)</span> <span class="p">}</span>
+    <span class="k">var</span> <span class="py">mapProperties</span> <span class="k">by</span> <span class="n">remember</span> <span class="p">{</span>
+        <span class="n">mutableStateOf</span><span class="p">(</span><span class="n">MapProperties</span><span class="p">(</span><span class="n">mapType</span> <span class="p">=</span> <span class="n">MapType</span><span class="p">.</span><span class="n">NORMAL</span><span class="p">))</span>
+    <span class="p">}</span>
+
+<del><span class="c1">//  <span class="k">val</span> <span class="py">placeState</span> <span class="p">=</span></span></del>
+<del><span class="c1">//      <span class="n">rememberMarkerState</span><span class="p">(</span><span class="n">key</span> <span class="p">=</span> <span class="n">place</span><span class="p">.</span><span class="n">toString</span><span class="p">(),</span> <span class="n">position</span> <span class="p">=</span> <span class="n">place</span><span class="p">)</span></span></del>
+<ins>    <span class="k">val</span> <span class="py">currentLocationState</span> <span class="p">=</span> <span class="n">remember</span><span class="p">(</span><span class="n">currentLocation</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>        <span class="n">currentLocation</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span></ins>
+<ins>            <span class="n">MarkerState</span><span class="p">(</span></ins>
+<ins>                <span class="n">LatLng</span><span class="p">(</span></ins>
+<ins>                    <span class="n">it</span><span class="p">.</span><span class="n">latitude</span><span class="p">,</span></ins>
+<ins>                    <span class="n">it</span><span class="p">.</span><span class="n">longitude</span></ins>
+<ins>                <span class="p">)</span></ins>
+<ins>            <span class="p">)</span></ins>
+<ins>        <span class="p">}</span></ins>
+<ins>    <span class="p">}</span></ins>
+</div>
+    <span class="n">Box</span><span class="p">(</span>
+        <span class="n">modifier</span> <span class="p">=</span> <span class="n">modifier</span><span class="p">,</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="n">Column</span><span class="p">(</span>
+            <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">fillMaxSize</span><span class="p">()</span>
+        <span class="p">)</span> <span class="p">{</span>
+            <span class="n">MapTypeSelector</span><span class="p">(</span>
+                <span class="n">currentValue</span> <span class="p">=</span> <span class="n">currentMapType</span><span class="p">,</span>
+                <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">fillMaxWidth</span><span class="p">(),</span>
+            <span class="p">)</span> <span class="p">{</span>
+                <span class="n">mapProperties</span> <span class="p">=</span> <span class="n">mapProperties</span><span class="p">.</span><span class="n">copy</span><span class="p">(</span><span class="n">mapType</span> <span class="p">=</span> <span class="n">it</span><span class="p">)</span>
+                <span class="n">currentMapType</span> <span class="p">=</span> <span class="n">it</span>
+            <span class="p">}</span>
+            <span class="n">GoogleMap</span><span class="p">(</span>
+                <span class="n">cameraPositionState</span> <span class="p">=</span> <span class="n">cameraPositionState</span><span class="p">,</span>
+                <span class="n">onMapLoaded</span> <span class="p">=</span> <span class="p">{</span>
+                    <span class="n">mapLoaded</span> <span class="p">=</span> <span class="k">true</span>
+                <span class="p">},</span>
+                <span class="n">properties</span> <span class="p">=</span> <span class="n">mapProperties</span><span class="p">,</span>
+                <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span>
+                    <span class="p">.</span><span class="n">fillMaxWidth</span><span class="p">()</span>
+                    <span class="p">.</span><span class="n">weight</span><span class="p">(</span><span class="m">1f</span><span class="p">),</span>
+            <span class="p">)</span> <span class="p">{</span>
+<div id="090-marker"><ins>                <span class="n">currentLocationState</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span></ins>
+                    <span class="n">MarkerInfoWindowContent</span><span class="p">(</span>
+<del><span class="c1">//                  <span class="n">state</span> <span class="p">=</span> <span class="n">placeState</span><span class="p">,</span></span></del>
+<del><span class="c1">//                  <span class="n">title</span> <span class="p">=</span> <span class="n">placeDescription</span><span class="p">,</span></span></del>
+<del><span class="c1">//                  <span class="n">onClick</span> <span class="p">=</span> <span class="p">{</span></span></del>
+<del><span class="c1">//                      <span class="n">placeState</span><span class="p">.</span><span class="n">showInfoWindow</span><span class="p">()</span></span></del>
+<del><span class="c1">//                      <span class="k">true</span></span></del>
+<del><span class="c1">//                  <span class="p">}</span></span></del>
+<ins>                        <span class="n">state</span> <span class="p">=</span> <span class="n">it</span><span class="p">,</span></ins>
+<ins>                        <span class="n">anchor</span> <span class="p">=</span> <span class="n">Offset</span><span class="p">(</span><span class="m">0.5f</span><span class="p">,</span> <span class="m">0.5f</span><span class="p">),</span></ins>
+<ins>                        <span class="n">title</span> <span class="p">=</span> <span class="n">stringResource</span><span class="p">(</span></ins>
+<ins>                            <span class="n">id</span> <span class="p">=</span> <span class="n">R</span><span class="p">.</span><span class="n">string</span><span class="p">.</span><span class="n">current_location</span></ins>
+<ins>                        <span class="p">),</span></ins>
+                    <span class="p">)</span>
+                <span class="p">}</span>
+</div><ins>            <span class="p">}</span></ins>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(!</span><span class="n">mapLoaded</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">AnimatedVisibility</span><span class="p">(</span>
+                <span class="n">visible</span> <span class="p">=</span> <span class="k">true</span><span class="p">,</span>
+                <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">fillMaxSize</span><span class="p">(),</span>
+                <span class="n">enter</span> <span class="p">=</span> <span class="n">EnterTransition</span><span class="p">.</span><span class="n">None</span><span class="p">,</span>
+                <span class="n">exit</span> <span class="p">=</span> <span class="n">fadeOut</span><span class="p">()</span>
+            <span class="p">)</span> <span class="p">{</span>
+                <span class="n">CircularProgressIndicator</span><span class="p">(</span>
+                    <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span>
+                        <span class="p">.</span><span class="n">background</span><span class="p">(</span><span class="n">MaterialTheme</span><span class="p">.</span><span class="n">colorScheme</span><span class="p">.</span><span class="n">background</span><span class="p">)</span>
+                        <span class="p">.</span><span class="n">wrapContentSize</span><span class="p">()</span>
+                <span class="p">)</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/google/google/maps/MainActivity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.google.google.maps</span>
+
+<ins><span class="k">import</span> <span class="nn">android.annotation.SuppressLint</span></ins>
+<ins><span class="k">import</span> <span class="nn">android.app.AlertDialog</span></ins>
+<ins><span class="k">import</span> <span class="nn">android.content.Intent</span></ins>
+<ins><span class="k">import</span> <span class="nn">android.content.pm.PackageManager</span></ins>
+<ins><span class="k">import</span> <span class="nn">android.net.Uri</span></ins>
+<span class="k">import</span> <span class="nn">android.os.Bundle</span>
+<ins><span class="k">import</span> <span class="nn">android.os.Looper</span></ins>
+<ins><span class="k">import</span> <span class="nn">android.provider.Settings</span></ins>
+<ins><span class="k">import</span> <span class="nn">android.widget.Toast</span></ins>
+<span class="k">import</span> <span class="nn">androidx.activity.ComponentActivity</span>
+<span class="k">import</span> <span class="nn">androidx.activity.compose.setContent</span>
+<span class="k">import</span> <span class="nn">androidx.activity.enableEdgeToEdge</span>
+<ins><span class="k">import</span> <span class="nn">androidx.activity.result.contract.ActivityResultContracts</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.activity.viewModels</span></ins>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.fillMaxSize</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.padding</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.Scaffold</span>
+<span class="k">import</span> <span class="nn">androidx.compose.material3.Text</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.Composable</span>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.runtime.getValue</span></ins>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.Modifier</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.tooling.preview.Preview</span>
+<ins><span class="k">import</span> <span class="nn">androidx.core.app.ActivityCompat</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.lifecycle.compose.collectAsStateWithLifecycle</span></ins>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.google.google.maps.ui.theme.GoogleMapsTheme</span>
+<ins><span class="k">import</span> <span class="nn">com.google.android.gms.common.GoogleApiAvailability</span></ins>
+<ins><span class="k">import</span> <span class="nn">com.google.android.gms.location.FusedLocationProviderClient</span></ins>
+<ins><span class="k">import</span> <span class="nn">com.google.android.gms.location.LocationCallback</span></ins>
+<ins><span class="k">import</span> <span class="nn">com.google.android.gms.location.LocationRequest</span></ins>
+<ins><span class="k">import</span> <span class="nn">com.google.android.gms.location.LocationResult</span></ins>
+<ins><span class="k">import</span> <span class="nn">com.google.android.gms.location.LocationServices</span></ins>
+<ins><span class="k">import</span> <span class="nn">com.google.android.gms.location.Priority</span></ins>
+<span class="k">import</span> <span class="nn">com.google.android.gms.maps.model.CameraPosition</span>
+<span class="k">import</span> <span class="nn">com.google.android.gms.maps.model.LatLng</span>
+<span class="k">import</span> <span class="nn">com.google.maps.android.compose.GoogleMap</span>
+<span class="k">import</span> <span class="nn">com.google.maps.android.compose.rememberCameraPositionState</span>
+
+<span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">ComponentActivity</span><span class="p">()</span> <span class="p">{</span>
+<div id="090-location-client-and-callback"><del><span class="c1">//  <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span></span></del>
+<del><span class="c1">//      <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span></span></del>
+<ins>    <span class="k">private</span> <span class="k">val</span> <span class="py">viewModel</span><span class="p">:</span> <span class="n">CarViewModel</span> <span class="k">by</span> <span class="n">viewModels</span><span class="p">()</span></ins>
+<ins></ins>
+<ins>    <span class="k">private</span> <span class="k">lateinit</span> <span class="k">var</span> <span class="py">fusedLocationProviderClient</span><span class="p">:</span> <span class="n">FusedLocationProviderClient</span></ins>
+<ins>    <span class="k">private</span> <span class="k">val</span> <span class="py">locationCallback</span> <span class="p">=</span> <span class="k">object</span> <span class="p">:</span> <span class="nc">LocationCallback</span><span class="p">()</span> <span class="p">{</span></ins>
+<ins>        <span class="k">override</span> <span class="k">fun</span> <span class="nf">onLocationResult</span><span class="p">(</span><span class="n">locationResult</span><span class="p">:</span> <span class="n">LocationResult</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>            <span class="n">viewModel</span><span class="p">.</span><span class="n">updateLocation</span><span class="p">(</span><span class="n">locationResult</span><span class="p">.</span><span class="n">lastLocation</span><span class="p">)</span></ins>
+<ins>        <span class="p">}</span></ins>
+<ins>    <span class="p">}</span></ins>
+</div><ins></ins>
+<div id="090-permission-launcher"><ins>    <span class="k">private</span> <span class="k">val</span> <span class="py">getLocationPermission</span> <span class="p">=</span></ins>
+<ins>        <span class="n">registerForActivityResult</span><span class="p">(</span></ins>
+<ins>            <span class="n">ActivityResultContracts</span><span class="p">.</span><span class="n">RequestMultiplePermissions</span><span class="p">()</span></ins>
+<ins>        <span class="p">)</span> <span class="p">{</span> <span class="n">isGranted</span> <span class="p">-&gt;</span></ins>
+<ins>            <span class="k">if</span> <span class="p">(</span><span class="n">isGranted</span><span class="p">.</span><span class="n">values</span><span class="p">.</span><span class="n">any</span> <span class="p">{</span> <span class="n">it</span> <span class="p">})</span> <span class="p">{</span></ins>
+<ins>                <span class="n">startLocationAndMap</span><span class="p">()</span></ins>
+<ins>            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></ins>
+<ins>                <span class="c1">// if the user denied permissions, tell them they</span></ins>
+<ins>                <span class="c1">//   cannot use the app without them. In general,</span></ins>
+<ins>                <span class="c1">//   you should try to just reduce function and let the</span></ins>
+<ins>                <span class="c1">//   user continue, but location is a key part of this</span></ins>
+<ins>                <span class="c1">//   application.</span></ins>
+<ins>                <span class="c1">//   (Note that a real version of this application</span></ins>
+<ins>                <span class="c1">//   might allow the user to manually click on the map</span></ins>
+<ins>                <span class="c1">//   to set their current location, and we wouldn&#39;t</span></ins>
+<ins>                <span class="c1">//   show this dialog, or perhaps only show it once)</span></ins>
+<ins>                <span class="c1">// NOTE: This is a normal Android-View-based dialog, not a compose one!</span></ins>
+<ins>                <span class="n">AlertDialog</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span><span class="k">this</span><span class="p">)</span></ins>
+<ins>                    <span class="p">.</span><span class="n">setTitle</span><span class="p">(</span><span class="s">&quot;Permissions Needed&quot;</span><span class="p">)</span></ins>
+<ins>                    <span class="p">.</span><span class="n">setMessage</span><span class="p">(</span></ins>
+<ins>                        <span class="s">&quot;We need coarse-location or fine-location permission &quot;</span> <span class="p">+</span></ins>
+<ins>                                <span class="s">&quot;to locate a car (fine location is highly &quot;</span> <span class="p">+</span></ins>
+<ins>                                <span class="s">&quot;recommended for accurate car locating). &quot;</span> <span class="p">+</span></ins>
+<ins>                                <span class="s">&quot;Please allow these permissions via App Info &quot;</span> <span class="p">+</span></ins>
+<ins>                                <span class="s">&quot;settings&quot;</span><span class="p">)</span></ins>
+<ins>                    <span class="p">.</span><span class="n">setCancelable</span><span class="p">(</span><span class="k">false</span><span class="p">)</span></ins>
+<ins>                    <span class="p">.</span><span class="n">setNegativeButton</span><span class="p">(</span><span class="s">&quot;Quit&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="p">-&gt;</span> <span class="n">finish</span><span class="p">()</span> <span class="p">}</span></ins>
+<ins>                    <span class="p">.</span><span class="n">setPositiveButton</span><span class="p">(</span><span class="s">&quot;App Info&quot;</span><span class="p">)</span> <span class="p">{</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="p">-&gt;</span></ins>
+<ins>                        <span class="n">startActivity</span><span class="p">(</span></ins>
+<ins>                            <span class="n">Intent</span><span class="p">(</span></ins>
+<ins>                                <span class="n">Settings</span><span class="p">.</span><span class="n">ACTION_APPLICATION_DETAILS_SETTINGS</span></ins>
+<ins>                            <span class="p">).</span><span class="n">apply</span> <span class="p">{</span></ins>
+<ins>                                <span class="k">data</span> <span class="p">=</span> <span class="n">Uri</span><span class="p">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&quot;package:$packageName&quot;</span><span class="p">)</span></ins>
+<ins>                            <span class="p">}</span></ins>
+<ins>                        <span class="p">)</span></ins>
+<ins>                        <span class="n">finish</span><span class="p">()</span></ins>
+<ins>                    <span class="p">}</span></ins>
+<ins>                    <span class="p">.</span><span class="n">show</span><span class="p">()</span></ins>
+<ins>            <span class="p">}</span></ins>
+<ins>        <span class="p">}</span></ins>
+</div><ins></ins>
+<div id="090-request-location-updates"><ins>    <span class="n">@SuppressLint</span><span class="p">(</span><span class="s">&quot;MissingPermission&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="k">fun</span> <span class="nf">startLocationAndMap</span><span class="p">()</span> <span class="p">{</span></ins>
+<ins>        <span class="k">val</span> <span class="py">locationRequest</span> <span class="p">=</span></ins>
+<ins>            <span class="n">LocationRequest</span><span class="p">.</span><span class="n">Builder</span><span class="p">(</span><span class="n">Priority</span><span class="p">.</span><span class="n">PRIORITY_HIGH_ACCURACY</span><span class="p">,</span> <span class="m">5000</span><span class="p">)</span></ins>
+<ins>                <span class="p">.</span><span class="n">setWaitForAccurateLocation</span><span class="p">(</span><span class="k">false</span><span class="p">)</span></ins>
+<ins>                <span class="p">.</span><span class="n">setMinUpdateIntervalMillis</span><span class="p">(</span><span class="m">0</span><span class="p">)</span></ins>
+<ins>                <span class="p">.</span><span class="n">setMaxUpdateDelayMillis</span><span class="p">(</span><span class="m">5000</span><span class="p">)</span></ins>
+<ins>                <span class="p">.</span><span class="n">build</span><span class="p">()</span></ins>
+<ins>        <span class="n">fusedLocationProviderClient</span> <span class="p">=</span></ins>
+<ins>            <span class="n">LocationServices</span><span class="p">.</span><span class="n">getFusedLocationProviderClient</span><span class="p">(</span><span class="k">this</span><span class="p">)</span></ins>
+<ins>        <span class="n">fusedLocationProviderClient</span><span class="p">.</span><span class="n">requestLocationUpdates</span><span class="p">(</span></ins>
+<ins>            <span class="n">locationRequest</span><span class="p">,</span></ins>
+<ins>            <span class="n">locationCallback</span><span class="p">,</span></ins>
+<ins>            <span class="n">Looper</span><span class="p">.</span><span class="n">getMainLooper</span><span class="p">()</span></ins>
+<ins>        <span class="p">)</span></ins>
+</div><ins></ins>
+        <span class="n">enableEdgeToEdge</span><span class="p">()</span>
+        <span class="n">setContent</span> <span class="p">{</span>
+            <span class="n">GoogleMapsTheme</span> <span class="p">{</span>
+                <span class="n">Scaffold</span><span class="p">(</span><span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">fillMaxSize</span><span class="p">())</span> <span class="p">{</span> <span class="n">innerPadding</span> <span class="p">-&gt;</span>
+<div id="050-factor-map">                    <span class="k">val</span> <span class="py">googleHQ</span> <span class="p">=</span> <span class="n">LatLng</span><span class="p">(</span><span class="m">37.42423291057923</span><span class="p">,</span> <span class="p">-</span><span class="m">122.08811454627153</span><span class="p">)</span>
+
+<div id="060-add-initial-position">                    <span class="k">val</span> <span class="py">defaultCameraPosition</span> <span class="p">=</span> <span class="n">CameraPosition</span><span class="p">.</span><span class="n">fromLatLngZoom</span><span class="p">(</span><span class="n">googleHQ</span><span class="p">,</span> <span class="m">11f</span><span class="p">)</span>
+</div>
+<div id="060-camera-position-state">                    <span class="k">val</span> <span class="py">cameraPositionState</span> <span class="p">=</span> <span class="n">rememberCameraPositionState</span> <span class="p">{</span>
+                        <span class="n">position</span> <span class="p">=</span> <span class="n">defaultCameraPosition</span>
+                    <span class="p">}</span>
+<ins></ins>
+<div id="090-collect-location-state"><ins>                    <span class="k">val</span> <span class="py">currentLocation</span> <span class="k">by</span> <span class="n">viewModel</span><span class="p">.</span><span class="n">currentLocation</span><span class="p">.</span><span class="n">collectAsStateWithLifecycle</span><span class="p">(</span></ins>
+<ins>                        <span class="n">initialValue</span> <span class="p">=</span> <span class="k">null</span></ins>
+<ins>                    <span class="p">)</span></ins>
+<ins></ins>
+                    <span class="n">GoogleMapDisplay</span><span class="p">(</span>
+<del><span class="c1">//                      <span class="n">place</span> <span class="p">=</span> <span class="n">googleHQ</span><span class="p">,</span></span></del>
+<del><span class="c1">//                      <span class="n">placeDescription</span> <span class="p">=</span> <span class="s">&quot;Google HQ&quot;</span><span class="p">,</span></span></del>
+<ins>                        <span class="n">currentLocation</span> <span class="p">=</span> <span class="n">currentLocation</span><span class="p">,</span></ins>
+</div>                        <span class="n">cameraPositionState</span> <span class="p">=</span> <span class="n">cameraPositionState</span><span class="p">,</span>
+                        <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="n">innerPadding</span><span class="p">).</span><span class="n">fillMaxSize</span><span class="p">(),</span>
+                    <span class="p">)</span>
+</div></div>                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+<ins></ins>
+<ins>    <span class="p">}</span></ins>
+<ins></ins>
+<ins>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span></ins>
+<ins>        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span></ins>
+<ins></ins>
+<div id="090-check-play-services"><ins>        <span class="n">GoogleApiAvailability</span><span class="p">.</span><span class="n">getInstance</span><span class="p">()</span></ins>
+<ins>            <span class="p">.</span><span class="n">makeGooglePlayServicesAvailable</span><span class="p">(</span><span class="k">this</span><span class="p">)</span></ins>
+<ins>            <span class="p">.</span><span class="n">addOnSuccessListener</span> <span class="p">{</span></ins>
+<div id="090-have-permission"><ins>                <span class="k">if</span> <span class="p">(</span><span class="n">ActivityCompat</span><span class="p">.</span><span class="n">checkSelfPermission</span><span class="p">(</span></ins>
+<ins>                        <span class="k">this</span><span class="p">,</span></ins>
+<ins>                        <span class="n">android</span><span class="p">.</span><span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_FINE_LOCATION</span></ins>
+<ins>                    <span class="p">)</span> <span class="p">!=</span> <span class="n">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span> <span class="p">&amp;&amp;</span></ins>
+<ins>                    <span class="n">ActivityCompat</span><span class="p">.</span><span class="n">checkSelfPermission</span><span class="p">(</span></ins>
+<ins>                        <span class="k">this</span><span class="p">,</span></ins>
+<ins>                        <span class="n">android</span><span class="p">.</span><span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_COARSE_LOCATION</span></ins>
+<ins>                    <span class="p">)</span> <span class="p">!=</span> <span class="n">PackageManager</span><span class="p">.</span><span class="n">PERMISSION_GRANTED</span></ins>
+<ins>                <span class="p">)</span> <span class="p">{</span></ins>
+<ins>                    <span class="n">getLocationPermission</span><span class="p">.</span><span class="n">launch</span><span class="p">(</span></ins>
+<ins>                        <span class="n">arrayOf</span><span class="p">(</span></ins>
+<ins>                            <span class="n">android</span><span class="p">.</span><span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_FINE_LOCATION</span><span class="p">,</span></ins>
+<ins>                            <span class="n">android</span><span class="p">.</span><span class="n">Manifest</span><span class="p">.</span><span class="n">permission</span><span class="p">.</span><span class="n">ACCESS_COARSE_LOCATION</span><span class="p">,</span></ins>
+<ins>                        <span class="p">)</span></ins>
+<ins>                    <span class="p">)</span></ins>
+<ins>                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span></ins>
+<ins>                    <span class="n">startLocationAndMap</span><span class="p">()</span></ins>
+<ins>                <span class="p">}</span></ins>
+</div><ins>            <span class="p">}.</span><span class="n">addOnFailureListener</span><span class="p">(</span><span class="k">this</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>                <span class="n">Toast</span><span class="p">.</span><span class="n">makeText</span><span class="p">(</span></ins>
+<ins>                    <span class="k">this</span><span class="p">,</span></ins>
+<ins>                    <span class="s">&quot;Google Play services required (or upgrade required)&quot;</span><span class="p">,</span></ins>
+<ins>                    <span class="n">Toast</span><span class="p">.</span><span class="n">LENGTH_SHORT</span></ins>
+<ins>                <span class="p">).</span><span class="n">show</span><span class="p">()</span></ins>
+<ins>                <span class="n">finish</span><span class="p">()</span></ins>
+<ins>            <span class="p">}</span></ins>
+</div><ins></ins>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/res/values/strings.xml</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="nt">&lt;resources&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;app_name&quot;</span><span class="nt">&gt;</span>Google Maps<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;map_type&quot;</span><span class="nt">&gt;</span>Map Type<span class="nt">&lt;/string&gt;</span>
+<ins>    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;current_location&quot;</span><span class="nt">&gt;</span>Current Location<span class="nt">&lt;/string&gt;</span></ins>
+<span class="nt">&lt;/resources&gt;</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: gradle/libs.versions.toml</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">[versions]</span>
+<span class="n">agp</span> <span class="o">=</span> <span class="s">&quot;8.7.2&quot;</span>
+<span class="n">kotlin</span> <span class="o">=</span> <span class="s">&quot;2.0.21&quot;</span>
+<span class="n">coreKtx</span> <span class="o">=</span> <span class="s">&quot;1.15.0&quot;</span>
+<span class="n">junit</span> <span class="o">=</span> <span class="s">&quot;4.13.2&quot;</span>
+<span class="n">junitVersion</span> <span class="o">=</span> <span class="s">&quot;1.2.1&quot;</span>
+<span class="n">espressoCore</span> <span class="o">=</span> <span class="s">&quot;3.6.1&quot;</span>
+<span class="n">lifecycleRuntimeKtx</span> <span class="o">=</span> <span class="s">&quot;2.8.7&quot;</span>
+<span class="n">activityCompose</span> <span class="o">=</span> <span class="s">&quot;1.9.3&quot;</span>
+<span class="n">composeBom</span> <span class="o">=</span> <span class="s">&quot;2024.11.00&quot;</span>
+<div id="040-secrets-version-vc"><span class="n">secrets</span> <span class="o">=</span> <span class="s">&quot;2.0.1&quot;</span>
+</div><div id="040-map-vc"><del><span class="c1">//</span></del>
+<span class="n">maps-compose</span> <span class="o">=</span> <span class="s">&quot;6.2.1&quot;</span>
+<div id="090-add-location-deps-vc"><ins><span class="n">location-services</span> <span class="o">=</span> <span class="s">&quot;21.3.0&quot;</span></ins>
+<ins><span class="n">lifecycle-runtime-compose</span> <span class="o">=</span> <span class="s">&quot;2.8.7&quot;</span></ins>
+
+<span class="k">[libraries]</span>
+<ins><span class="n">location-services</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;com.google.android.gms&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;play-services-location&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;location-services&quot;</span> <span class="p">}</span></ins>
+<ins><span class="n">lifecycle-runtime-compose</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.lifecycle&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;lifecycle-runtime-compose&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;lifecycle-runtime-compose&quot;</span> <span class="p">}</span></ins>
+</div><span class="n">maps-compose</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;com.google.maps.android&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;maps-compose&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;maps-compose&quot;</span> <span class="p">}</span>
+<span class="n">maps-compose-utils</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;com.google.maps.android&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;maps-compose-utils&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;maps-compose&quot;</span> <span class="p">}</span>
+<del><span class="c1">//</span></del>
+</div><span class="n">androidx-core-ktx</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.core&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;core-ktx&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;coreKtx&quot;</span> <span class="p">}</span>
+<span class="n">junit</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;junit&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;junit&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;junit&quot;</span> <span class="p">}</span>
+<span class="n">androidx-junit</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.test.ext&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;junit&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;junitVersion&quot;</span> <span class="p">}</span>
+<span class="n">androidx-espresso-core</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.test.espresso&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;espresso-core&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;espressoCore&quot;</span> <span class="p">}</span>
+<span class="n">androidx-lifecycle-runtime-ktx</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.lifecycle&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;lifecycle-runtime-ktx&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;lifecycleRuntimeKtx&quot;</span> <span class="p">}</span>
+<span class="n">androidx-activity-compose</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.activity&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;activity-compose&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;activityCompose&quot;</span> <span class="p">}</span>
+<span class="n">androidx-compose-bom</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;compose-bom&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;composeBom&quot;</span> <span class="p">}</span>
+<span class="n">androidx-ui</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ui&quot;</span> <span class="p">}</span>
+<span class="n">androidx-ui-graphics</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ui-graphics&quot;</span> <span class="p">}</span>
+<span class="n">androidx-ui-tooling</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ui-tooling&quot;</span> <span class="p">}</span>
+<span class="n">androidx-ui-tooling-preview</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ui-tooling-preview&quot;</span> <span class="p">}</span>
+<span class="n">androidx-ui-test-manifest</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ui-test-manifest&quot;</span> <span class="p">}</span>
+<span class="n">androidx-ui-test-junit4</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.ui&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;ui-test-junit4&quot;</span> <span class="p">}</span>
+<span class="n">androidx-material3</span> <span class="o">=</span> <span class="p">{</span> <span class="n">group</span> <span class="o">=</span> <span class="s">&quot;androidx.compose.material3&quot;</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s">&quot;material3&quot;</span> <span class="p">}</span>
+
+<span class="k">[plugins]</span>
+<span class="n">android-application</span> <span class="o">=</span> <span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s">&quot;com.android.application&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;agp&quot;</span> <span class="p">}</span>
+<span class="n">kotlin-android</span> <span class="o">=</span> <span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s">&quot;org.jetbrains.kotlin.android&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;kotlin&quot;</span> <span class="p">}</span>
+<span class="n">kotlin-compose</span> <span class="o">=</span> <span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s">&quot;org.jetbrains.kotlin.plugin.compose&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;kotlin&quot;</span> <span class="p">}</span>
+<div id="040-secrets-plugin-vc"><span class="n">secrets</span> <span class="o">=</span> <span class="p">{</span> <span class="n">id</span> <span class="o">=</span> <span class="s">&quot;com.google.android.libraries.mapsplatform.secrets-gradle-plugin&quot;</span><span class="p">,</span> <span class="n">version</span><span class="p">.</span><span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;secrets&quot;</span> <span class="p">}</span>
+</div></pre>
+</div>
+</div>
+</details>
+
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025. Scott Stanchfield
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.sections", "search.suggest", "search.highlight", "navigation.instant", "content.tabs.link", "toc.follow", "toc.integrate", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>

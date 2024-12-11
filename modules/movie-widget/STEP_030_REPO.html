@@ -1,0 +1,4448 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://androidbyexample.com/modules/movie-widget/STEP_030_REPO.html">
+      
+      
+        <link rel="prev" href="STEP_020_REPO.html">
+      
+      
+        <link rel="next" href="../speech/repo.html">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.0, mkdocs-material-9.5.31">
+    
+    
+      
+        <title>Widget UI and Data - Android By Example</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3cba04c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+  
+  
+    
+    
+  
+    
+    
+  
+    
+    
+  
+  
+  <style>:root{--md-admonition-icon--example:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');--md-admonition-icon--success:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');--md-admonition-icon--failure:url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0h160v128c0 17.7 14.3 32 32 32h128v288c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V64zm384 64H256V0l128 128z"/></svg>');}</style>
+
+
+
+    
+    
+      
+        <script src="https://unpkg.com/iframe-worker/shim"></script>
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Android By Example" class="md-header__button md-logo" aria-label="Android By Example" data-md-component="logo">
+      
+  <img src="../../android.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Android By Example
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Widget UI and Data
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Android By Example" class="md-nav__button md-logo" aria-label="Android By Example" data-md-component="logo">
+      
+  <img src="../../android.png" alt="logo">
+
+    </a>
+    Android By Example
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Introduction
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_010_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About This Site
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    About Your Instructor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Content License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Source Code License
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Course Hardware and Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_080_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Assignments
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_090_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Grading
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../introduction/STEP_100_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Using Third-Party and Course Sample Code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 1 (1/23-1/29)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Week 1 (1/23-1/29)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Kotlin Primer
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            Kotlin Primer
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kotlin-primer/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../kotlin-primer/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Domain Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User-Interface Layer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Data Objects
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Events
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Concurrency
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/STEP_080_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Unidirectional Data Flow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Android Studio
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Android Studio
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../android-studio/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 2 (1/30-2/5)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Week 2 (1/30-2/5)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Jetpack Compose Concepts
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Jetpack Compose Concepts
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compose Concepts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Composable Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    String literals
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    State
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_050_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compose Optimizations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_060_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Where do you store state?
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-concepts/STEP_070_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Density
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Initial Movies UI
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Initial Movies UI
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Initial Movie UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Update versions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Create initial screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Refactor Scaffold Use
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-1/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Flesh out the screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 3 (2/6-2/12)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Week 3 (2/6-2/12)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_1" id="__nav_4_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Room
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_1">
+            <span class="md-nav__icon md-icon"></span>
+            Room
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_10_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Relationships
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_20_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Room Basics
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_25_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Room Relations
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_30_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Suspending Functions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../room/STEP_40_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies Database
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies Database
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add new modules
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Room dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_035_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Android SDK and JDK to version catalog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Module Dependencies
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Entities, DAO and Database
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Repository Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Modifying the view model to use real data
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fix movie list
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_090_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fetch data for movie display
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-db/STEP_100_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Viewing the Database
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 4 (2/13-2/19)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Week 4 (2/13-2/19)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Compose Lists
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Compose Lists
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fixed UIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dynamic UIs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-lists/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies UI - Lists
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies UI - Lists
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Convert to LazyColumn
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selection Tracking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Selections in the UI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contextual Top Bar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Refactor time!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Actors and Ratings
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Better Movie Icon
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-2/STEP_090_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wrapup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 5 (2/20-2/26)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Week 5 (2/20-2/26)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_1" id="__nav_6_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Compose Text Fields
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_1">
+            <span class="md-nav__icon md-icon"></span>
+            Compose Text Fields
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    State Races
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fixing State Races
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compose-text-fields/STEP_040_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Heads up!
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_6_2" id="__nav_6_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies UI - Updates
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            Movies UI - Updates
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Display-screen list cleanup
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Deleting from the display screens
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-ui-3/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Editing a movie
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 6 (2/27-3/5)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Week 6 (2/27-3/5)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_7_1" id="__nav_7_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Movies Widget
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7_1">
+            <span class="md-nav__icon md-icon"></span>
+            Movies Widget
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Widget Declaration
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+      <a href="STEP_030_REPO.html" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Widget UI and Data
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_7_2" id="__nav_7_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Speech
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            Speech
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../speech/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../speech/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Video
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Week 7 (3/6-3/12)
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Week 7 (3/6-3/12)
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_1" id="__nav_8_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Google Map
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            Google Map
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_020_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Find Your Fingerprint
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_030_FULL.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Google Console Project
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Set up a map
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add a Marker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_060_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Initial Position
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_070_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Loading Spinner
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_080_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Map Types
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_090_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Current Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_100_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jump to Current Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_110_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Add Top Bar
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_120_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Copy Icons
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_130_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manage Car Location
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_140_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dragging a Marker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_150_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Navigating
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../google-maps/STEP_160_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Lat/Lon Bounds
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    REST services
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            REST services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/repo.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sample Repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/index.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Overview
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_020_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rest server module
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_030_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Server code
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_040_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Server address
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../movie-rest/STEP_050_REPO.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REST client repository
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+<h4>Movies Widget</h4>
+
+<h1>Widget UI and Data</h1>
+
+<p>Let's make this widget actually do something. We'll fetch the list of movies from the database
+and display it on the widget. When the user selects a movie, they'll be taken to its display
+page in the app.</p>
+<p>Before moving forward, let's update the widget metadata</p>
+<details class="example" open>
+<summary><a class="find-button" href="#030-update-widget-info">show in full file</a>  app/src/main/res/xml/movies_app_widget_info.xml</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="nt">&lt;appwidget-provider</span>
+    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+<del><span class="c1">//  <span class="na">android:initialLayout=</span><span class="s">&quot;@layout/glance_default_loading_layout&quot;</span> <span class="nt">/&gt;</span></span></del>
+<ins>    android:initialLayout=&quot;@layout/glance_default_loading_layout&quot;</ins>
+<ins>    android:description=&quot;@string/movie_list&quot;</ins>
+<ins>    android:minWidth=&quot;46dp&quot;</ins>
+<ins>    android:minHeight=&quot;46dp&quot;</ins>
+<ins>    android:resizeMode=&quot;horizontal|vertical&quot;</ins>
+<ins>    android:targetCellWidth=&quot;2&quot;</ins>
+<ins>    android:targetCellHeight=&quot;2&quot;</ins>
+<ins>    android:widgetCategory=&quot;home_screen&quot; /&gt;</ins></pre>
+</div>
+</div>
+</details>
+
+<ul>
+<li><code>description</code> adds descriptive text when choosing the widget to place on a home screen.
+  This requires adding the text to strings.xml</li>
+<li><code>minWidth</code> and <code>minHeight</code> limits how small the user can size the widget</li>
+<li><code>resizeMode</code> specifies which directions the user can resize the widget</li>
+<li><code>targetCellWidth</code> and <code>targetCellHeight</code> gives sizing when initially placing the widget.
+  These are multiples of the cell size defined by the home application.</li>
+<li><code>widgetCategory</code> specifies if the widget can appear on the home or lock screen (called "keyguard"
+  here)</li>
+</ul>
+<p>Widgets run in a different process than our application. The <code>MovieAppWidget</code> runs in our
+application's process to create a set of <em>Remote Views</em> that are sent to the widget to be
+rendered. We need to set it up to fetch data when first creating the widget and when the widget is
+updated.</p>
+<p>By default, <code>GlanceAppWidget</code> is set up to read widget state from a preference store. This is a
+file that's private to your application, and is normally used to store application settings
+between runs. Here it's used for the application to write widget state updates. If you only
+have minor data to update, this is fine, but a movie list is typically too much data to store
+in a preference store (and the data would have to be read from the database, written to
+the file, then read back from the file to perform the widget update).</p>
+<p>Instead, we'll override the update data handling.</p>
+<p>All classes that extend <code>GlanceAppWidget</code> contain a <code>GlanceStateDefinition</code> instance that
+provides a <code>DataStore</code> that the widget can use to get its data. We'll use this data store to
+fetch the initial list of movies from the database. Glance gets the <code>data</code> property from the
+data store, a <code>Flow</code> of our movie list in this case.</p>
+<p>Whenever the widget is told to update (we'll see that later), Glance reads <code>data</code> again and updates
+state.</p>
+<p>Normally, if we use a <code>DataStore</code>, we read <code>data</code> once to get the <code>Flow</code> of updates, and then
+collect from that <code>Flow</code> to get changes. However, the <code>MovieAppWidget</code> wants an explicit update
+notification, telling it when to update its data. We'll ask for a new <code>Flow</code> each time from
+our repository to get the movie list.</p>
+<p>To do this, we need to create a state definition class. This is just a factory for our
+data store. We don't need to define the <code>getLocation</code> function; it's not used (and normally
+returns a <code>File</code> indicating where the data is stored)</p>
+<details class="example" open>
+<summary><a class="find-button" href="#030-state-def">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/glance/MoviesAppWidget.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">private</span> <span class="k">val</span> <span class="py">movieIdKey</span> <span class="p">=</span> <span class="n">ActionParameters</span><span class="p">.</span><span class="n">Key</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;(</span><span class="n">MOVIE_ID_EXTRA</span><span class="p">)</span>
+
+<ins><span class="k">class</span> <span class="nc">MovieGlanceStateDefinition</span><span class="p">:</span> <span class="n">GlanceStateDefinition</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;&gt;</span> <span class="p">{</span></ins>
+<ins>    <span class="k">override</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">getDataStore</span><span class="p">(</span></ins>
+<ins>        <span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span></ins>
+<ins>        <span class="n">fileKey</span><span class="p">:</span> <span class="n">String</span></ins>
+<ins>    <span class="p">):</span> <span class="n">DataStore</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="n">MovieDataStore</span><span class="p">(</span><span class="n">context</span><span class="p">)</span></ins>
+<ins>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getLocation</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">fileKey</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">File</span> <span class="p">{</span></ins>
+<ins>        <span class="k">throw</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">&quot;Should not be used&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="p">}</span></ins>
+<ins><span class="p">}</span></ins>
+
+<span class="k">class</span> <span class="nc">MovieDataStore</span><span class="p">(</span>
+    <span class="c1">// ...</span></pre>
+</div>
+</div>
+</details>
+
+<p>Create a data store that returns the actual data. Its <code>data</code> property returns a new
+<code>Flow&lt;List&lt;MovieDto&gt;&gt;</code> each time it's read.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#030-data-store">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/glance/MoviesAppWidget.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="p">}</span>
+
+<ins><span class="k">class</span> <span class="nc">MovieDataStore</span><span class="p">(</span></ins>
+<ins>    <span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span></ins>
+<ins><span class="p">):</span> <span class="n">DataStore</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;&gt;</span> <span class="p">{</span></ins>
+<ins>    <span class="k">val</span> <span class="py">repository</span> <span class="p">=</span> <span class="n">MovieDatabaseRepository</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">context</span><span class="p">)</span></ins>
+<ins>    <span class="k">override</span> <span class="k">val</span> <span class="py">data</span><span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;&gt;</span></ins>
+<ins>        <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">repository</span><span class="p">.</span><span class="n">moviesFlow</span></ins>
+<ins>    <span class="k">override</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">updateData</span><span class="p">(</span><span class="n">transform</span><span class="p">:</span> <span class="n">suspend</span> <span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;)</span> <span class="p">-&gt;</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;):</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;</span> <span class="p">{</span></ins>
+<ins>        <span class="k">throw</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">&quot;Should not be used&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="p">}</span></ins>
+<ins><span class="p">}</span></ins>
+<span class="k">class</span> <span class="nc">MovieAppWidget</span> <span class="p">:</span> <span class="n">GlanceAppWidget</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">override</span> <span class="k">val</span> <span class="py">stateDefinition</span> <span class="p">=</span> <span class="n">MovieGlanceStateDefinition</span><span class="p">()</span>
+    <span class="c1">// ...</span></pre>
+</div>
+</div>
+</details>
+
+<p>Add a state definition property in our <code>MovieAppWidget</code> so it knows how to create its data store
+(and then get its data). Because the widget doesn't update the data, we don't implement the
+<code>updateData</code> function.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#030-stateDefinition-prop">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/glance/MoviesAppWidget.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="p">}</span>
+<span class="k">class</span> <span class="nc">MovieAppWidget</span> <span class="p">:</span> <span class="n">GlanceAppWidget</span><span class="p">()</span> <span class="p">{</span>
+<ins>    <span class="k">override</span> <span class="k">val</span> <span class="py">stateDefinition</span> <span class="p">=</span> <span class="n">MovieGlanceStateDefinition</span><span class="p">()</span></ins>
+    <span class="k">override</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">provideGlance</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">id</span><span class="p">:</span> <span class="n">GlanceId</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">provideContent</span> <span class="p">{</span>
+            <span class="c1">// ...</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>Get the current state so we can display it.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#030-get-state">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/glance/MoviesAppWidget.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">MovieAppWidget</span> <span class="p">:</span> <span class="n">GlanceAppWidget</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">override</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">provideGlance</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">id</span><span class="p">:</span> <span class="n">GlanceId</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">provideContent</span> <span class="p">{</span>
+<del><span class="c1">//          <span class="n">Text</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="s">&quot;Widget!&quot;</span><span class="p">)</span></span></del>
+<ins>            <span class="k">val</span> <span class="py">movies</span> <span class="p">=</span> <span class="n">currentState</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;&gt;()</span></ins>
+
+            <span class="n">GlanceTheme</span> <span class="p">{</span>
+                <span class="c1">// ...</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>We need to explicitly request widget updates when the UI changes data. This is done via</p>
+<div class="highlight"><pre><span></span><code><span class="n">MovieAppWidget</span><span class="p">().</span><span class="na">updateAll</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This will update all instances of the movie widget that the user has placed on their home
+screens. It's possible to update just a specific instance if you'd like, but we won't go into
+that detail here. (Think as an example, different instances of a picture-frame widget
+that host different images - you click on one to take you to the app to select an image,
+and it updates only that instance of the widget)</p>
+</div>
+<p>Ideally, we want to make this update call in as few places as possible, while ensuring we cover
+all cases. In our application, this is simple - we can 
+watch the movie flow for emissions and call update. For this
+purpose, we start a coroutine when the view model is initialized and collect the movie flow.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#030-watch-changes">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/MovieViewModel.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="n">@OptIn</span><span class="p">(</span><span class="n">FlowPreview</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MovieViewModel</span><span class="p">(</span>
+    <span class="c1">// ...</span>
+<span class="p">):</span> <span class="n">AndroidViewModel</span><span class="p">(</span><span class="n">application</span><span class="p">),</span> <span class="n">MovieRepository</span> <span class="k">by</span> <span class="n">repository</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">ratingUpdateFlow</span> <span class="p">=</span> <span class="n">MutableStateFlow</span><span class="p">&lt;</span><span class="n">RatingDto</span><span class="p">?&gt;(</span><span class="k">null</span><span class="p">)</span>
+    <span class="n">init</span> <span class="p">{</span>
+<ins>        <span class="n">viewModelScope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span></ins>
+<ins>            <span class="n">repository</span><span class="p">.</span><span class="n">moviesFlow</span><span class="p">.</span><span class="n">collectLatest</span> <span class="p">{</span></ins>
+<ins>                <span class="n">MovieAppWidget</span><span class="p">().</span><span class="n">updateAll</span><span class="p">(</span><span class="n">getApplication</span><span class="p">())</span></ins>
+<ins>            <span class="p">}</span></ins>
+<ins>        <span class="p">}</span></ins>
+
+        <span class="n">viewModelScope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
+            <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>The <code>updateAll()</code> call requires a context. We can access the application context (which lives
+across the lifetime of the application, vs an activity context that only lives while the
+activity is running) by changing our view model
+to subclass <code>AndroidViewModel</code> and passing in an <code>Application</code>. <code>AndroidViewModel</code> contains a
+<code>getApplication()</code> function that allows access when we call <code>updateAll()</code>.</p>
+<p>This requires that we pass the application when creating our view model in its factory.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#030-change-to-androidviewmodel">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/MovieViewModel.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="n">@OptIn</span><span class="p">(</span><span class="n">FlowPreview</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MovieViewModel</span><span class="p">(</span>
+<ins>    <span class="n">application</span><span class="p">:</span> <span class="n">Application</span><span class="p">,</span></ins>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">repository</span><span class="p">:</span> <span class="n">MovieRepository</span><span class="p">,</span>
+<del><span class="c1">//<span class="p">):</span> <span class="n">ViewModel</span><span class="p">(),</span> <span class="n">MovieRepository</span> <span class="k">by</span> <span class="n">repository</span> <span class="p">{</span></span></del>
+<ins><span class="p">):</span> <span class="n">AndroidViewModel</span><span class="p">(</span><span class="n">application</span><span class="p">),</span> <span class="n">MovieRepository</span> <span class="k">by</span> <span class="n">repository</span> <span class="p">{</span></ins>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">_selectedIdsFlow</span> <span class="p">=</span> <span class="n">MutableStateFlow</span><span class="p">&lt;</span><span class="n">Set</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;(</span><span class="n">emptySet</span><span class="p">())</span>
+    <span class="k">val</span> <span class="py">selectedIdsFlow</span><span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Set</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="n">_selectedIdsFlow</span><span class="p">.</span><span class="n">asStateFlow</span><span class="p">()</span>
+    <span class="c1">// ...</span>
+    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+        <span class="k">val</span> <span class="py">Factory</span><span class="p">:</span> <span class="n">ViewModelProvider</span><span class="p">.</span><span class="n">Factory</span> <span class="p">=</span> <span class="k">object</span><span class="p">:</span> <span class="n">ViewModelProvider</span><span class="p">.</span><span class="n">Factory</span> <span class="p">{</span>
+            <span class="n">@Suppress</span><span class="p">(</span><span class="s">&quot;UNCHECKED_CAST&quot;</span><span class="p">)</span>
+            <span class="k">override</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="n">T</span> <span class="p">:</span> <span class="n">ViewModel</span><span class="p">&gt;</span> <span class="nf">create</span><span class="p">(</span>
+                <span class="c1">// ...</span>
+            <span class="p">):</span> <span class="n">T</span> <span class="p">{</span>
+                <span class="c1">// ...</span>
+                <span class="k">val</span> <span class="py">application</span> <span class="p">=</span> <span class="n">checkNotNull</span><span class="p">(</span><span class="n">extras</span><span class="p">[</span><span class="n">ViewModelProvider</span><span class="p">.</span><span class="n">AndroidViewModelFactory</span><span class="p">.</span><span class="n">APPLICATION_KEY</span><span class="p">])</span>
+                <span class="k">return</span> <span class="n">MovieViewModel</span><span class="p">(</span>
+<ins>                    <span class="n">application</span><span class="p">,</span></ins>
+                    <span class="n">MovieDatabaseRepository</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">application</span><span class="p">)</span>
+                <span class="p">)</span> <span class="k">as</span> <span class="n">T</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>The UI for our <code>MovieAppWidget</code> uses a <code>LazyColumn</code> to display our list of
+movies.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#030-ui">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/glance/MoviesAppWidget.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">import</span> <span class="nn">java.io.File</span>
+
+<ins><span class="k">private</span> <span class="k">val</span> <span class="py">movieIdKey</span> <span class="p">=</span> <span class="n">ActionParameters</span><span class="p">.</span><span class="n">Key</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;(</span><span class="n">MOVIE_ID_EXTRA</span><span class="p">)</span></ins>
+
+<span class="k">class</span> <span class="nc">MovieGlanceStateDefinition</span><span class="p">:</span> <span class="n">GlanceStateDefinition</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;&gt;</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">MovieAppWidget</span> <span class="p">:</span> <span class="n">GlanceAppWidget</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">override</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">provideGlance</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">id</span><span class="p">:</span> <span class="n">GlanceId</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">provideContent</span> <span class="p">{</span>
+            <span class="c1">// ...</span>
+            <span class="k">val</span> <span class="py">movies</span> <span class="p">=</span> <span class="n">currentState</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;&gt;()</span>
+
+<ins>            <span class="n">GlanceTheme</span> <span class="p">{</span></ins>
+<ins>                <span class="n">LazyColumn</span><span class="p">(</span></ins>
+<ins>                    <span class="n">modifier</span> <span class="p">=</span> <span class="n">GlanceModifier</span></ins>
+<ins>                        <span class="p">.</span><span class="n">fillMaxSize</span><span class="p">()</span></ins>
+<ins>                        <span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="m">4.</span><span class="n">dp</span><span class="p">)</span></ins>
+<ins>                        <span class="p">.</span><span class="n">appWidgetBackground</span><span class="p">()</span></ins>
+<ins>                        <span class="p">.</span><span class="n">background</span><span class="p">(</span><span class="n">GlanceTheme</span><span class="p">.</span><span class="n">colors</span><span class="p">.</span><span class="n">background</span><span class="p">),</span></ins>
+<ins>                <span class="p">)</span> <span class="p">{</span></ins>
+<ins>                    <span class="n">items</span><span class="p">(</span><span class="n">items</span> <span class="p">=</span> <span class="n">movies</span><span class="p">)</span> <span class="p">{</span> <span class="n">movie</span> <span class="p">-&gt;</span></ins>
+<ins>                        <span class="n">Text</span><span class="p">(</span></ins>
+<ins>                            <span class="n">text</span> <span class="p">=</span> <span class="n">movie</span><span class="p">.</span><span class="n">title</span><span class="p">,</span></ins>
+<ins>                            <span class="n">modifier</span> <span class="p">=</span> <span class="n">GlanceModifier</span></ins>
+<ins>                                <span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="m">4.</span><span class="n">dp</span><span class="p">)</span></ins>
+<ins>                                <span class="p">.</span><span class="n">fillMaxWidth</span><span class="p">()</span></ins>
+<ins>                                <span class="p">.</span><span class="n">clickable</span><span class="p">(</span></ins>
+<ins>                                    <span class="n">actionStartActivity</span><span class="p">&lt;</span><span class="n">MainActivity</span><span class="p">&gt;(</span></ins>
+<ins>                                        <span class="n">actionParametersOf</span><span class="p">(</span><span class="n">movieIdKey</span> <span class="n">to</span> <span class="n">movie</span><span class="p">.</span><span class="n">id</span><span class="p">)</span></ins>
+<ins>                                    <span class="p">)</span></ins>
+<ins>                                <span class="p">)</span></ins>
+<ins>                            <span class="p">,</span></ins>
+<ins>                            <span class="n">style</span> <span class="p">=</span> <span class="n">TextStyle</span><span class="p">(</span></ins>
+<ins>                                <span class="n">fontWeight</span> <span class="p">=</span> <span class="n">FontWeight</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></ins>
+<ins>                                <span class="n">fontSize</span> <span class="p">=</span> <span class="m">18.</span><span class="n">sp</span><span class="p">,</span></ins>
+<ins>                            <span class="p">),</span></ins>
+<ins>                        <span class="p">)</span></ins>
+<ins>                    <span class="p">}</span></ins>
+<ins>                <span class="p">}</span></ins>
+<ins>            <span class="p">}</span></ins>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>When a movie title is clicked, we start our <code>MainActivity</code> and pass the movie id as a parameter.</p>
+<p>Note that <code>actionStartActivity</code> creates a lambda for us, so we pass it in parentheses to <code>clickable</code>
+rather than put it in a lambda. If we had instead written</p>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="na">clickable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">actionStartActivity</span><span class="o">&lt;</span><span class="n">MainActivity</span><span class="o">&gt;</span><span class="p">(</span>
+<span class="w">        </span><span class="n">actionParametersOf</span><span class="p">(</span><span class="n">movieIdKey</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">movie</span><span class="p">.</span><span class="na">id</span><span class="p">)</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>we'd be telling it to call <code>actionStartActivity</code> to <em>create</em> the lambda when the button is clicked.
+We need to create that lambda and use it as the function called when the button is clicked.</p>
+<p>The created lambda creates an explicit <code>Intent</code> targeting our activity, and uses the 
+<code>actionParametersOf</code> function to add key and value pairs to the <code>extras</code> map of that intent.</p>
+<p>The name specified in the <code>movieIdKey</code> must match the name we use to retrieve the data from the
+intent in <code>MainActivity</code>. </p>
+<p>We define the key name as a constant in <code>MainActivity</code> to ensure the name is consistent.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#030-key-name">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/MainActivity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.ui.theme.MoviesTheme</span>
+
+<ins><span class="k">const</span> <span class="k">val</span> <span class="py">MOVIE_ID_EXTRA</span> <span class="p">=</span> <span class="s">&quot;movieId&quot;</span></ins>
+<span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">ComponentActivity</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">viewModel</span> <span class="k">by</span> <span class="n">viewModels</span><span class="p">&lt;</span><span class="n">MovieViewModel</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">MovieViewModel</span><span class="p">.</span><span class="n">Factory</span> <span class="p">}</span>
+    <span class="c1">// ...</span></pre>
+</div>
+</div>
+</details>
+
+<p>When the user selects a movie from the list in the widget, we need to show the movie display screen.
+But what happens when the user presses back? It would be nice if we could go to the movie list
+screen so it feels the same as when the user runs the app directly.</p>
+<p>To do this, we need a way to set the entire stack.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#030-set-screens">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/MovieViewModel.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+
+<span class="n">@OptIn</span><span class="p">(</span><span class="n">FlowPreview</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">MovieViewModel</span><span class="p">(</span>
+    <span class="c1">// ...</span>
+<span class="p">):</span> <span class="n">AndroidViewModel</span><span class="p">(</span><span class="n">application</span><span class="p">),</span> <span class="n">MovieRepository</span> <span class="k">by</span> <span class="n">repository</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+<ins>    <span class="k">fun</span> <span class="nf">setScreens</span><span class="p">(</span><span class="k">vararg</span> <span class="n">screens</span><span class="p">:</span> <span class="n">Screen</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>        <span class="n">screenStack</span> <span class="p">=</span> <span class="n">screens</span><span class="p">.</span><span class="n">toList</span><span class="p">()</span></ins>
+<ins>    <span class="p">}</span></ins>
+
+    <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">movie</span><span class="p">:</span> <span class="n">MovieDto</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>The fun part is now dealing with that intent coming into the activity. The activity may or may not
+already be running. If you were running the application and went to the home screen, the system
+may keep the activity instance around until it needs to reclaim its memory. However, it could kill
+it at any time when it's not the current foreground application. This leads to two ways we must deal
+with the intent:</p>
+<ul>
+<li>if the activity is <em>not</em> running, a new instance will be created and the intent passed to
+  <code>onCreate</code></li>
+<li>if the activity <em>is</em> running, the intent will be passed to the <code>onNewIntent()</code> function of the
+  existing activity instance</li>
+</ul>
+<p>We need to handle the intent in both places, so we create a helper function that tries to pull the
+movie id out of an intent. If the intent is not present, we reset the stack to be just <code>MovieList</code>.
+If it is present, we set the stack to be <code>MovieList</code> followed by <code>MovieDisplay</code> for that movie. This
+presents the movie to the user and allows them to press back to get to the movie list.</p>
+<p>We call <code>handleMovieId()</code> from <code>onCreate</code> and <code>onNewIntent</code>.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#030-handle-movie-id">show in full file</a>  app/src/main/java/com/androidbyexample/compose/movies/MainActivity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">ComponentActivity</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+
+<ins>        <span class="n">intent</span><span class="p">.</span><span class="n">handleMovieId</span><span class="p">()</span></ins>
+
+        <span class="n">enableEdgeToEdge</span><span class="p">()</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+<ins>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onNewIntent</span><span class="p">(</span><span class="n">intent</span><span class="p">:</span> <span class="n">Intent</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>        <span class="k">super</span><span class="p">.</span><span class="n">onNewIntent</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span></ins>
+<ins>        <span class="n">intent</span><span class="p">.</span><span class="n">handleMovieId</span><span class="p">()</span></ins>
+<ins>    <span class="p">}</span></ins>
+
+<ins>    <span class="k">private</span> <span class="k">fun</span> <span class="nc">Intent</span><span class="p">.</span><span class="nf">handleMovieId</span><span class="p">()</span> <span class="p">{</span></ins>
+<ins>        <span class="k">val</span> <span class="py">movieId</span> <span class="p">=</span> <span class="n">extras</span><span class="o">?.</span><span class="n">getString</span><span class="p">(</span><span class="n">MOVIE_ID_EXTRA</span><span class="p">)</span></ins>
+<ins>        <span class="k">if</span> <span class="p">(</span><span class="n">movieId</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>            <span class="n">viewModel</span><span class="p">.</span><span class="n">setScreens</span><span class="p">(</span><span class="n">MovieList</span><span class="p">,</span> <span class="n">MovieDisplay</span><span class="p">(</span><span class="n">movieId</span><span class="p">))</span></ins>
+<ins>        <span class="p">}</span></ins>
+<ins>    <span class="p">}</span></ins>
+<span class="p">}</span></pre>
+</div>
+</div>
+</details>
+
+<p>Note that <code>onNewIntent</code> is passed an <code>Intent</code> as a parameter, while <code>onCreate</code> uses the property
+<code>intent</code> defined by the activity as the <code>Intent</code> that launched it.</p>
+<p>If we run the application now, we'll get some interesting results if we</p>
+<ol>
+<li>Click on a movie in the widget (and see the movie displayed)</li>
+<li>Go back to home</li>
+<li>Click on a different movie in the widget (and see it displayed)</li>
+<li>Press back repeatedly</li>
+</ol>
+<p><img alt="Bad stack!" src="screenshots/need-launch-mode.gif" width="300" /></p>
+<p>The problem is that each time we start the activity from the widget, a new instance is pushed
+on the stack for the application process. We now have a stack of activities, managed by the
+system, each of which contains a stack of screens. Originally, Android applications used an
+<code>Actitity</code> for each screen, calling <code>startActvitity</code> to push new instances on the system-managed
+stacks. Over time we evolved to using a single <code>Activity</code> approach.</p>
+<p>To fix this, we set the launch mode for our <code>MainActivity</code> to <code>singleInstance</code>, which ensures we
+only ever have one instance of the activity.</p>
+<details class="example" open>
+<summary><a class="find-button" href="#030-launch-mode">show in full file</a>  app/src/main/AndroidManifest.xml</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span class="c1">// ...</span>
+<span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">xmlns:tools=</span><span class="s">&quot;http://schemas.android.com/tools&quot;</span><span class="nt">&gt;</span>
+    <span class="c1">// ...</span>
+    <span class="nt">&lt;application</span>
+        <span class="c1">// ...</span>
+        <span class="na">tools:targetApi=</span><span class="s">&quot;31&quot;</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;activity</span>
+            <span class="na">android:name=</span><span class="s">&quot;.MainActivity&quot;</span>
+            <span class="na">android:exported=</span><span class="s">&quot;true&quot;</span>
+<del><span class="c1">//          <span class="na">android:label=</span><span class="s">&quot;@string/app_name&quot;</span></span></del>
+<ins>            <span class="na">android:launchMode=</span><span class="s">&quot;singleInstance&quot;</span></ins>
+            <span class="na">android:theme=</span><span class="s">&quot;@style/Theme.Movies&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="c1">// ...</span>
+        <span class="nt">&lt;/activity&gt;</span>
+        <span class="c1">// ...</span>
+    <span class="nt">&lt;/application&gt;</span>
+<span class="c1">// ...</span>
+<span class="nt">&lt;/manifest&gt;</span></pre>
+</div>
+</div>
+</details>
+<hr/>
+<h2>All code changes</h2>
+<details class="example" open>
+<summary>CHANGED: app/src/main/AndroidManifest.xml</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<span class="nt">&lt;manifest</span> <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+    <span class="na">xmlns:tools=</span><span class="s">&quot;http://schemas.android.com/tools&quot;</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;application</span>
+        <span class="na">android:allowBackup=</span><span class="s">&quot;true&quot;</span>
+        <span class="na">android:dataExtractionRules=</span><span class="s">&quot;@xml/data_extraction_rules&quot;</span>
+        <span class="na">android:fullBackupContent=</span><span class="s">&quot;@xml/backup_rules&quot;</span>
+        <span class="na">android:icon=</span><span class="s">&quot;@mipmap/ic_launcher&quot;</span>
+        <span class="na">android:label=</span><span class="s">&quot;@string/app_name&quot;</span>
+        <span class="na">android:roundIcon=</span><span class="s">&quot;@mipmap/ic_launcher_round&quot;</span>
+        <span class="na">android:supportsRtl=</span><span class="s">&quot;true&quot;</span>
+        <span class="na">android:theme=</span><span class="s">&quot;@style/Theme.Movies&quot;</span>
+        <span class="na">tools:targetApi=</span><span class="s">&quot;31&quot;</span><span class="nt">&gt;</span>
+<div id="030-launch-mode">        <span class="nt">&lt;activity</span>
+            <span class="na">android:name=</span><span class="s">&quot;.MainActivity&quot;</span>
+            <span class="na">android:exported=</span><span class="s">&quot;true&quot;</span>
+<del><span class="c1">//          <span class="na">android:label=</span><span class="s">&quot;@string/app_name&quot;</span></span></del>
+<ins>            <span class="na">android:launchMode=</span><span class="s">&quot;singleInstance&quot;</span></ins>
+            <span class="na">android:theme=</span><span class="s">&quot;@style/Theme.Movies&quot;</span><span class="nt">&gt;</span>
+</div>            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">&quot;android.intent.action.MAIN&quot;</span> <span class="nt">/&gt;</span>
+
+                <span class="nt">&lt;category</span> <span class="na">android:name=</span><span class="s">&quot;android.intent.category.LAUNCHER&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+        <span class="nt">&lt;/activity&gt;</span>
+
+<div id="020-register-in-manifest">        <span class="nt">&lt;receiver</span> <span class="na">android:name=</span><span class="s">&quot;.glance.MovieAppWidgetReceiver&quot;</span>
+            <span class="na">android:exported=</span><span class="s">&quot;true&quot;</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;intent-filter&gt;</span>
+                <span class="nt">&lt;action</span> <span class="na">android:name=</span><span class="s">&quot;android.appwidget.action.APPWIDGET_UPDATE&quot;</span> <span class="nt">/&gt;</span>
+            <span class="nt">&lt;/intent-filter&gt;</span>
+            <span class="nt">&lt;meta-data</span>
+                <span class="na">android:name=</span><span class="s">&quot;android.appwidget.provider&quot;</span>
+                <span class="na">android:resource=</span><span class="s">&quot;@xml/movies_app_widget_info&quot;</span> <span class="nt">/&gt;</span>
+        <span class="nt">&lt;/receiver&gt;</span>
+</div>    <span class="nt">&lt;/application&gt;</span>
+
+<span class="nt">&lt;/manifest&gt;</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/movies/MainActivity.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies</span>
+
+<ins><span class="k">import</span> <span class="nn">android.content.Intent</span></ins>
+<span class="k">import</span> <span class="nn">android.os.Bundle</span>
+<span class="k">import</span> <span class="nn">androidx.activity.ComponentActivity</span>
+<span class="k">import</span> <span class="nn">androidx.activity.compose.setContent</span>
+<span class="k">import</span> <span class="nn">androidx.activity.enableEdgeToEdge</span>
+<span class="k">import</span> <span class="nn">androidx.activity.viewModels</span>
+<span class="k">import</span> <span class="nn">androidx.compose.foundation.layout.fillMaxSize</span>
+<span class="k">import</span> <span class="nn">androidx.compose.ui.Modifier</span>
+<ins><span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.screens.MovieDisplay</span></ins>
+<ins><span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.screens.MovieList</span></ins>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.screens.Ui</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.ui.theme.MoviesTheme</span>
+
+<div id="030-key-name"><ins><span class="k">const</span> <span class="k">val</span> <span class="py">MOVIE_ID_EXTRA</span> <span class="p">=</span> <span class="s">&quot;movieId&quot;</span></ins>
+</div><span class="k">class</span> <span class="nc">MainActivity</span> <span class="p">:</span> <span class="n">ComponentActivity</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">viewModel</span> <span class="k">by</span> <span class="n">viewModels</span><span class="p">&lt;</span><span class="n">MovieViewModel</span><span class="p">&gt;</span> <span class="p">{</span> <span class="n">MovieViewModel</span><span class="p">.</span><span class="n">Factory</span> <span class="p">}</span>
+
+    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">:</span> <span class="n">Bundle</span><span class="p">?)</span> <span class="p">{</span>
+        <span class="k">super</span><span class="p">.</span><span class="n">onCreate</span><span class="p">(</span><span class="n">savedInstanceState</span><span class="p">)</span>
+<ins></ins>
+<div id="030-on-create"><ins>        <span class="n">intent</span><span class="p">.</span><span class="n">handleMovieId</span><span class="p">()</span></ins>
+</div><ins></ins>
+        <span class="n">enableEdgeToEdge</span><span class="p">()</span>
+        <span class="n">setContent</span> <span class="p">{</span>
+            <span class="n">MoviesTheme</span> <span class="p">{</span>
+                <span class="n">Ui</span><span class="p">(</span>
+                    <span class="n">viewModel</span> <span class="p">=</span> <span class="n">viewModel</span><span class="p">,</span>
+                    <span class="n">modifier</span> <span class="p">=</span> <span class="n">Modifier</span><span class="p">.</span><span class="n">fillMaxSize</span><span class="p">()</span>
+                <span class="p">)</span> <span class="p">{</span>
+                    <span class="n">finish</span><span class="p">()</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<ins></ins>
+<div id="030-on-new-intent"><ins>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">onNewIntent</span><span class="p">(</span><span class="n">intent</span><span class="p">:</span> <span class="n">Intent</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>        <span class="k">super</span><span class="p">.</span><span class="n">onNewIntent</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span></ins>
+<ins>        <span class="n">intent</span><span class="p">.</span><span class="n">handleMovieId</span><span class="p">()</span></ins>
+<ins>    <span class="p">}</span></ins>
+</div><ins></ins>
+<div id="030-handle-movie-id"><ins>    <span class="k">private</span> <span class="k">fun</span> <span class="nc">Intent</span><span class="p">.</span><span class="nf">handleMovieId</span><span class="p">()</span> <span class="p">{</span></ins>
+<ins>        <span class="k">val</span> <span class="py">movieId</span> <span class="p">=</span> <span class="n">extras</span><span class="o">?.</span><span class="n">getString</span><span class="p">(</span><span class="n">MOVIE_ID_EXTRA</span><span class="p">)</span></ins>
+<ins>        <span class="k">if</span> <span class="p">(</span><span class="n">movieId</span> <span class="p">!=</span> <span class="k">null</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>            <span class="n">viewModel</span><span class="p">.</span><span class="n">setScreens</span><span class="p">(</span><span class="n">MovieList</span><span class="p">,</span> <span class="n">MovieDisplay</span><span class="p">(</span><span class="n">movieId</span><span class="p">))</span></ins>
+<ins>        <span class="p">}</span></ins>
+<ins>    <span class="p">}</span></ins>
+</div><span class="p">}</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/movies/MovieViewModel.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies</span>
+
+<ins><span class="k">import</span> <span class="nn">android.app.Application</span></ins>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.getValue</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.mutableStateOf</span>
+<span class="k">import</span> <span class="nn">androidx.compose.runtime.setValue</span>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.appwidget.updateAll</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.lifecycle.AndroidViewModel</span></ins>
+<span class="k">import</span> <span class="nn">androidx.lifecycle.ViewModel</span>
+<span class="k">import</span> <span class="nn">androidx.lifecycle.ViewModelProvider</span>
+<span class="k">import</span> <span class="nn">androidx.lifecycle.viewModelScope</span>
+<span class="k">import</span> <span class="nn">androidx.lifecycle.viewmodel.CreationExtras</span>
+<ins><span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.glance.MovieAppWidget</span></ins>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.ActorDto</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.MovieDatabaseRepository</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.MovieDto</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.MovieRepository</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.RatingDto</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.screens.MovieList</span>
+<span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.screens.Screen</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.FlowPreview</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.flow.Flow</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.flow.MutableStateFlow</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.flow.asStateFlow</span>
+<ins><span class="k">import</span> <span class="nn">kotlinx.coroutines.flow.collectLatest</span></ins>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.flow.debounce</span>
+<span class="k">import</span> <span class="nn">kotlinx.coroutines.launch</span>
+
+<span class="n">@OptIn</span><span class="p">(</span><span class="n">FlowPreview</span><span class="o">::</span><span class="k">class</span><span class="p">)</span>
+<div id="030-change-to-androidviewmodel"><span class="k">class</span> <span class="nc">MovieViewModel</span><span class="p">(</span>
+<ins>    <span class="n">application</span><span class="p">:</span> <span class="n">Application</span><span class="p">,</span></ins>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">repository</span><span class="p">:</span> <span class="n">MovieRepository</span><span class="p">,</span>
+<del><span class="c1">//<span class="p">):</span> <span class="n">ViewModel</span><span class="p">(),</span> <span class="n">MovieRepository</span> <span class="k">by</span> <span class="n">repository</span> <span class="p">{</span></span></del>
+<ins><span class="p">):</span> <span class="n">AndroidViewModel</span><span class="p">(</span><span class="n">application</span><span class="p">),</span> <span class="n">MovieRepository</span> <span class="k">by</span> <span class="n">repository</span> <span class="p">{</span></ins>
+</div>    <span class="k">private</span> <span class="k">val</span> <span class="py">_selectedIdsFlow</span> <span class="p">=</span> <span class="n">MutableStateFlow</span><span class="p">&lt;</span><span class="n">Set</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;(</span><span class="n">emptySet</span><span class="p">())</span>
+    <span class="k">val</span> <span class="py">selectedIdsFlow</span><span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">Set</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="n">_selectedIdsFlow</span><span class="p">.</span><span class="n">asStateFlow</span><span class="p">()</span>
+
+    <span class="k">fun</span> <span class="nf">clearSelectedIds</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">_selectedIdsFlow</span><span class="p">.</span><span class="n">value</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="k">fun</span> <span class="nf">toggleSelection</span><span class="p">(</span><span class="n">id</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">id</span> <span class="k">in</span> <span class="n">_selectedIdsFlow</span><span class="p">.</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">_selectedIdsFlow</span><span class="p">.</span><span class="n">value</span> <span class="p">-=</span> <span class="n">id</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">_selectedIdsFlow</span><span class="p">.</span><span class="n">value</span> <span class="p">+=</span> <span class="n">id</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">var</span> <span class="py">screenStack</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">&lt;</span><span class="n">Screen</span><span class="p">&gt;(</span><span class="n">MovieList</span><span class="p">)</span>
+        <span class="k">set</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">field</span> <span class="p">=</span> <span class="n">value</span>
+            <span class="n">clearSelectedIds</span><span class="p">()</span>
+            <span class="n">currentScreen</span> <span class="p">=</span> <span class="n">value</span><span class="p">.</span><span class="n">lastOrNull</span><span class="p">()</span>
+        <span class="p">}</span>
+
+    <span class="c1">// NOTE: We&#39;re keep this as a Compose State for comparison.</span>
+    <span class="c1">//       You can use Compose state to expose anything from the view model,</span>
+    <span class="c1">//       but our example will be using Flow from now on to demonstrate how</span>
+    <span class="c1">//       the view model can be used without Compose, perhaps for other</span>
+    <span class="c1">//       platforms such as iOS, desktop, web or command line</span>
+    <span class="k">var</span> <span class="py">currentScreen</span> <span class="k">by</span> <span class="n">mutableStateOf</span><span class="p">&lt;</span><span class="n">Screen</span><span class="p">?&gt;(</span><span class="n">MovieList</span><span class="p">)</span>
+        <span class="k">private</span> <span class="k">set</span>
+
+    <span class="k">fun</span> <span class="nf">pushScreen</span><span class="p">(</span><span class="n">screen</span><span class="p">:</span> <span class="n">Screen</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">screenStack</span> <span class="p">=</span> <span class="n">screenStack</span> <span class="p">+</span> <span class="n">screen</span>
+    <span class="p">}</span>
+    <span class="k">fun</span> <span class="nf">popScreen</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">screenStack</span> <span class="p">=</span> <span class="n">screenStack</span><span class="p">.</span><span class="n">dropLast</span><span class="p">(</span><span class="m">1</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">setScreen</span><span class="p">(</span><span class="n">screen</span><span class="p">:</span> <span class="n">Screen</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">screenStack</span> <span class="p">=</span> <span class="n">listOf</span><span class="p">(</span><span class="n">screen</span><span class="p">)</span>
+    <span class="p">}</span>
+
+<div id="030-set-screens"><ins>    <span class="k">fun</span> <span class="nf">setScreens</span><span class="p">(</span><span class="k">vararg</span> <span class="n">screens</span><span class="p">:</span> <span class="n">Screen</span><span class="p">)</span> <span class="p">{</span></ins>
+<ins>        <span class="n">screenStack</span> <span class="p">=</span> <span class="n">screens</span><span class="p">.</span><span class="n">toList</span><span class="p">()</span></ins>
+<ins>    <span class="p">}</span></ins>
+</div><ins></ins>
+    <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">movie</span><span class="p">:</span> <span class="n">MovieDto</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">movieUpdateFlow</span><span class="p">.</span><span class="n">value</span> <span class="p">=</span> <span class="n">movie</span>
+    <span class="p">}</span>
+    <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">actor</span><span class="p">:</span> <span class="n">ActorDto</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">actorUpdateFlow</span><span class="p">.</span><span class="n">value</span> <span class="p">=</span> <span class="n">actor</span>
+    <span class="p">}</span>
+    <span class="k">fun</span> <span class="nf">update</span><span class="p">(</span><span class="n">rating</span><span class="p">:</span> <span class="n">RatingDto</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">ratingUpdateFlow</span><span class="p">.</span><span class="n">value</span> <span class="p">=</span> <span class="n">rating</span>
+    <span class="p">}</span>
+    <span class="c1">// using a debounced flow as a person-update queue</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">movieUpdateFlow</span> <span class="p">=</span> <span class="n">MutableStateFlow</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">?&gt;(</span><span class="k">null</span><span class="p">)</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">actorUpdateFlow</span> <span class="p">=</span> <span class="n">MutableStateFlow</span><span class="p">&lt;</span><span class="n">ActorDto</span><span class="p">?&gt;(</span><span class="k">null</span><span class="p">)</span>
+    <span class="k">private</span> <span class="k">val</span> <span class="py">ratingUpdateFlow</span> <span class="p">=</span> <span class="n">MutableStateFlow</span><span class="p">&lt;</span><span class="n">RatingDto</span><span class="p">?&gt;(</span><span class="k">null</span><span class="p">)</span>
+    <span class="n">init</span> <span class="p">{</span>
+<div id="030-watch-changes"><ins>        <span class="n">viewModelScope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span></ins>
+<ins>            <span class="n">repository</span><span class="p">.</span><span class="n">moviesFlow</span><span class="p">.</span><span class="n">collectLatest</span> <span class="p">{</span></ins>
+<ins>                <span class="n">MovieAppWidget</span><span class="p">().</span><span class="n">updateAll</span><span class="p">(</span><span class="n">getApplication</span><span class="p">())</span></ins>
+<ins>            <span class="p">}</span></ins>
+<ins>        <span class="p">}</span></ins>
+</div><ins></ins>
+        <span class="n">viewModelScope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
+            <span class="n">movieUpdateFlow</span><span class="p">.</span><span class="n">debounce</span><span class="p">(</span><span class="m">500</span><span class="p">).</span><span class="n">collect</span> <span class="p">{</span> <span class="n">movie</span> <span class="p">-&gt;</span>
+                <span class="n">movie</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span> <span class="n">repository</span><span class="p">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">viewModelScope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
+            <span class="n">actorUpdateFlow</span><span class="p">.</span><span class="n">debounce</span><span class="p">(</span><span class="m">500</span><span class="p">).</span><span class="n">collect</span> <span class="p">{</span> <span class="n">actor</span> <span class="p">-&gt;</span>
+                <span class="n">actor</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span> <span class="n">repository</span><span class="p">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">viewModelScope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
+            <span class="n">ratingUpdateFlow</span><span class="p">.</span><span class="n">debounce</span><span class="p">(</span><span class="m">500</span><span class="p">).</span><span class="n">collect</span> <span class="p">{</span> <span class="n">rating</span> <span class="p">-&gt;</span>
+                <span class="n">rating</span><span class="o">?.</span><span class="n">let</span> <span class="p">{</span> <span class="n">repository</span><span class="p">.</span><span class="n">upsert</span><span class="p">(</span><span class="n">it</span><span class="p">)</span> <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">fun</span> <span class="nf">deleteSelectedMovies</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">viewModelScope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
+            <span class="n">deleteMoviesById</span><span class="p">(</span><span class="n">_selectedIdsFlow</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">_selectedIdsFlow</span><span class="p">.</span><span class="n">value</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">fun</span> <span class="nf">deleteSelectedActors</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">viewModelScope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
+            <span class="n">deleteActorsById</span><span class="p">(</span><span class="n">_selectedIdsFlow</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">_selectedIdsFlow</span><span class="p">.</span><span class="n">value</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">fun</span> <span class="nf">deleteSelectedRatings</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">viewModelScope</span><span class="p">.</span><span class="n">launch</span> <span class="p">{</span>
+            <span class="n">deleteRatingsById</span><span class="p">(</span><span class="n">_selectedIdsFlow</span><span class="p">.</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">_selectedIdsFlow</span><span class="p">.</span><span class="n">value</span> <span class="p">=</span> <span class="n">emptySet</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">companion</span> <span class="k">object</span> <span class="p">{</span>
+        <span class="k">val</span> <span class="py">Factory</span><span class="p">:</span> <span class="n">ViewModelProvider</span><span class="p">.</span><span class="n">Factory</span> <span class="p">=</span> <span class="k">object</span><span class="p">:</span> <span class="n">ViewModelProvider</span><span class="p">.</span><span class="n">Factory</span> <span class="p">{</span>
+            <span class="n">@Suppress</span><span class="p">(</span><span class="s">&quot;UNCHECKED_CAST&quot;</span><span class="p">)</span>
+            <span class="k">override</span> <span class="k">fun</span> <span class="p">&lt;</span><span class="n">T</span> <span class="p">:</span> <span class="n">ViewModel</span><span class="p">&gt;</span> <span class="nf">create</span><span class="p">(</span>
+                <span class="n">modelClass</span><span class="p">:</span> <span class="n">Class</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span>
+                <span class="n">extras</span><span class="p">:</span> <span class="n">CreationExtras</span>
+            <span class="p">):</span> <span class="n">T</span> <span class="p">{</span>
+                <span class="c1">// Get the Application object from extras</span>
+                <span class="k">val</span> <span class="py">application</span> <span class="p">=</span> <span class="n">checkNotNull</span><span class="p">(</span><span class="n">extras</span><span class="p">[</span><span class="n">ViewModelProvider</span><span class="p">.</span><span class="n">AndroidViewModelFactory</span><span class="p">.</span><span class="n">APPLICATION_KEY</span><span class="p">])</span>
+                <span class="k">return</span> <span class="n">MovieViewModel</span><span class="p">(</span>
+<div id="030-pass-application"><ins>                    <span class="n">application</span><span class="p">,</span></ins>
+</div>                    <span class="n">MovieDatabaseRepository</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">application</span><span class="p">)</span>
+                <span class="p">)</span> <span class="k">as</span> <span class="n">T</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/java/com/androidbyexample/compose/movies/glance/MoviesAppWidget.kt</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="k">package</span> <span class="nn">com.androidbyexample.compose.movies.glance</span>
+
+<span class="k">import</span> <span class="nn">android.content.Context</span>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.ui.unit.dp</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.compose.ui.unit.sp</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.datastore.core.DataStore</span></ins>
+<span class="k">import</span> <span class="nn">androidx.glance.GlanceId</span>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.GlanceModifier</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.GlanceTheme</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.action.ActionParameters</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.action.actionParametersOf</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.action.actionStartActivity</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.action.clickable</span></ins>
+<span class="k">import</span> <span class="nn">androidx.glance.appwidget.GlanceAppWidget</span>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.appwidget.appWidgetBackground</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.appwidget.lazy.LazyColumn</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.appwidget.lazy.items</span></ins>
+<span class="k">import</span> <span class="nn">androidx.glance.appwidget.provideContent</span>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.background</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.currentState</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.layout.fillMaxSize</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.layout.fillMaxWidth</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.layout.padding</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.state.GlanceStateDefinition</span></ins>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.text.FontWeight</span></ins>
+<span class="k">import</span> <span class="nn">androidx.glance.text.Text</span>
+<ins><span class="k">import</span> <span class="nn">androidx.glance.text.TextStyle</span></ins>
+<ins><span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.MOVIE_ID_EXTRA</span></ins>
+<ins><span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.MainActivity</span></ins>
+<ins><span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.MovieDatabaseRepository</span></ins>
+<ins><span class="k">import</span> <span class="nn">com.androidbyexample.compose.movies.repository.MovieDto</span></ins>
+<ins><span class="k">import</span> <span class="nn">kotlinx.coroutines.flow.Flow</span></ins>
+<ins><span class="k">import</span> <span class="nn">java.io.File</span></ins>
+
+<div id="030-key"><ins><span class="k">private</span> <span class="k">val</span> <span class="py">movieIdKey</span> <span class="p">=</span> <span class="n">ActionParameters</span><span class="p">.</span><span class="n">Key</span><span class="p">&lt;</span><span class="n">String</span><span class="p">&gt;(</span><span class="n">MOVIE_ID_EXTRA</span><span class="p">)</span></ins>
+</div><ins></ins>
+<div id="030-state-def"><ins><span class="k">class</span> <span class="nc">MovieGlanceStateDefinition</span><span class="p">:</span> <span class="n">GlanceStateDefinition</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;&gt;</span> <span class="p">{</span></ins>
+<ins>    <span class="k">override</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">getDataStore</span><span class="p">(</span></ins>
+<ins>        <span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span></ins>
+<ins>        <span class="n">fileKey</span><span class="p">:</span> <span class="n">String</span></ins>
+<ins>    <span class="p">):</span> <span class="n">DataStore</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;&gt;</span> <span class="p">=</span> <span class="n">MovieDataStore</span><span class="p">(</span><span class="n">context</span><span class="p">)</span></ins>
+<ins>    <span class="k">override</span> <span class="k">fun</span> <span class="nf">getLocation</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">fileKey</span><span class="p">:</span> <span class="n">String</span><span class="p">):</span> <span class="n">File</span> <span class="p">{</span></ins>
+<ins>        <span class="k">throw</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">&quot;Should not be used&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="p">}</span></ins>
+<ins><span class="p">}</span></ins>
+</div><ins></ins>
+<div id="030-data-store"><ins><span class="k">class</span> <span class="nc">MovieDataStore</span><span class="p">(</span></ins>
+<ins>    <span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span></ins>
+<ins><span class="p">):</span> <span class="n">DataStore</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;&gt;</span> <span class="p">{</span></ins>
+<ins>    <span class="k">val</span> <span class="py">repository</span> <span class="p">=</span> <span class="n">MovieDatabaseRepository</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="n">context</span><span class="p">)</span></ins>
+<ins>    <span class="k">override</span> <span class="k">val</span> <span class="py">data</span><span class="p">:</span> <span class="n">Flow</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;&gt;</span></ins>
+<ins>        <span class="k">get</span><span class="p">()</span> <span class="p">=</span> <span class="n">repository</span><span class="p">.</span><span class="n">moviesFlow</span></ins>
+<ins>    <span class="k">override</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">updateData</span><span class="p">(</span><span class="n">transform</span><span class="p">:</span> <span class="n">suspend</span> <span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;)</span> <span class="p">-&gt;</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;):</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;</span> <span class="p">{</span></ins>
+<ins>        <span class="k">throw</span> <span class="n">RuntimeException</span><span class="p">(</span><span class="s">&quot;Should not be used&quot;</span><span class="p">)</span></ins>
+<ins>    <span class="p">}</span></ins>
+<ins><span class="p">}</span></ins>
+</div><div id="020-create-appwidget"><span class="k">class</span> <span class="nc">MovieAppWidget</span> <span class="p">:</span> <span class="n">GlanceAppWidget</span><span class="p">()</span> <span class="p">{</span>
+<div id="030-stateDefinition-prop"><ins>    <span class="k">override</span> <span class="k">val</span> <span class="py">stateDefinition</span> <span class="p">=</span> <span class="n">MovieGlanceStateDefinition</span><span class="p">()</span></ins>
+</div>    <span class="k">override</span> <span class="n">suspend</span> <span class="k">fun</span> <span class="nf">provideGlance</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="n">Context</span><span class="p">,</span> <span class="n">id</span><span class="p">:</span> <span class="n">GlanceId</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">provideContent</span> <span class="p">{</span>
+<div id="030-get-state"><del><span class="c1">//          <span class="n">Text</span><span class="p">(</span><span class="n">text</span> <span class="p">=</span> <span class="s">&quot;Widget!&quot;</span><span class="p">)</span></span></del>
+<ins>            <span class="k">val</span> <span class="py">movies</span> <span class="p">=</span> <span class="n">currentState</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">MovieDto</span><span class="p">&gt;&gt;()</span></ins>
+</div><ins></ins>
+<div id="030-ui"><ins>            <span class="n">GlanceTheme</span> <span class="p">{</span></ins>
+<ins>                <span class="n">LazyColumn</span><span class="p">(</span></ins>
+<ins>                    <span class="n">modifier</span> <span class="p">=</span> <span class="n">GlanceModifier</span></ins>
+<ins>                        <span class="p">.</span><span class="n">fillMaxSize</span><span class="p">()</span></ins>
+<ins>                        <span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="m">4.</span><span class="n">dp</span><span class="p">)</span></ins>
+<ins>                        <span class="p">.</span><span class="n">appWidgetBackground</span><span class="p">()</span></ins>
+<ins>                        <span class="p">.</span><span class="n">background</span><span class="p">(</span><span class="n">GlanceTheme</span><span class="p">.</span><span class="n">colors</span><span class="p">.</span><span class="n">background</span><span class="p">),</span></ins>
+<ins>                <span class="p">)</span> <span class="p">{</span></ins>
+<ins>                    <span class="n">items</span><span class="p">(</span><span class="n">items</span> <span class="p">=</span> <span class="n">movies</span><span class="p">)</span> <span class="p">{</span> <span class="n">movie</span> <span class="p">-&gt;</span></ins>
+<ins>                        <span class="n">Text</span><span class="p">(</span></ins>
+<ins>                            <span class="n">text</span> <span class="p">=</span> <span class="n">movie</span><span class="p">.</span><span class="n">title</span><span class="p">,</span></ins>
+<ins>                            <span class="n">modifier</span> <span class="p">=</span> <span class="n">GlanceModifier</span></ins>
+<ins>                                <span class="p">.</span><span class="n">padding</span><span class="p">(</span><span class="m">4.</span><span class="n">dp</span><span class="p">)</span></ins>
+<ins>                                <span class="p">.</span><span class="n">fillMaxWidth</span><span class="p">()</span></ins>
+<ins>                                <span class="p">.</span><span class="n">clickable</span><span class="p">(</span></ins>
+<ins>                                    <span class="n">actionStartActivity</span><span class="p">&lt;</span><span class="n">MainActivity</span><span class="p">&gt;(</span></ins>
+<ins>                                        <span class="n">actionParametersOf</span><span class="p">(</span><span class="n">movieIdKey</span> <span class="n">to</span> <span class="n">movie</span><span class="p">.</span><span class="n">id</span><span class="p">)</span></ins>
+<ins>                                    <span class="p">)</span></ins>
+<ins>                                <span class="p">)</span></ins>
+<ins>                            <span class="p">,</span></ins>
+<ins>                            <span class="n">style</span> <span class="p">=</span> <span class="n">TextStyle</span><span class="p">(</span></ins>
+<ins>                                <span class="n">fontWeight</span> <span class="p">=</span> <span class="n">FontWeight</span><span class="p">.</span><span class="n">Normal</span><span class="p">,</span></ins>
+<ins>                                <span class="n">fontSize</span> <span class="p">=</span> <span class="m">18.</span><span class="n">sp</span><span class="p">,</span></ins>
+<ins>                            <span class="p">),</span></ins>
+<ins>                        <span class="p">)</span></ins>
+<ins>                    <span class="p">}</span></ins>
+<ins>                <span class="p">}</span></ins>
+<ins>            <span class="p">}</span></ins>
+</div>        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</div></pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/res/values/strings.xml</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="nt">&lt;resources&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;app_name&quot;</span><span class="nt">&gt;</span>Movies<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;movies&quot;</span><span class="nt">&gt;</span>Movies<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;title&quot;</span><span class="nt">&gt;</span>Title<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;description&quot;</span><span class="nt">&gt;</span>Description<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;movie&quot;</span><span class="nt">&gt;</span>Movie<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;reset_database&quot;</span><span class="nt">&gt;</span>Reset Database<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;loading&quot;</span><span class="nt">&gt;</span>…Loading…<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;cast&quot;</span><span class="nt">&gt;</span>Cast<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;cast_entry&quot;</span><span class="nt">&gt;</span>%1$s: %2$s<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;clear_selections&quot;</span><span class="nt">&gt;</span>Clear Selections<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;delete_selected_items&quot;</span><span class="nt">&gt;</span>Delete selected items<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;ratings&quot;</span><span class="nt">&gt;</span>Ratings<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;rating&quot;</span><span class="nt">&gt;</span>Rating<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;actors&quot;</span><span class="nt">&gt;</span>Actors<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;actor&quot;</span><span class="nt">&gt;</span>Actor<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;name&quot;</span><span class="nt">&gt;</span>Name<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;movies_rated&quot;</span><span class="nt">&gt;</span>Movies rated %1$s<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;movies_starring&quot;</span><span class="nt">&gt;</span>Movies starring %1$s<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;edit&quot;</span><span class="nt">&gt;</span>Edit<span class="nt">&lt;/string&gt;</span>
+<ins>    <span class="nt">&lt;string</span> <span class="na">name=</span><span class="s">&quot;movie_list&quot;</span><span class="nt">&gt;</span>Movie List<span class="nt">&lt;/string&gt;</span></ins>
+<span class="nt">&lt;/resources&gt;</span>
+</pre>
+</div>
+</div>
+</details>
+<details class="example" open>
+<summary>CHANGED: app/src/main/res/xml/movies_app_widget_info.xml</summary>
+<div class="sas1-code-block">
+<div class="highlight">
+<pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span>
+<div id="020-create-widget-info"><div id="030-update-widget-info"><span class="nt">&lt;appwidget-provider</span>
+    <span class="na">xmlns:android=</span><span class="s">&quot;http://schemas.android.com/apk/res/android&quot;</span>
+<del><span class="c1">//  <span class="na">android:initialLayout=</span><span class="s">&quot;@layout/glance_default_loading_layout&quot;</span> <span class="nt">/&gt;</span></span></del>
+<ins>    android:initialLayout=&quot;@layout/glance_default_loading_layout&quot;</ins>
+<ins>    android:description=&quot;@string/movie_list&quot;</ins>
+<ins>    android:minWidth=&quot;46dp&quot;</ins>
+<ins>    android:minHeight=&quot;46dp&quot;</ins>
+<ins>    android:resizeMode=&quot;horizontal|vertical&quot;</ins>
+<ins>    android:targetCellWidth=&quot;2&quot;</ins>
+<ins>    android:targetCellHeight=&quot;2&quot;</ins>
+<ins>    android:widgetCategory=&quot;home_screen&quot; /&gt;</ins>
+</div></div></pre>
+</div>
+</div>
+</details>
+
+
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var tab,labels=set.querySelector(".tabbed-labels");for(tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025. Scott Stanchfield
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.expand", "navigation.sections", "search.suggest", "search.highlight", "navigation.instant", "content.tabs.link", "toc.follow", "toc.integrate", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fe8b6f2b.min.js"></script>
+      
+    
+  </body>
+</html>
